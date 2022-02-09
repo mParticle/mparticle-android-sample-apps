@@ -90,7 +90,7 @@ jobs:
 
   sync-repository:
     name: "Sync Repository"
-    needs: sonatype-release
+    needs: semantic-release
     runs-on: ubuntu-18.04
     steps:
       - name: "Checkout main branch"
