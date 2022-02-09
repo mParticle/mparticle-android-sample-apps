@@ -17,6 +17,8 @@ android {
         versionCode = buildVersionCode()
         versionName = "0.1.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "HIGGS_SHOP_SAMPLE_APP_KEY", "\"${System.getenv("HIGGS_SHOP_SAMPLE_APP_KEY")}\"")
+        buildConfigField("String", "HIGGS_SHOP_SAMPLE_APP_SECRET", "\"${System.getenv("HIGGS_SHOP_SAMPLE_APP_SECRET")}\"")
     }
 
     buildTypes {
@@ -24,17 +26,23 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        getByName("debug") {
+            isMinifyEnabled = false
+        }
     }
 }
 
 dependencies {
     implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    testImplementation("junit:junit:4.13.2")
+
+    implementation("com.mparticle:android-core:5.35.2")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation("junit:junit:4.13.2")
 }
 
 fun buildVersionCode(): Int {

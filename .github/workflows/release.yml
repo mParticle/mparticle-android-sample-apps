@@ -88,4 +88,30 @@ jobs:
         run: |
           ./gradlew assembleRelease
 
+  sync-repository:
+    name: "Sync Repository"
+    needs: sonatype-release
+    runs-on: ubuntu-18.04
+    steps:
+      - name: "Checkout main branch"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          repository: ${{ github.repository }}
+          token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+          ref: main
+      - name: "Merge release branch into main branch"
+        if: ${{ github.event.inputs.dryRun == 'false' }}
+        run: |
+          git pull origin release/${{ github.run_number }}
+      - name: "Push release commits to main branch"
+        if: ${{ github.event.inputs.dryRun == 'false'}}
+        run: |
+          git push origin HEAD:main
+          git push origin HEAD:development
+      - name: "Delete release branch"
+        if: ${{ github.event.inputs.dryRun == 'false' }}
+        run: |
+          git push --delete origin release/${{ github.run_number }}
+
 
