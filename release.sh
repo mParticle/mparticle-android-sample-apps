@@ -15,6 +15,6 @@ git add :/*.kts
 #git add README.md
 
 #create and rename release APK for Github
-./gradlew assembleRelease
+./gradlew assembleDebug
 mkdir dist
-mv core-sdk-samples/higgs-shop-sample-app/app/build/outputs/apk/release/app-release-unsigned.apk "dist/HiggsShopSampleApp-$1.apk"
+mv core-sdk-samples/higgs-shop-sample-app/app/build/outputs/apk/release/app-debug.apk "dist/HiggsShopSampleApp-$1.apk"

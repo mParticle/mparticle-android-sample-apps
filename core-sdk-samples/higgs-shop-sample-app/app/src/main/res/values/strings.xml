@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Higgs Shop Sample App</string>
+    <string name="landing_welcome">Welcome to the mParticle SDK sample app. Everything here is connected to the SDK so you can see what we can do for you!</string>
+    <string name="landing_disclaimer">*This app is for demo purposes only.</string>
+    <string name="landing_cta">Start Shopping*</string>
 </resources>

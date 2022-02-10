@@ -11,17 +11,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HiggsShopSampleApp">
+        android:theme="@style/Theme.mParticle.Activity.Landing">
         <activity
-            android:name="com.mparticle.example.higgsshopsampleapp.SplashActivity"
-            android:noHistory="true"
-            android:theme="@style/Theme.mParticle.Activity.Splash"
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.SplashActivity"
+            android:theme="@style/Theme.mParticle.Activity.Landing"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.LandingActivity"
+            android:theme="@style/Theme.mParticle.Activity.Landing"
+            android:exported="true">
         </activity>
     </application>
 </manifest>

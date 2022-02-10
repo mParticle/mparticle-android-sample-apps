@@ -12,13 +12,13 @@ The purpose of the app is to highlight the following features:
 
 ## Getting Started
 
-1. In this repo, open a sample app (inside samples folder) in Android Studio
+1. Open this repository in Android Studio after cloning
 
-2. Update the `HIGGS_SHOP_SAMPLE_APP_KEY` variable with your mParticle Android API Key inside app/build.gradle.kts file
+2. Update the `HIGGS_SHOP_SAMPLE_APP_KEY` and `HIGGS_SHOP_SAMPLE_APP_SECRET` variable with your mParticle Android API Key inside app/build.gradle.kts file
 
 -   Visit your [mParticle Workspace](https://app.mparticle.com/setup/inputs/apps) to generate API Credentials
 
-3. Run the project in Android emulator.  This will open the Higgs Shop Sample App
+3. Run the Higgs Shop sample app project (inside core-sdk-samples folder) in Android emulator.  This will open the Higgs Shop Sample App
 
 ### API Credentials
 
