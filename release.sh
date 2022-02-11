@@ -13,3 +13,8 @@ sed -i '' "s/versionName = \".*-SNAPSHOT/versionName = \"$1-SNAPSHOT/g" core-sdk
 #commit the version bump, tag, and push to private and public
 git add :/*.kts
 #git add README.md
+
+#create and rename release APK for Github
+./gradlew assembleRelease
+mkdir dist
+mv core-sdk-samples/higgs-shop-sample-app/app/build/outputs/apk/release/app-release-unsigned.apk "dist/HiggsShopSampleApp-$1.apk"
