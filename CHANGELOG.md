@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.2.0...v0.3.0) (2022-02-11)
+
+
+### Features
+
+* add release APK to Github release ([#4](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/4)) ([e81c699](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/e81c699c129455fbc4b4908b0544ff0dc845f474))
+
 # [0.2.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.1.0...v0.2.0) (2022-02-09)
 
 
