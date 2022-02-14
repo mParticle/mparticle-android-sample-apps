@@ -1,6 +1,6 @@
-name: "Pull Request"
+name: "Pull Request Checks"
 
-on: [ push, pull_request, workflow_dispatch ]
+on: [ pull_request_target ]
 
 jobs:
 
