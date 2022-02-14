@@ -1,3 +1,16 @@
+# [0.4.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.3.0...v0.4.0) (2022-02-14)
+
+
+### Bug Fixes
+
+* rename folder path for semantic release job ([#8](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/8)) ([452fb84](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/452fb84d28f4277446349fe6724996153997b136))
+* separate out push and pull jobs ([#7](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/7)) ([019db02](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/019db02aa6bed8a421a52ace994ea8ffe7411aa2))
+
+
+### Features
+
+* add branded splash page ([#5](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/5)) ([013e7e4](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/013e7e4cbe1d98684ba3bdce84e41114df076786))
+
 # [0.3.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.2.0...v0.3.0) (2022-02-11)
 
 
