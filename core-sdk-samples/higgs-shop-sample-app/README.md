@@ -14,7 +14,7 @@ The purpose of the app is to highlight the following features:
 
 1. Open this repository in Android Studio after cloning
 
-2. Update the `HIGGS_SHOP_SAMPLE_APP_KEY` and `HIGGS_SHOP_SAMPLE_APP_SECRET` variable with your mParticle Android API Key inside app/build.gradle.kts file
+2. Update the `HIGGS_SHOP_SAMPLE_APP_KEY` & `HIGGS_SHOP_SAMPLE_APP_SECRET` variable with your mParticle Android API Key inside app/build.gradle.kts file
 
 -   Visit your [mParticle Workspace](https://app.mparticle.com/setup/inputs/apps) to generate API Credentials
 
