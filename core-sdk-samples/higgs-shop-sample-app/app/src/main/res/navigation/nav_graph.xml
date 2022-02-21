@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_shop">
+
+    <fragment
+        android:id="@+id/navigation_shop"
+        android:name="com.mparticle.example.higgsshopsampleapp.fragments.ShopFragment"
+        android:label="@string/nav_shop"
+        tools:layout="@layout/fragment_shop" />
+
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.mparticle.example.higgsshopsampleapp.fragments.AboutFragment"
+        android:label="@string/nav_about"
+        tools:layout="@layout/fragment_about" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.mparticle.example.higgsshopsampleapp.fragments.AccountFragment"
+        android:label="@string/nav_account"
+        tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.mparticle.example.higgsshopsampleapp.fragments.CartFragment"
+        android:label="@string/nav_cart"
+        tools:layout="@layout/fragment_cart" />
+</navigation>
