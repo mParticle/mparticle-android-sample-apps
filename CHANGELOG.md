@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.4.0...v0.5.0) (2022-02-23)
+
+
+### Features
+
+* add nav, shop, detail screen ([#9](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/9)) ([a0febb3](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/a0febb39aafbc2ab1b3040a34f756aa596d85b89))
+
 # [0.4.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.3.0...v0.4.0) (2022-02-14)
 
 
