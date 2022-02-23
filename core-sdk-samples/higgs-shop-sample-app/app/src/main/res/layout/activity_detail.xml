@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview_product_detail"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_detail_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="@string/detail_header"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_detail_price"
+            android:visibility="visible"
+            android:layout_width="282dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/detail_price"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_marginTop="30dp" />
+
+        <ImageView
+            android:id="@+id/iv_detail_image"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:src="@drawable/product_placeholder"
+            />
+        <LinearLayout
+            android:id="@+id/spinners"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/spinnersRow1"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/spinner_colors"
+                    android:spinnerMode="dropdown"
+                    android:background="@drawable/spinner_border"
+                    android:popupBackground="@drawable/spinner_popup_border"
+                    android:layout_width="154dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="30dp"
+                    />
+                <View
+                    android:layout_width="25dp"
+                    android:layout_height="54dp" />
+                <Spinner
+                    android:id="@+id/spinner_sizes"
+                    android:spinnerMode="dropdown"
+                    android:background="@drawable/spinner_border"
+                    android:popupBackground="@drawable/spinner_popup_border"
+                    android:layout_width="154dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="30dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <Button
+            android:id="@+id/detail_cta"
+            android:layout_width="190dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_corner"
+            android:text="@string/detail_add_to_cart"
+            android:theme="@style/Theme.mParticle.SampleApp.Button" />
+
+        <View
+            android:id="@+id/overflow"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
+</ScrollView>

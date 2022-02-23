@@ -1,6 +1,37 @@
 <resources>
     <string name="app_name">Higgs Shop Sample App</string>
+
+    <!-- landing page -->
     <string name="landing_welcome">Welcome to the mParticle SDK sample app. Everything here is connected to the SDK so you can see what we can do for you!</string>
     <string name="landing_disclaimer">*This app is for demo purposes only.</string>
     <string name="landing_cta">Start Shopping*</string>
+
+    <!-- navigation -->
+    <string name="nav_shop">Shop</string>
+    <string name="nav_about">About</string>
+    <string name="nav_account">My Account</string>
+    <string name="nav_cart">Cart</string>
+    <string name="nav_title">About</string>
+
+    <!-- shop -->
+    <string name="shop_title">Shop Higgs</string>
+    <string name="shop_product_item_id">ID</string>
+    <string name="shop_product_item_label">Product Item Label</string>
+    <string name="shop_product_picture">Product Picture</string>
+
+    <!-- detail -->
+    <string name="detail_header">Product Label</string>
+    <string name="detail_add_to_cart">Add to cart</string>
+    <string name="detail_price">$0.00</string>
+
+    <!-- about -->
+    <string name="about_title">About</string>
+
+    <!-- account -->
+    <string name="account_title">My Account</string>
+
+    <!-- cart -->
+    <string name="cart_title">Cart</string>
+
+
 </resources>

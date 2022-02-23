@@ -11,10 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.mParticle.Activity.Landing">
+        android:theme="@style/Theme.mParticle.SampleApp">
         <activity
             android:name="com.mparticle.example.higgsshopsampleapp.activities.SplashActivity"
-            android:theme="@style/Theme.mParticle.Activity.Landing"
+            android:theme="@style/Theme.mParticle.SampleApp.Splash"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +25,21 @@
         </activity>
         <activity
             android:name="com.mparticle.example.higgsshopsampleapp.activities.LandingActivity"
-            android:theme="@style/Theme.mParticle.Activity.Landing"
+            android:theme="@style/Theme.mParticle.SampleApp.Splash"
+            android:screenOrientation="portrait"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.MainActivity"
+            android:theme="@style/Theme.mParticle.SampleApp"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <nav-graph android:value="@navigation/nav_graph" />
+        </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.ProductDetailActivity"
+            android:theme="@style/Theme.mParticle.SampleApp"
+            android:screenOrientation="portrait"
             android:exported="true">
         </activity>
     </application>
