@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.5.0...v0.6.0) (2022-03-03)
+
+
+### Features
+
+* add in cart functionality to UI ([#10](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/10)) ([2d1eb87](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/2d1eb87e5503d2e34189f7a9aa2c5568f1a76d40))
+
 # [0.5.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.4.0...v0.5.0) (2022-02-23)
 
 
