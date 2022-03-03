@@ -1,4 +1,4 @@
-package com.mparticle.example.higgsshopsampleapp.repositories.network
+package com.mparticle.example.higgsshopsampleapp.repositories
 
 import android.content.Context
 import android.util.Log
@@ -7,7 +7,6 @@ import com.google.gson.reflect.TypeToken
 import com.mparticle.example.higgsshopsampleapp.repositories.network.models.Product
 import com.mparticle.example.higgsshopsampleapp.repositories.network.models.Products
 import java.io.IOException
-
 
 class ProductsRepository()  {
     val TAG = "ProductsRepository"

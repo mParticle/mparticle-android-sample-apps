@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.activities.MainActivity
 import com.mparticle.example.higgsshopsampleapp.adapters.ProductItemsAdapter
@@ -37,7 +38,7 @@ class ShopFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MParticle.getInstance()?.logScreen("Shop Higgs Gear")
+        MParticle.getInstance()?.logScreen("Shop")
 
         _binding?.rvProductList?.layoutManager = LinearLayoutManager(activity)
 
@@ -48,13 +49,12 @@ class ShopFragment : Fragment() {
                 return@Observer
             }
 
-            val adapter = ProductItemsAdapter(products)
+            val adapter = ProductItemsAdapter()
+            adapter.list = products.toMutableList()
 
             _binding?.rvProductList?.let { listView ->
                 if (listView.adapter == null) {
-                    listView.adapter = adapter.also { adapter ->
-                        //adapter.setOnItemSelectedListener(onItemClickListener())
-                    }
+                    listView.adapter = adapter
                 } else {
                     adapter.notifyDataSetChanged()
                 }

@@ -14,7 +14,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         val intent = Intent(this, LandingActivity::class.java)
-        MParticle.getInstance()?.logScreen("Splash")
 
         //add slight delay so you can see splash screen
         Timer().schedule(500) {
