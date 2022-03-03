@@ -46,7 +46,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:src="@drawable/product_placeholder"
+            android:src="@drawable/product_image_placeholder"
             />
         <LinearLayout
             android:id="@+id/spinners"

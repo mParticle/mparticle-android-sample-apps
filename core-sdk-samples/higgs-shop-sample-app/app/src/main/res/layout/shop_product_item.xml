@@ -9,7 +9,7 @@
     android:layout_width="343dp"
     android:layout_height="338dp">
         <ImageView
-            android:src="@drawable/product_placeholder"
+            android:src="@drawable/product_image_placeholder"
             android:id="@+id/product_item_picture"
             android:layout_width="343dp"
             android:layout_height="264dp"

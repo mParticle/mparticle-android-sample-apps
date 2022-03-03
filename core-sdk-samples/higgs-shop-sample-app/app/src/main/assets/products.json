@@ -1,5 +1,15 @@
 {
   "products": [{
+    "id": "128742",
+    "label": "Pride Sticker",
+    "imageUrl": "/products/128742.png",
+    "altText": "Pride Sticker",
+    "price": 1.50,
+    "category": "Stickers",
+    "brand": "mParticle",
+    "description": "Description TBD"
+    },
+    {
     "id": "128740",
     "label": "mP Icon Full Zip",
     "imageUrl": "/products/128740.png",
@@ -12,7 +22,7 @@
       "sizes": ["S", "M", "L", "XL", "2XL"]
     },
     "description": "Description TBD"
-  },
+    },
     {
       "id": "128744",
       "label": "Unisex Fleece Pullover",
@@ -153,16 +163,6 @@
       "category": "Stickers",
       "brand": "Higgs",
       "description": "2' W x 2.25' H"
-    },
-    {
-      "id": "128742",
-      "label": "Pride Sticker",
-      "imageUrl": "/products/128742.png",
-      "altText": "Pride Sticker",
-      "price": 2.0,
-      "category": "Stickers",
-      "brand": "mParticle",
-      "description": "Description TBD"
     },
     {
       "id": "128743",

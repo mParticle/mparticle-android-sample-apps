@@ -13,7 +13,7 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import com.mparticle.example.higgsshopsampleapp.activities.LandingActivity
 import com.mparticle.example.higgsshopsampleapp.activities.MainActivity
-import com.mparticle.example.higgsshopsampleapp.repositories.network.ProductsRepository
+import com.mparticle.example.higgsshopsampleapp.repositories.ProductsRepository
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test

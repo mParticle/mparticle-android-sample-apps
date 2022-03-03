@@ -1,5 +1,6 @@
 package com.mparticle.example.higgsshopsampleapp.activities
 
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -12,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.databinding.ActivityDetailBinding
+import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import com.mparticle.example.higgsshopsampleapp.viewmodels.ProductDetailViewModel
+import java.util.*
 
 class ProductDetailActivity : AppCompatActivity() {
     private val TAG = "ProductDetailActivity"
@@ -72,6 +75,21 @@ class ProductDetailActivity : AppCompatActivity() {
                 binding.spinnerSizes.adapter = arrayAdapter
             } else {
                 binding.spinnerSizes.visibility = View.GONE
+            }
+
+            binding.detailCta.setOnClickListener {
+                val sku = "${product.id}-${binding.spinnerColors.selectedItem}-${binding.spinnerSizes.selectedItem}"
+                val entity = CartItemEntity(
+                    sku = sku,
+                    id = product.id,
+                    label = product.label,
+                    imageUrl = product.imageUrl,
+                    color = binding.spinnerColors.selectedItem?.toString(),
+                    size = binding.spinnerSizes.selectedItem?.toString(),
+                    price = product.price,
+                    quantity = 1
+                )
+                detailViewModel.addToCart(this.applicationContext, entity)
             }
         })
         detailViewModel.getProductById(this, productId)
