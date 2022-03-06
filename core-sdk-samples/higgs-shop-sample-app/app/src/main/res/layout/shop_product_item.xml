@@ -30,14 +30,6 @@
                     android:textColor="@color/white"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"/>
-                <TextView
-                    android:id="@+id/tv_product_item_id"
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="0"
-                    android:text="@string/shop_product_item_id"
-                    android:visibility="invisible" />
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

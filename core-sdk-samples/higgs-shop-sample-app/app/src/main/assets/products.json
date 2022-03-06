@@ -4,7 +4,7 @@
     "label": "Pride Sticker",
     "imageUrl": "/products/128742.png",
     "altText": "Pride Sticker",
-    "price": 1.50,
+    "price": "1.50",
     "category": "Stickers",
     "brand": "mParticle",
     "description": "Description TBD"
@@ -14,7 +14,7 @@
     "label": "mP Icon Full Zip",
     "imageUrl": "/products/128740.png",
     "altText": "mP Icon Full Zip",
-    "price": 110.0,
+    "price": "110.00",
     "category": "Apparel",
     "brand": "mParticle",
     "variants": {
@@ -28,7 +28,7 @@
       "label": "Unisex Fleece Pullover",
       "imageUrl": "/products/128744.png",
       "altText": "Unisex Fleece Pullover",
-      "price": 50.0,
+      "price": "50.00",
       "category": "Apparel",
       "brand": "mParticle",
       "variants": {
@@ -42,7 +42,7 @@
       "label": "Unisex Full Logo Tee",
       "imageUrl": "/products/128745.png",
       "altText": "Unisex Full Logo Tee",
-      "price": 9.0,
+      "price": "9.00",
       "category": "Apparel",
       "brand": "mParticle",
       "variants": {
@@ -68,7 +68,7 @@
       "altText": "Women's Full Logo Tee",
       "category": "Apparel",
       "brand": "mParticle",
-      "price": 9.0,
+      "price": "9.00",
       "variants": {
         "colors": [
           "Black Heather",
@@ -93,7 +93,7 @@
       "altText": "Unisex Tee",
       "category": "Apparel",
       "brand": "mParticle",
-      "price": 8.0,
+      "price": "8.00",
       "variants": {
         "colors": ["Dark Grey Heather"],
         "sizes": ["XS", "S", "M", "L", "XL", "2XL"]
@@ -105,7 +105,7 @@
       "label": "Unisex Pride Tee",
       "imageUrl": "/products/128746.png",
       "altText": "Unisex Pride Tee",
-      "price": 14.0,
+      "price": "14.00",
       "category": "Apparel",
       "brand": "mParticle",
       "variants": {
@@ -119,7 +119,7 @@
       "label": "Absobu Dog Bowl",
       "imageUrl": "/products/128737.png",
       "altText": "Absobu Dog Bowl",
-      "price": 28.0,
+      "price": "28.00",
       "category": "Swag",
       "brand": "Absobu",
       "description": "Description TBD"
@@ -129,7 +129,7 @@
       "label": "Pride Decal",
       "imageUrl": "/products/128741.png",
       "altText": "Pride Decal",
-      "price": 3.0,
+      "price": "3.00",
       "category": "Stickers",
       "brand": "mParticle",
       "description": "Description TBD"
@@ -139,7 +139,7 @@
       "label": "Gamer Sticker",
       "imageUrl": "/products/128113.png",
       "altText": "Gamer Sticker",
-      "price": 1.0,
+      "price": "1.00",
       "category": "Stickers",
       "brand": "Higgs",
       "description": "2.3' W x 2.25' H"
@@ -149,7 +149,7 @@
       "label": "Mug Sticker",
       "imageUrl": "/products/128115.png",
       "altText": "Mug Sticker",
-      "price": 1.0,
+      "price": "1.00",
       "category": "Stickers",
       "brand": "Higgs",
       "description": "2.25' W x 2.1' H"
@@ -159,7 +159,7 @@
       "label": "Glasses Sticker",
       "imageUrl": "/products/128114.png",
       "altText": "Glasses Sticker",
-      "price": 1.0,
+      "price": "1.00",
       "category": "Stickers",
       "brand": "Higgs",
       "description": "2' W x 2.25' H"
@@ -169,7 +169,7 @@
       "label": "Tennis Ball",
       "imageUrl": "/products/128743.png",
       "altText": "Tennis Ball",
-      "price": 2.0,
+      "price": "2.00",
       "category": "Toys",
       "brand": "mParticle",
       "description": "Description TBD"

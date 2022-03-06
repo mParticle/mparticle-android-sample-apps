@@ -15,17 +15,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mparticle.example.higgsshopsampleapp.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class CartItemsAdapter() :
-    RecyclerView.Adapter<CartItemsAdapter.CartItemViewHolder>() {
 
-    var onItemClicked: ((CartItemEntity, Int) -> Unit)? = null
+class CheckoutItemsAdapter() :
+    RecyclerView.Adapter<CheckoutItemsAdapter.CartItemViewHolder>() {
+
     var list = mutableListOf<CartItemEntity>()
         set(value) {
             field = value
@@ -47,7 +44,6 @@ class CartItemsAdapter() :
 
         viewHolder.tvPrice.text = "$${BigDecimal(list[position].price)
             .setScale(2, BigDecimal.ROUND_HALF_UP)}"
-
         var quantity = "Qty: ${list[position].quantity}"
         list[position].color?.apply { quantity += ", Color: ${list[position].color}" }
         list[position].size?.apply { quantity += ", Size: ${list[position].size}" }
@@ -61,6 +57,7 @@ class CartItemsAdapter() :
             .centerCrop()
             .into(viewHolder.ivImage)
 
+        viewHolder.tvRemove.visibility = View.INVISIBLE
     }
 
     inner class CartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -79,10 +76,6 @@ class CartItemsAdapter() :
             tvPrice = itemView.findViewById(R.id.tv_cart_item_price)
             tvQuantity = itemView.findViewById(R.id.tv_cart_item_quantity)
             tvRemove = itemView.findViewById(R.id.tv_cart_item_remove)
-
-            itemView.setOnClickListener {
-                onItemClicked?.invoke(list[absoluteAdapterPosition], absoluteAdapterPosition)
-            }
         }
     }
 }

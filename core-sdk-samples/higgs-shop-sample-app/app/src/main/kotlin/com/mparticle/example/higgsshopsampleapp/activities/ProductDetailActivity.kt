@@ -1,22 +1,30 @@
 package com.mparticle.example.higgsshopsampleapp.activities
 
-import android.content.Intent
-import android.graphics.PorterDuff
+import android.app.ActionBar
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.mparticle.MParticle
+import com.mparticle.commerce.CommerceEvent
+import com.mparticle.commerce.Product
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.databinding.ActivityDetailBinding
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import com.mparticle.example.higgsshopsampleapp.viewmodels.ProductDetailViewModel
-import java.util.*
+import java.math.BigDecimal
 
 class ProductDetailActivity : AppCompatActivity() {
     private val TAG = "ProductDetailActivity"
@@ -31,7 +39,7 @@ class ProductDetailActivity : AppCompatActivity() {
         MParticle.getInstance()?.logScreen("Detail")
 
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setTitle("Back")
+        getSupportActionBar()?.setTitle(R.string.detail_back)
         getSupportActionBar()?.setBackgroundDrawable(ColorDrawable(getColor(R.color.blue_4079FE)))
 
         val productId = intent.getIntExtra(Constants.PRODUCT_ID, 0)
@@ -39,22 +47,45 @@ class ProductDetailActivity : AppCompatActivity() {
         detailViewModel =
             ViewModelProvider(this).get(ProductDetailViewModel::class.java)
 
-        detailViewModel.detailResponseLiveData.observe(this, Observer { product ->
-            Log.d(TAG, "Show Product ID: " + product?.id)
+        detailViewModel.cartResponseLiveData.observe(this, { cartAdded ->
+            if(cartAdded) {
+                showAddToCartAlert()
+            }
+        })
 
-            if (product == null) {
+        detailViewModel.detailResponseLiveData.observe(this, Observer { productItem ->
+            Log.d(TAG, "Show Product ID: " + productItem?.id)
+
+            if (productItem == null) {
+                finish()
                 return@Observer
             }
 
-            binding.tvDetailHeader.text = product.label
-            binding.tvDetailPrice.text = "\$${"%.2f".format(product.price)}"
+            val product = Product.Builder(productItem.label, productItem.id.toString(), productItem.price.toDouble())
+                .unitPrice(productItem.price.toDouble())
+                .build()
+            val event = CommerceEvent.Builder(Product.DETAIL, product)
+                .build()
+            MParticle.getInstance()?.logEvent(event)
 
-            if(product.variants?.colors?.isNotEmpty() ?: false) {
+            binding.tvDetailHeader.text = productItem.label
+            binding.tvDetailPrice.text = "\$${BigDecimal(productItem.price)
+                .setScale(2, BigDecimal.ROUND_HALF_UP)}"
+
+            Glide.with(this)
+                .load(
+                    Uri.parse("file:///android_asset" + productItem.imageUrl))
+                .placeholder(R.drawable.product_image_placeholder)
+                //.override(328,264)
+                .centerCrop()
+                .into(binding.ivDetailImage)
+
+            if(productItem.variants?.colors?.isNotEmpty() ?: false) {
                 val arrayAdapter: ArrayAdapter<*>
                 arrayAdapter = ArrayAdapter(
                     this,
                     R.layout.shop_detail_spinner_item,
-                    listOf("Select Color") + (product.variants?.colors ?: listOf("Red"))
+                    productItem.variants?.colors ?: listOf()
                 )
                 arrayAdapter.setDropDownViewResource(R.layout.shop_detail_spinner_item_popup)
                 binding.spinnerColors.visibility = View.VISIBLE
@@ -63,12 +94,12 @@ class ProductDetailActivity : AppCompatActivity() {
                 binding.spinnerColors.visibility = View.GONE
             }
 
-            if(product.variants?.sizes?.isNotEmpty() ?: false) {
-                val arrayAdapter: ArrayAdapter<String>
+            if(productItem.variants?.sizes?.isNotEmpty() ?: false) {
+                val arrayAdapter: ArrayAdapter<*>
                 arrayAdapter = ArrayAdapter(
                     this,
                     R.layout.shop_detail_spinner_item,
-                    listOf("Select Size") + (product.variants?.sizes ?: listOf("M"))
+                    productItem.variants?.sizes ?: listOf()
                 )
                 arrayAdapter.setDropDownViewResource(R.layout.shop_detail_spinner_item_popup)
                 binding.spinnerSizes.visibility = View.VISIBLE
@@ -77,17 +108,26 @@ class ProductDetailActivity : AppCompatActivity() {
                 binding.spinnerSizes.visibility = View.GONE
             }
 
+            val arrayAdapter: ArrayAdapter<*>
+            arrayAdapter = ArrayAdapter(
+                this,
+                R.layout.shop_detail_spinner_item,
+                listOf("1","2","3","4","5","6","7","8")
+            )
+            arrayAdapter.setDropDownViewResource(R.layout.shop_detail_spinner_item_popup)
+            binding.spinnerQty.adapter = arrayAdapter
+
             binding.detailCta.setOnClickListener {
-                val sku = "${product.id}-${binding.spinnerColors.selectedItem}-${binding.spinnerSizes.selectedItem}"
+                val sku = "${productItem.id}-${binding.spinnerColors.selectedItem}-${binding.spinnerSizes.selectedItem}"
                 val entity = CartItemEntity(
                     sku = sku,
-                    id = product.id,
-                    label = product.label,
-                    imageUrl = product.imageUrl,
+                    id = productItem.id,
+                    label = productItem.label,
+                    imageUrl = productItem.imageUrl,
                     color = binding.spinnerColors.selectedItem?.toString(),
                     size = binding.spinnerSizes.selectedItem?.toString(),
-                    price = product.price,
-                    quantity = 1
+                    price = productItem.price,
+                    quantity = Integer.parseInt(binding.spinnerQty.selectedItem.toString())
                 )
                 detailViewModel.addToCart(this.applicationContext, entity)
             }
@@ -98,5 +138,21 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
+    }
+
+    fun showAddToCartAlert() {
+        val snackbar = Snackbar.make(binding.root, getString(R.string.detail_cta_added), Snackbar.LENGTH_LONG)
+        val layoutParams = ActionBar.LayoutParams(snackbar.view.layoutParams)
+        snackbar.view.layoutParams = layoutParams
+        snackbar.setBackgroundTint(getColor(R.color.blue_4079FE))
+        snackbar.setTextColor(getColor(R.color.white))
+        snackbar.view.setPadding(0, 10, 0, 0)
+        (snackbar.view.findViewById<TextView>(R.id.snackbar_text))?.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        snackbar.view.setOnClickListener({
+            setResult(Constants.RESULT_CODE_CART_ADDED)
+            finish()
+        })
+        snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+        snackbar.show()
     }
 }

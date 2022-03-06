@@ -5,6 +5,7 @@
     <string name="landing_welcome">Welcome to the mParticle SDK sample app. Everything here is connected to the SDK so you can see what we can do for you!</string>
     <string name="landing_disclaimer">*This app is for demo purposes only.</string>
     <string name="landing_cta">Start Shopping*</string>
+    <string name="landing_apikey_alert">You have started the app without an API key in the config. There is information in this app\'s github repo about how to add your API key.</string>
 
     <!-- navigation -->
     <string name="nav_shop">Shop</string>
@@ -20,18 +21,25 @@
     <string name="shop_product_picture">Product Picture</string>
 
     <!-- detail -->
+    <string name="detail_back">Back</string>
     <string name="detail_header">Product Label</string>
     <string name="detail_add_to_cart">Add to cart</string>
     <string name="detail_price">$0.00</string>
+    <string name="detail_cta_added">Item added, view cart</string>
 
     <!-- about -->
     <string name="about_title">About</string>
 
     <!-- account -->
     <string name="account_title">My Account</string>
+    <string name="account_username">MyHiggsId</string>
+    <string name="account_cta_login">Sign In*</string>
+    <string name="account_cta_logout">Sign Out*</string>
+    <string name="account_disclaimer">*Demonstration only</string>
 
     <!-- cart -->
     <string name="cart_title">My Cart</string>
+    <string name="cart_0">No items in cart</string>
     <string name="cart_subtotal">Subtotal</string>
     <string name="cart_subtotal_price">$0.00</string>
     <string name="cart_disclaimer">*Demonstration only</string>
@@ -42,5 +50,22 @@
     <string name="cart_quantity">Qty: 1</string>
     <string name="cart_remove">Remove</string>
 
+    <!-- checkout -->
+    <string name="checkout_back">Back to Cart</string>
+    <string name="checkout_title">Checkout</string>
+    <string name="checkout_header1">Shipping*</string>
+    <string name="checkout_header2">Payment*</string>
+    <string name="checkout_header3">Review Order</string>
+    <string name="checkout_subtotal_header">Subtotal</string>
+    <string name="checkout_salestax_header">Sales Tax</string>
+    <string name="checkout_shipping_header">Shipping</string>
+    <string name="checkout_grand_header">Grand Total</string>
+    <string name="checkout_price_0">$0.00</string>
+    <string name="checkout_disclaimer">*Demonstration only</string>
+    <string name="checkout_cta">Place Order*</string>
+    <string name="checkout_sku">SKU</string>
+    <string name="checkout_label">Label</string>
+    <string name="checkout_quantity">Qty: 1</string>
+    <string name="checkout_thanks">Thank you for your purchase</string>
 
 </resources>
