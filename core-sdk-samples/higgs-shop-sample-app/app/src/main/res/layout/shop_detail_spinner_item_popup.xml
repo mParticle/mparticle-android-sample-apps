@@ -7,8 +7,12 @@
     android:layout_gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:maxLines="1"
     android:textSize="20sp"
     android:gravity="start"
+    android:background="@color/black_121212"
     android:textColor="@color/white"
-    android:padding="10dp"
+    style="@style/Theme.mParticle.SampleApp.TextInputLayout.DropdownItem"
+    android:padding="5dp"
     android:layout_margin="5dp" />

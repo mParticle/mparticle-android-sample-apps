@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mparticle.MParticle
 import com.mparticle.commerce.CommerceEvent
-import com.mparticle.commerce.TransactionAttributes
 import com.mparticle.example.higgsshopsampleapp.repositories.CartRepository
 import com.mparticle.example.higgsshopsampleapp.repositories.ProductsRepository
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
@@ -16,9 +15,12 @@ import kotlinx.coroutines.launch
 
 
 class ProductDetailViewModel : ViewModel() {
+    private val TAG = "ProductDetailViewModel"
     val detailResponseLiveData = MutableLiveData<Product>()
     val cartResponseLiveData = MutableLiveData<Boolean>()
-    private val TAG = "ProductDetailViewModel"
+    var quantity: Int = 0
+    var color: String? = null
+    var size: String? = null
 
     private val productsRepository = ProductsRepository()
     private val cartRepository = CartRepository()

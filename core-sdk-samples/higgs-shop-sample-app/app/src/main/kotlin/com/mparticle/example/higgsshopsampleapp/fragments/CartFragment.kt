@@ -58,11 +58,12 @@ class CartFragment : Fragment() {
             if (items == null || items.size == 0) {
                 _binding?.tvCart0?.visibility = View.VISIBLE
                 _binding?.rvCartList?.visibility = View.GONE
-                _binding?.tvCartSubtotalPrice?.text = "$0.00"
-                btnCTA.isEnabled = false
+                _binding?.tvCartSubtotalPrice?.text = getString(R.string.detail_price)
+                btnCTA.isClickable = false
+                btnCTA.alpha = 0.3F
                 return@Observer
             }
-
+            btnCTA.setBackgroundResource(R.drawable.rounded_button)
             _binding?.tvCart0?.visibility = View.GONE
             _binding?.rvCartList?.visibility = View.VISIBLE
             val adapter = CartItemsAdapter()
@@ -93,7 +94,8 @@ class CartFragment : Fragment() {
                 cartViewModel.getSubtotalPrice(this.requireContext())
             }
 
-            btnCTA.isEnabled = true
+            btnCTA.isClickable = true
+            btnCTA.alpha = 1.0F
             btnCTA.setOnClickListener {
                 val intent = Intent(activity, CheckoutActivity::class.java)
                 (activity as MainActivity).activityResultLaunch?.launch(intent)

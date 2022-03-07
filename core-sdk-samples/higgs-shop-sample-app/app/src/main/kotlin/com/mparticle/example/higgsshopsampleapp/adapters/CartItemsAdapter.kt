@@ -48,10 +48,10 @@ class CartItemsAdapter() :
         viewHolder.tvPrice.text = "$${BigDecimal(list[position].price)
             .setScale(2, BigDecimal.ROUND_HALF_UP)}"
 
-        var quantity = "Qty: ${list[position].quantity}"
-        list[position].color?.apply { quantity += ", Color: ${list[position].color}" }
-        list[position].size?.apply { quantity += ", Size: ${list[position].size}" }
-        viewHolder.tvQuantity.text = quantity
+        var line1 = "Qty: ${list[position].quantity}"
+        list[position].color?.apply { line1 += ", Color: ${list[position].color}" }
+        list[position].size?.apply { line1 += ", Size: ${list[position].size}" }
+        viewHolder.tvLine1.text = line1
 
         Glide.with(viewHolder.itemView.context)
             .load(
@@ -66,19 +66,17 @@ class CartItemsAdapter() :
     inner class CartItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val intent: Intent? = null
         var ivImage: ImageView
-        var tvSku: TextView
         var tvLabel: TextView
         var tvPrice: TextView
-        var tvQuantity: TextView
-        var tvRemove: TextView
+        var tvLine1: TextView
+        var tvLine2: TextView
 
         init {
             ivImage = itemView.findViewById(R.id.iv_cart_item_picture)
-            tvSku = itemView.findViewById(R.id.tv_cart_item_sku)
             tvLabel = itemView.findViewById(R.id.tv_cart_item_label)
             tvPrice = itemView.findViewById(R.id.tv_cart_item_price)
-            tvQuantity = itemView.findViewById(R.id.tv_cart_item_quantity)
-            tvRemove = itemView.findViewById(R.id.tv_cart_item_remove)
+            tvLine1 = itemView.findViewById(R.id.tv_cart_item_line1)
+            tvLine2 = itemView.findViewById(R.id.tv_cart_item_line2)
 
             itemView.setOnClickListener {
                 onItemClicked?.invoke(list[absoluteAdapterPosition], absoluteAdapterPosition)

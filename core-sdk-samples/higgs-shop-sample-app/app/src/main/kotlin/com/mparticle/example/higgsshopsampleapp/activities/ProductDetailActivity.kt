@@ -5,14 +5,13 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -80,54 +79,78 @@ class ProductDetailActivity : AppCompatActivity() {
                 .centerCrop()
                 .into(binding.ivDetailImage)
 
+            val dropdownColors = binding.dropdownColors.editText as? AutoCompleteTextView
             if(productItem.variants?.colors?.isNotEmpty() ?: false) {
-                val arrayAdapter: ArrayAdapter<*>
-                arrayAdapter = ArrayAdapter(
+                val colorAdapter: ArrayAdapter<*>
+                colorAdapter = ArrayAdapter(
                     this,
-                    R.layout.shop_detail_spinner_item,
+                    R.layout.shop_detail_spinner_item_popup,
                     productItem.variants?.colors ?: listOf()
                 )
-                arrayAdapter.setDropDownViewResource(R.layout.shop_detail_spinner_item_popup)
-                binding.spinnerColors.visibility = View.VISIBLE
-                binding.spinnerColors.adapter = arrayAdapter
+                dropdownColors?.setAdapter(colorAdapter)
+                dropdownColors?.setOnClickListener {
+                    dropdownColors.showDropDown()
+                }
+                dropdownColors?.setOnItemClickListener {  _, _, position, _ ->
+                    detailViewModel.color = colorAdapter.getItem(position).toString()
+                }
+                detailViewModel.color = colorAdapter.getItem(0).toString()
+                dropdownColors?.setText(detailViewModel.color, false)
+                binding.dropdownColors.visibility = View.VISIBLE
             } else {
-                binding.spinnerColors.visibility = View.GONE
+                binding.dropdownColors.visibility = View.GONE
             }
 
+            val dropdownSizes = binding.dropdownSizes.editText as? AutoCompleteTextView
             if(productItem.variants?.sizes?.isNotEmpty() ?: false) {
-                val arrayAdapter: ArrayAdapter<*>
-                arrayAdapter = ArrayAdapter(
+                val sizeAdapter: ArrayAdapter<*>
+                sizeAdapter = ArrayAdapter(
                     this,
-                    R.layout.shop_detail_spinner_item,
+                    R.layout.shop_detail_spinner_item_popup,
                     productItem.variants?.sizes ?: listOf()
                 )
-                arrayAdapter.setDropDownViewResource(R.layout.shop_detail_spinner_item_popup)
-                binding.spinnerSizes.visibility = View.VISIBLE
-                binding.spinnerSizes.adapter = arrayAdapter
+                dropdownSizes?.setAdapter(sizeAdapter)
+                dropdownSizes?.setOnClickListener {
+                    dropdownSizes.showDropDown()
+                }
+                dropdownSizes?.setOnItemClickListener {  _, _, position, _ ->
+                    detailViewModel.size = sizeAdapter.getItem(position).toString()
+                }
+                detailViewModel.size = sizeAdapter.getItem(0).toString()
+                dropdownSizes?.setText(detailViewModel.size, false)
+                binding.dropdownSizes.visibility = View.VISIBLE
             } else {
-                binding.spinnerSizes.visibility = View.GONE
+                binding.dropdownSizes.visibility = View.GONE
             }
 
-            val arrayAdapter: ArrayAdapter<*>
-            arrayAdapter = ArrayAdapter(
+            val quantityAdapter: ArrayAdapter<*>
+            quantityAdapter = ArrayAdapter(
                 this,
-                R.layout.shop_detail_spinner_item,
+                R.layout.shop_detail_spinner_item_popup,
                 listOf("1","2","3","4","5","6","7","8")
             )
-            arrayAdapter.setDropDownViewResource(R.layout.shop_detail_spinner_item_popup)
-            binding.spinnerQty.adapter = arrayAdapter
+            val dropdownQuantity = binding.dropdownQuantity.editText as? AutoCompleteTextView
+            dropdownQuantity?.setAdapter(quantityAdapter)
+            dropdownQuantity?.setOnClickListener {
+                dropdownQuantity.showDropDown()
+            }
+            dropdownQuantity?.setOnItemClickListener {  _, _, position, _ ->
+                detailViewModel.quantity = Integer.parseInt(quantityAdapter.getItem(position).toString())
+            }
+            detailViewModel.quantity = Integer.parseInt(quantityAdapter.getItem(0).toString())
+            dropdownQuantity?.setText(detailViewModel.quantity.toString(), false)
 
             binding.detailCta.setOnClickListener {
-                val sku = "${productItem.id}-${binding.spinnerColors.selectedItem}-${binding.spinnerSizes.selectedItem}"
+                val sku = "${productItem.id}-${detailViewModel.color}-${detailViewModel.size}"
                 val entity = CartItemEntity(
                     sku = sku,
                     id = productItem.id,
                     label = productItem.label,
                     imageUrl = productItem.imageUrl,
-                    color = binding.spinnerColors.selectedItem?.toString(),
-                    size = binding.spinnerSizes.selectedItem?.toString(),
+                    color = detailViewModel.color,
+                    size = detailViewModel.size,
                     price = productItem.price,
-                    quantity = Integer.parseInt(binding.spinnerQty.selectedItem.toString())
+                    quantity = detailViewModel.quantity
                 )
                 detailViewModel.addToCart(this.applicationContext, entity)
             }
