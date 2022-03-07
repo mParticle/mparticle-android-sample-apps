@@ -1,27 +1,24 @@
 package com.mparticle.example.higgsshopsampleapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.activities.MainActivity
+import com.mparticle.example.higgsshopsampleapp.activities.CheckoutActivity
 import com.mparticle.example.higgsshopsampleapp.adapters.CartItemsAdapter
-import com.mparticle.example.higgsshopsampleapp.adapters.ProductItemsAdapter
 import com.mparticle.example.higgsshopsampleapp.databinding.FragmentCartBinding
-import com.mparticle.example.higgsshopsampleapp.repositories.CartRepository
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.viewmodels.CartViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CartFragment : Fragment() {
     private var _binding: FragmentCartBinding? = null
@@ -47,18 +44,27 @@ class CartFragment : Fragment() {
         MParticle.getInstance()?.logScreen("View My Cart")
 
         _binding?.rvCartList?.layoutManager = LinearLayoutManager(activity)
+        val btnCTA = activity?.findViewById(R.id.cart_cta) as Button
 
-        cartViewModel.cartSubtotalPriceLiveData.observe(viewLifecycleOwner, Observer { subTotalPrice ->
-            _binding?.tvCartSubtotalPrice?.text = "$${subTotalPrice}"
-        })
+        cartViewModel.cartSubtotalPriceLiveData.observe(
+            viewLifecycleOwner,
+            { subTotalPrice ->
+                _binding?.tvCartSubtotalPrice?.text = "$${subTotalPrice}"
+            })
 
         cartViewModel.cartResponseLiveData.observe(viewLifecycleOwner, Observer { items ->
             Log.d(TAG, "Size: " + items?.size)
 
-            if (items == null) {
+            if (items == null || items.size == 0) {
+                _binding?.tvCart0?.visibility = View.VISIBLE
+                _binding?.rvCartList?.visibility = View.GONE
+                _binding?.tvCartSubtotalPrice?.text = "$0.00"
+                btnCTA.isEnabled = false
                 return@Observer
             }
 
+            _binding?.tvCart0?.visibility = View.GONE
+            _binding?.rvCartList?.visibility = View.VISIBLE
             val adapter = CartItemsAdapter()
             adapter.list = items.toMutableList()
 
@@ -86,7 +92,17 @@ class CartFragment : Fragment() {
                 }
                 cartViewModel.getSubtotalPrice(this.requireContext())
             }
+
+            btnCTA.isEnabled = true
+            btnCTA.setOnClickListener {
+                val intent = Intent(activity, CheckoutActivity::class.java)
+                (activity as MainActivity).activityResultLaunch?.launch(intent)
+            }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
         cartViewModel.getCartItems(this.requireContext())
     }
 }

@@ -35,4 +35,11 @@ class CartRepository() {
         val rowsAffected = mpDao.removeFromCart(entity)
         rowsAffected
     }
+
+    suspend fun clearCart(context: Context) = withContext(Dispatchers.IO) {
+        val db = MpDatabase.getDatabase(context)
+        val mpDao = db.mpDao()
+        val rowsAffected = mpDao.clearCart()
+        rowsAffected
+    }
 }

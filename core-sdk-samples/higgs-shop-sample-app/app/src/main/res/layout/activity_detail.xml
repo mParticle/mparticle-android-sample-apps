@@ -50,7 +50,7 @@
             />
         <LinearLayout
             android:id="@+id/spinners"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -71,7 +71,7 @@
                     />
                 <View
                     android:layout_width="25dp"
-                    android:layout_height="54dp" />
+                    android:layout_height="wrap_content" />
                 <Spinner
                     android:id="@+id/spinner_sizes"
                     android:spinnerMode="dropdown"
@@ -80,6 +80,35 @@
                     android:layout_width="154dp"
                     android:layout_height="54dp"
                     android:layout_marginTop="30dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/spinnersRow2"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Spinner
+                    android:id="@+id/spinner_qty"
+                    android:spinnerMode="dropdown"
+                    android:background="@drawable/spinner_border"
+                    android:popupBackground="@drawable/spinner_popup_border"
+                    android:layout_width="154dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="30dp"
+                    />
+                <View
+                    android:layout_width="25dp"
+                    android:layout_height="54dp" />
+                <Spinner
+                    android:id="@+id/spinner_invisible"
+                    android:spinnerMode="dropdown"
+                    android:background="@drawable/spinner_border"
+                    android:popupBackground="@drawable/spinner_popup_border"
+                    android:layout_width="154dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="30dp"
+                    android:visibility="invisible"
                     />
             </LinearLayout>
         </LinearLayout>

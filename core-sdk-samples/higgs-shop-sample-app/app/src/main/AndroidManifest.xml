@@ -42,5 +42,11 @@
             android:screenOrientation="portrait"
             android:exported="true">
         </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.CheckoutActivity"
+            android:theme="@style/Theme.mParticle.SampleApp"
+            android:screenOrientation="portrait"
+            android:exported="true">
+        </activity>
     </application>
 </manifest>
