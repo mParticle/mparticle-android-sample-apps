@@ -42,7 +42,7 @@
         android:layout_height="50dp"
         android:text="@string/landing_cta"
         android:textColor="@color/white"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/rounded_button"
         app:layout_constraintBottom_toTopOf="@id/landing_disclaimer"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

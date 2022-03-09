@@ -14,7 +14,7 @@
         android:layout_height="56dp">
         <ImageView
             android:src="@drawable/product_image_placeholder"
-            android:id="@+id/iv_cart_item_picture"
+            android:id="@+id/iv_checkout_item_picture"
             android:layout_gravity="center_vertical"
             android:layout_width="100dp"
             android:layout_height="56dp"
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tv_cart_item_label"
+                    android:id="@+id/tv_checkout_item_label"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:gravity="start"
@@ -43,7 +43,7 @@
                     android:maxLines="1"
                     />
                 <TextView
-                    android:id="@+id/tv_cart_item_price"
+                    android:id="@+id/tv_checkout_item_price"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -56,7 +56,7 @@
                     android:paddingEnd="15dp"/>
             </LinearLayout>
             <TextView
-                android:id="@+id/tv_cart_item_line1"
+                android:id="@+id/tv_checkout_item_line1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -67,8 +67,8 @@
                 android:textSize="14sp"
                 android:textColor="@color/gray_999999" />
             <TextView
-                android:id="@+id/tv_cart_item_line2"
-                android:textColor="@color/blue_4079FE"
+                android:id="@+id/tv_checkout_item_line2"
+                android:textColor="@color/gray_999999"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

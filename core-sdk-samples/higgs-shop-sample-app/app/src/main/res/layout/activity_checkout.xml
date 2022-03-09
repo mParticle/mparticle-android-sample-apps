@@ -41,10 +41,79 @@
             android:textStyle="bold"
             android:textSize="16sp"
             />
-
-
-
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="325dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="30dp"
+            android:hint="@string/checkout_address"
+            style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+                android:textIsSelectable="false"
+                android:enabled="false"
+                android:text="@string/checkout_address_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="325dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/checkout_city"
+            android:textSize="16sp"
+            style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+                android:textIsSelectable="false"
+                android:enabled="false"
+                android:text="@string/checkout_city_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/checkout_state"
+                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+                    android:textIsSelectable="false"
+                    android:enabled="false"
+                    android:text="@string/checkout_state_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+                android:hint="@string/checkout_zip"
+                android:textSize="16sp"
+                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+                    android:textIsSelectable="false"
+                    android:enabled="false"
+                    android:text="@string/checkout_zip_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
         <TextView
             android:layout_gravity="center_horizontal"
@@ -67,6 +136,66 @@
             android:textSize="16sp"
             />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="325dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/checkout_creditcard"
+            android:textSize="16sp"
+            style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+                android:textIsSelectable="false"
+                android:enabled="false"
+                android:text="@string/checkout_creditcard_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                app:endIconTint="@color/white"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/checkout_expiration"
+                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+                    android:textIsSelectable="false"
+                    android:enabled="false"
+                    android:text="@string/checkout_expiration_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="20dp"
+                android:hint="@string/checkout_cvc"
+                android:textSize="16sp"
+                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+                    android:textIsSelectable="false"
+                    android:enabled="false"
+                    android:text="@string/checkout_cvc_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
         <TextView
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
@@ -99,31 +228,22 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="@string/checkout_subtotal_header"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:ellipsize="end"
-                android:maxLines="1"
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView"
                 />
             <TextView
                 android:id="@+id/tv_payment_subtotal_price"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:gravity="end"
                 android:layout_weight="1"
                 android:text="@string/checkout_price_0"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView" />
         </LinearLayout>
         <View
             android:layout_gravity="center_horizontal"
             android:layout_width="328dp"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            style="@style/Theme.mParticle.SampleApp.Checkout.Line"
             />
         <LinearLayout
             android:orientation="horizontal"
@@ -134,34 +254,23 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="@string/checkout_salestax_header"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:ellipsize="end"
-                android:maxLines="1"
-                />
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView" />
             <TextView
                 android:id="@+id/tv_payment_tax_price"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:gravity="end"
                 android:layout_weight="1"
                 android:text="@string/checkout_price_0"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView" />
         </LinearLayout>
         <View
             android:layout_gravity="center_horizontal"
             android:layout_width="328dp"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            style="@style/Theme.mParticle.SampleApp.Checkout.Line"
             />
         <LinearLayout
             android:orientation="horizontal"
@@ -172,34 +281,23 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="@string/checkout_shipping_header"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:ellipsize="end"
-                android:maxLines="1"
-                />
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView" />
             <TextView
                 android:id="@+id/tv_payment_shipping_price"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:gravity="end"
                 android:layout_weight="1"
                 android:text="@string/checkout_price_0"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView" />
         </LinearLayout>
         <View
             android:layout_gravity="center_horizontal"
             android:layout_width="328dp"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            style="@style/Theme.mParticle.SampleApp.Checkout.Line"
             />
         <LinearLayout
             android:orientation="horizontal"
@@ -210,34 +308,23 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="@string/checkout_grand_header"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:ellipsize="end"
-                android:maxLines="1"
-                />
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView" />
             <TextView
                 android:id="@+id/tv_payment_grand_price"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:gravity="end"
                 android:layout_weight="1"
                 android:text="@string/checkout_price_0"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"/>
+                style="@style/Theme.mParticle.SampleApp.Checkout.TextView" />
         </LinearLayout>
         <View
             android:layout_gravity="center_horizontal"
             android:layout_width="328dp"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            style="@style/Theme.mParticle.SampleApp.Checkout.Line"
             />
         <Button
             android:id="@+id/payment_cta"
@@ -246,7 +333,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/rounded_button"
             android:text="@string/cart_cta"
             android:theme="@style/Theme.mParticle.SampleApp.Button" />
         <TextView

@@ -19,26 +19,33 @@
         android:textStyle="bold"
         android:textSize="24sp"
         />
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_gravity="center_horizontal"
         android:layout_width="342dp"
         android:layout_height="54dp"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"
-        android:paddingStart="10dp"
-        android:text="@string/account_username"
-        android:textColor="@color/black"
-        android:background="@color/white"
-        />
+        android:hint="@string/checkout_address"
+        style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/Theme.mParticle.SampleApp.TextInputEditText"
+            android:textIsSelectable="false"
+            android:enabled="false"
+            android:text="@string/account_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/account_cta"
-        android:layout_width="190dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
+        android:theme="@style/Theme.mParticle.SampleApp.Button"
+        android:background="@drawable/rounded_button"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/rounded_corner"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
         android:text="@string/account_cta_login"
-        android:theme="@style/Theme.mParticle.SampleApp.Button" />
+        />
     <TextView
         android:id="@+id/tv_account_disclaimer"
         android:visibility="visible"

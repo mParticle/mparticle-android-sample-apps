@@ -1,12 +1,16 @@
 package com.mparticle.example.higgsshopsampleapp.fragments
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.activities.MainActivity
@@ -44,9 +48,11 @@ class AccountFragment : Fragment() {
                 when(loggedIn) {
                     false -> {
                         btnCTA.text = getString(R.string.account_cta_login)
+                        showIdentityAlert("Logout Successful")
                     }
                     true -> {
                         btnCTA.text = getString(R.string.account_cta_logout)
+                        showIdentityAlert("Login Successful")
                     }
                 }
             })
@@ -69,7 +75,24 @@ class AccountFragment : Fragment() {
                         accountViewModel.logout()
                     }
                 }
+                else -> {}
             }
         }
+    }
+
+    fun showIdentityAlert(message: String) {
+        val parentLayout: View = requireActivity().findViewById(android.R.id.content)
+        val snackbar = Snackbar.make(parentLayout, message, Snackbar.LENGTH_SHORT)
+        val layoutParams = ActionBar.LayoutParams(snackbar.view.layoutParams)
+
+        val tv = (snackbar.view.findViewById<TextView>(R.id.snackbar_text))
+        tv?.textAlignment = View.TEXT_ALIGNMENT_CENTER
+
+        snackbar.setBackgroundTint(requireContext().getColor(R.color.blue_4079FE))
+        snackbar.setTextColor(requireContext().getColor(R.color.white))
+        snackbar.view.layoutParams = layoutParams
+        snackbar.view.setPadding(0, 10, 0, 0)
+        snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+        snackbar.show()
     }
 }

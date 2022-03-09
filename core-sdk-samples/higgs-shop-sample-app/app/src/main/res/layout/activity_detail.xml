@@ -48,70 +48,98 @@
             android:gravity="center"
             android:src="@drawable/product_image_placeholder"
             />
+
         <LinearLayout
-            android:id="@+id/spinners"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/spinnersRow1"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Spinner
-                    android:id="@+id/spinner_colors"
-                    android:spinnerMode="dropdown"
-                    android:background="@drawable/spinner_border"
-                    android:popupBackground="@drawable/spinner_popup_border"
-                    android:layout_width="154dp"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="30dp"
-                    />
-                <View
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content" />
-                <Spinner
-                    android:id="@+id/spinner_sizes"
-                    android:spinnerMode="dropdown"
-                    android:background="@drawable/spinner_border"
-                    android:popupBackground="@drawable/spinner_popup_border"
-                    android:layout_width="154dp"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="30dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/spinnersRow2"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Spinner
-                    android:id="@+id/spinner_qty"
-                    android:spinnerMode="dropdown"
-                    android:background="@drawable/spinner_border"
-                    android:popupBackground="@drawable/spinner_popup_border"
-                    android:layout_width="154dp"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="30dp"
-                    />
-                <View
-                    android:layout_width="25dp"
-                    android:layout_height="54dp" />
-                <Spinner
-                    android:id="@+id/spinner_invisible"
-                    android:spinnerMode="dropdown"
-                    android:background="@drawable/spinner_border"
-                    android:popupBackground="@drawable/spinner_popup_border"
-                    android:layout_width="154dp"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="30dp"
-                    android:visibility="invisible"
-                    />
-            </LinearLayout>
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                app:endIconTint="@color/white"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
+                app:hintTextColor="@color/white"
+                app:helperTextTextColor="@color/white"
+                android:id="@+id/dropdown_colors"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/detail_color"
+                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+                >
+                <AutoCompleteTextView
+                    style="@style/Theme.mParticle.SampleApp.TextInputLayout.Dropdown"
+                    android:id="@+id/dropdown_color_item"
+                    android:inputType="none"
+                    android:text="@string/detail_tbd"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                app:endIconTint="@color/white"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
+                app:hintTextColor="@color/white"
+                app:helperTextTextColor="@color/white"
+                android:id="@+id/dropdown_sizes"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/detail_size"
+                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+                >
+                <AutoCompleteTextView
+                    style="@style/Theme.mParticle.SampleApp.TextInputLayout.Dropdown"
+                    android:id="@+id/dropdown_size_item"
+                    android:inputType="none"
+                    android:text="@string/detail_tbd"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                app:endIconTint="@color/white"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
+                app:hintTextColor="@color/white"
+                app:helperTextTextColor="@color/white"
+                android:id="@+id/dropdown_quantity"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/detail_quantity"
+                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
+                >
+                <AutoCompleteTextView
+                    style="@style/Theme.mParticle.SampleApp.TextInputLayout.Dropdown"
+                    android:id="@+id/dropdown_quantity_item"
+                    android:inputType="none"
+                    android:text="@string/detail_tbd"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dropdown_invisible"
+                android:visibility="invisible"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="153dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="10dp" />
+        </LinearLayout>
+
         <Button
             android:id="@+id/detail_cta"
             android:layout_width="190dp"
@@ -119,7 +147,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/rounded_button"
             android:text="@string/detail_add_to_cart"
             android:theme="@style/Theme.mParticle.SampleApp.Button" />
 

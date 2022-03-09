@@ -47,7 +47,6 @@ class CartViewModel : ViewModel() {
                         "size" to entity.size,
                         "color" to entity.color
                     ))
-                    .unitPrice(entity.price.toDouble())
                     .quantity(entity.quantity.toDouble())
                     .build()
                 val event = CommerceEvent.Builder(Product.REMOVE_FROM_CART, product)

@@ -65,7 +65,7 @@ class ShopFragment : Fragment() {
             _binding?.rvProductList?.let { listView ->
                 if (listView.adapter == null) {
                     listView.adapter = adapter.also { adapter ->
-                        adapter.onItemClicked = { productItem, position ->
+                        adapter.onItemClicked = { productItem, _ ->
                             val intent = Intent(activity, ProductDetailActivity::class.java)
                             intent.putExtra(Constants.PRODUCT_ID, productItem.id.toString().toIntOrNull() ?: 0)
                             (activity as MainActivity).activityResultLaunch?.launch(intent)

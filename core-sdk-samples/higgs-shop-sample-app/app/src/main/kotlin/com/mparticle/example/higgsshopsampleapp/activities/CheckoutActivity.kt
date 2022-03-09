@@ -14,11 +14,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.mparticle.MParticle
+import com.mparticle.commerce.CommerceEvent
+import com.mparticle.commerce.Product
+import com.mparticle.commerce.TransactionAttributes
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.adapters.CheckoutItemsAdapter
 import com.mparticle.example.higgsshopsampleapp.databinding.ActivityCheckoutBinding
+import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import com.mparticle.example.higgsshopsampleapp.viewmodels.CheckoutViewModel
+import java.math.BigDecimal
+import java.util.Calendar
 
 
 class CheckoutActivity : AppCompatActivity() {
@@ -46,12 +52,16 @@ class CheckoutActivity : AppCompatActivity() {
         ) { priceMap ->
             binding.tvPaymentSubtotalPrice.text = "$${priceMap["subTotal"]}"
             binding.tvPaymentTaxPrice.text = "$${priceMap["salesTax"]}"
-            binding.tvPaymentShippingPrice.text = "$${Constants.CHECKOUT_SHIPPING_COST}"
+            binding.tvPaymentShippingPrice.text = "$${priceMap["shipping"]}"
             binding.tvPaymentGrandPrice.text = "$${priceMap["grandTotal"]}"
+
+            var event = commerceEventConversion(priceMap, Product.CHECKOUT)
+            MParticle.getInstance()?.logEvent(event)
 
             val btnCTA = findViewById(R.id.payment_cta) as Button
             btnCTA.setOnClickListener {
-                val cartItems = priceMap["cartItems"]
+                event = commerceEventConversion(priceMap, Product.PURCHASE)
+                MParticle.getInstance()?.logEvent(event)
                 showPurchaseAlert()
                 btnCTA.isEnabled = false
                 checkoutViewModel.clearCart(this)
@@ -99,5 +109,39 @@ class CheckoutActivity : AppCompatActivity() {
         })
         snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
         snackbar.show()
+    }
+
+    fun commerceEventConversion(priceMap: Map<String, Any>, productAction: String): CommerceEvent {
+        val cartItems = priceMap["cartItems"] as List<CartItemEntity>
+        var entity = cartItems.get(0)
+        val product = Product.Builder(entity.label, entity.id.toString(), entity.price.toDouble())
+            .customAttributes(mapOf(
+                "size" to entity.size,
+                "color" to entity.color
+            ))
+            .quantity(entity.quantity.toDouble())
+            .build()
+        val event = CommerceEvent.Builder(productAction, product)
+        for (i in 1 until cartItems.size) {
+            entity = cartItems.get(i)
+            val product2 = Product.Builder(entity.label, entity.id.toString(), entity.price.toDouble())
+                .customAttributes(mapOf(
+                    "size" to entity.size,
+                    "color" to entity.color
+                ))
+                .quantity(entity.quantity.toDouble())
+                .build()
+            event.addProduct(product2)
+        }
+
+        if(productAction == Product.PURCHASE) {
+            val attributes: TransactionAttributes = TransactionAttributes(Calendar.getInstance().time.toString())
+                .setRevenue(priceMap["grandTotal"].toString().toDouble())
+                .setTax(priceMap["salesTax"].toString().toDouble())
+                .setShipping(BigDecimal(Constants.CHECKOUT_SHIPPING_COST).toDouble())
+            event.transactionAttributes(attributes)
+        }
+
+        return event.build()
     }
 }
