@@ -1,3 +1,11 @@
+# [0.7.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.6.0...v0.7.0) (2022-03-09)
+
+
+### Features
+
+* add in checkout screen foundational work, account, and apikey check ([#11](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/11)) ([35e3264](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/35e32640c21816d391ebbfab9818adf6270962e6))
+* checkout screen cleanup ([#12](https://github.com/mParticle/mparticle-android-sample-apps-internal/issues/12)) ([8f35d06](https://github.com/mParticle/mparticle-android-sample-apps-internal/commit/8f35d06fe827f56ea60dbe2e3c1b1a4c2e26e42f))
+
 # [0.6.0](https://github.com/mParticle/mparticle-android-sample-apps-internal/compare/v0.5.0...v0.6.0) (2022-03-03)
 
 
