@@ -62,8 +62,8 @@ class AccountFragment : Fragment() {
                 false -> {
                     //no user so login
                     val identityRequest = IdentityApiRequest.withEmptyUser()
-                        .email("higgs@example.com")
-                        .customerId("123456")
+                        .email("higgs@mparticle.com")
+                        .customerId("higgs123456")
                         .build()
                     MParticle.getInstance()?.Identity()?.login(identityRequest)?.addSuccessListener {
                         accountViewModel.login()

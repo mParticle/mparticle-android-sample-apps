@@ -23,8 +23,10 @@ class LandingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_landing)
         MParticle.getInstance()?.logScreen("Landing")
 
+        val btnCTA = findViewById(R.id.landing_cta) as Button
         if(hasApiKey()) {
-            val btnCTA = findViewById(R.id.landing_cta) as Button
+            btnCTA.isClickable = true
+            btnCTA.alpha = 1.0F
             btnCTA.setOnClickListener {
                 val event = MPEvent.Builder("Landing Button Click", MParticle.EventType.Other)
                     .build()
@@ -33,6 +35,8 @@ class LandingActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         } else {
+            btnCTA.isClickable = false
+            btnCTA.alpha = 0.3F
             showBlankAPIKeyAlert()
         }
     }
