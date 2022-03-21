@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -40,24 +41,25 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MParticle.getInstance()?.logScreen("My Account")
-        val btnCTA = activity?.findViewById(R.id.account_cta) as Button
 
         accountViewModel.loggedInResponseLiveData.observe(
             viewLifecycleOwner,
             { loggedIn ->
                 when(loggedIn) {
                     false -> {
-                        btnCTA.text = getString(R.string.account_cta_login)
-                        showIdentityAlert("Logout Successful")
+                        binding.accountCta.text = getString(R.string.account_cta_login)
+                        binding.accountLoginLayout.visibility = View.VISIBLE
+                        binding.accountLogoutLayout.visibility = View.GONE
                     }
                     true -> {
-                        btnCTA.text = getString(R.string.account_cta_logout)
-                        showIdentityAlert("Login Successful")
+                        binding.accountCta.text = getString(R.string.account_cta_logout)
+                        binding.accountLoginLayout.visibility = View.GONE
+                        binding.accountLogoutLayout.visibility = View.VISIBLE
                     }
                 }
             })
 
-        btnCTA.setOnClickListener {
+        binding.accountCta.setOnClickListener {
             when(MParticle.getInstance()?.Identity()?.currentUser?.isLoggedIn) {
                 false -> {
                     //no user so login
@@ -67,12 +69,14 @@ class AccountFragment : Fragment() {
                         .build()
                     MParticle.getInstance()?.Identity()?.login(identityRequest)?.addSuccessListener {
                         accountViewModel.login()
+                        showIdentityAlert("mParticle Login Call")
                     }
                 }
                 true -> {
                     //user exists in sample app so logout
                     MParticle.getInstance()?.Identity()?.logout()?.addSuccessListener {
                         accountViewModel.logout()
+                        showIdentityAlert("mParticle Logout Call")
                     }
                 }
                 else -> {}
@@ -88,8 +92,9 @@ class AccountFragment : Fragment() {
         val tv = (snackbar.view.findViewById<TextView>(R.id.snackbar_text))
         tv?.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
-        snackbar.setBackgroundTint(requireContext().getColor(R.color.blue_4079FE))
-        snackbar.setTextColor(requireContext().getColor(R.color.white))
+        snackbar.setBackgroundTint(requireContext().getColor(R.color.white))
+        snackbar.setTextColor(requireContext().getColor(R.color.black))
+        snackbar.setActionTextColor(getColor(requireContext().applicationContext, R.color.blue_4079FE))
         snackbar.view.layoutParams = layoutParams
         snackbar.view.setPadding(0, 10, 0, 0)
         snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE

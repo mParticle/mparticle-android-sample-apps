@@ -2,6 +2,7 @@ package com.mparticle.example.higgsshopsampleapp.activities
 
 import android.app.ActionBar
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,7 @@ import com.mparticle.MPEvent
 import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.BuildConfig
 import com.mparticle.example.higgsshopsampleapp.R
+import com.mparticle.example.higgsshopsampleapp.utils.Constants
 
 class LandingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +57,18 @@ class LandingActivity : AppCompatActivity() {
         tv?.maxLines = 5
         tv?.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
 
-        snackbar.setBackgroundTint(getColor(R.color.blue_4079FE))
-        snackbar.setTextColor(getColor(R.color.white))
+        snackbar.setBackgroundTint(getColor(R.color.white))
+        snackbar.setTextColor(getColor(R.color.black))
         snackbar.view.layoutParams = layoutParams
         snackbar.view.setPadding(0, 10, 0, 0)
+        snackbar.setActionTextColor(getColor(R.color.blue_4079FE))
+
+        val snackbarActionTextView =
+            snackbar.view.findViewById<View>(com.google.android.material.R.id.snackbar_action) as TextView
+        snackbarActionTextView.setAllCaps(false)
+        snackbarActionTextView.setTypeface(snackbarActionTextView.getTypeface(), Typeface.BOLD);
         snackbar.setAction("Go to docs") {
-            val url = "https://docs.mparticle.com/developers/quickstart/senddata/#1-generate-your-api-key-1"
+            val url = Constants.URL_DOCS_API_KEY
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)

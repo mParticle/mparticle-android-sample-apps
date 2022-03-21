@@ -302,6 +302,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
+            android:background="@color/gray_333333"
             android:layout_width="344dp"
             android:layout_height="48dp">
             <TextView
