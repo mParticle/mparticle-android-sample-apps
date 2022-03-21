@@ -10,6 +10,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.mparticle.MPEvent
+import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.databinding.ActivityMainBinding
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
@@ -39,19 +41,28 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigation.setupWithNavController(navController)
-//        bottomNavigation.setOnItemSelectedListener { item ->
-//            val customAttributes: MutableMap<String, String> = HashMap()
-//            when (item.itemId) {
-//                R.id.navigation_shop -> customAttributes["destination"] = getString(R.string.nav_shop)
-//                R.id.navigation_account -> customAttributes["destination"] = getString(R.string.nav_account)
-//                R.id.navigation_cart -> customAttributes["destination"] = getString(R.string.nav_cart)
-//            }
-//            val event = MPEvent.Builder("Navbar Clicked", MParticle.EventType.Navigation)
-//                .customAttributes(customAttributes)
-//                .build()
-//            MParticle.getInstance()?.logEvent(event)
-//            true
-//        }
+        bottomNavigation.setOnItemSelectedListener { item ->
+            val customAttributes: MutableMap<String, String> = HashMap()
+            when (item.itemId) {
+                R.id.navigation_shop -> {
+                    customAttributes["destination"] = getString(R.string.nav_shop)
+                    navController.navigate(R.id.navigation_shop)
+                }
+                R.id.navigation_account -> {
+                    customAttributes["destination"] = getString(R.string.nav_account)
+                    navController.navigate(R.id.navigation_account)
+                }
+                R.id.navigation_cart -> {
+                    customAttributes["destination"] = getString(R.string.nav_cart)
+                    navController.navigate(R.id.navigation_cart)
+                }
+            }
+            val event = MPEvent.Builder("Navbar Clicked", MParticle.EventType.Navigation)
+                .customAttributes(customAttributes)
+                .build()
+            MParticle.getInstance()?.logEvent(event)
+            return@setOnItemSelectedListener true
+        }
 
         activityResultLaunch =
             registerForActivityResult(

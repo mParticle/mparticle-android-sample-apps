@@ -25,7 +25,8 @@
     <string name="detail_header">Product Label</string>
     <string name="detail_add_to_cart">Add to cart</string>
     <string name="detail_price">$0.00</string>
-    <string name="detail_cta_added">Item added, view cart</string>
+    <string name="detail_cta_added">Product added to cart</string>
+    <string name="detail_cta_cart">Go to cart</string>
     <string name="detail_color">Color</string>
     <string name="detail_size">Size</string>
     <string name="detail_quantity">Quantity</string>
@@ -36,7 +37,9 @@
 
     <!-- account -->
     <string name="account_title">My Account</string>
-    <string name="account_username">MyHiggsId</string>
+    <string name="account_username_header">Username</string>
+    <string name="account_username_value">MyHiggsId</string>
+    <string name="account_username_header2">You are signed in as</string>
     <string name="account_cta_login">Sign In*</string>
     <string name="account_cta_logout">Sign Out*</string>
     <string name="account_disclaimer">*Demonstration only</string>

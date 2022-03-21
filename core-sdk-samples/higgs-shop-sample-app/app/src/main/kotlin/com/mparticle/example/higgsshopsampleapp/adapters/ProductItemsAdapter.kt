@@ -9,6 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mparticle.MParticle
+import com.mparticle.commerce.CommerceEvent
+import com.mparticle.commerce.Impression
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.repositories.network.models.Product
 
@@ -42,6 +45,15 @@ class ProductItemsAdapter() :
             .override(343,264)
             .centerCrop()
             .into(viewHolder.ivImage)
+
+        val product = com.mparticle.commerce.Product.Builder(list[position].label,
+            list[position].id.toString(), list[position].price.toDouble())
+            .build()
+        Impression("Products List", product).let {
+            CommerceEvent.Builder(it).build()
+        }.let {
+            MParticle.getInstance()?.logEvent(it)
+        }
     }
 
     inner class ProductItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

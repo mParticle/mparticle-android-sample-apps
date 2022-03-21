@@ -1,6 +1,7 @@
 package com.mparticle.example.higgsshopsampleapp.activities
 
 import android.app.ActionBar
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
@@ -99,14 +100,19 @@ class CheckoutActivity : AppCompatActivity() {
         val snackbar = Snackbar.make(binding.root, getString(R.string.checkout_thanks), Snackbar.LENGTH_INDEFINITE)
         val layoutParams = ActionBar.LayoutParams(snackbar.view.layoutParams)
         snackbar.view.layoutParams = layoutParams
-        snackbar.setBackgroundTint(getColor(R.color.blue_4079FE))
-        snackbar.setTextColor(getColor(R.color.white))
-        snackbar.view.setPadding(0, 10, 0, 0)
-        (snackbar.view.findViewById<TextView>(R.id.snackbar_text))?.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        snackbar.view.setOnClickListener({
+        snackbar.setBackgroundTint(getColor(R.color.white))
+        snackbar.setTextColor(getColor(R.color.black))
+        snackbar.setActionTextColor(getColor(R.color.blue_4079FE))
+        snackbar.view.setPadding(20, 10, 20, 0)
+        (snackbar.view.findViewById<TextView>(R.id.snackbar_text))?.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+        val snackbarActionTextView =
+            snackbar.view.findViewById<View>(com.google.android.material.R.id.snackbar_action) as TextView
+        snackbarActionTextView.setAllCaps(false)
+        snackbarActionTextView.setTypeface(snackbarActionTextView.getTypeface(), Typeface.BOLD);
+        snackbar.setAction("Exit") {
             setResult(Constants.RESULT_CODE_PURCHASE)
             finish()
-        })
+        }
         snackbar.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
         snackbar.show()
     }
