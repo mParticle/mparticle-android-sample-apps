@@ -38,14 +38,7 @@ module.exports = {
         prepareCmd: "sh ./release.sh ${nextRelease.version}",
       },
     ],
-    ["@semantic-release/github", {
-         "assets": [
-               {
-                    path: "dist/HiggsShopSampleApp-**.apk",
-                    label: "HiggsShopSampleApp-${nextRelease.version}.apk"
-                },
-         ]
-    }],
+    ["@semantic-release/github"],
     [
       "@semantic-release/git",
       {
