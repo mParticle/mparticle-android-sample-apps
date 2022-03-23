@@ -1,3 +1,12 @@
+# [0.8.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.7.0...v0.8.0) (2022-03-23)
+
+
+### Features
+
+* Add in additional analytics event and UI polishing ([#14](https://github.com/mParticle/mparticle-android-sample-apps/issues/14)) ([68ce89e](https://github.com/mParticle/mparticle-android-sample-apps/commit/68ce89e67341fb02040d2095e47a664e215bc8ff))
+* add in readme changes ([#13](https://github.com/mParticle/mparticle-android-sample-apps/issues/13)) ([70be06d](https://github.com/mParticle/mparticle-android-sample-apps/commit/70be06d2a13c2339404cf1bc995489ddceb3e3d8))
+* remove generated apk upload to github ([#15](https://github.com/mParticle/mparticle-android-sample-apps/issues/15)) ([8544ab7](https://github.com/mParticle/mparticle-android-sample-apps/commit/8544ab7d4f327dd48974f3830dc89b9a20b3917e))
+
 # [0.7.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.6.0...v0.7.0) (2022-03-09)
 
 
