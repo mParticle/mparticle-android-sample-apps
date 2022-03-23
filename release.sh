@@ -16,5 +16,5 @@ git add :/*.kts
 
 #create and rename release APK for Github
 ./gradlew assembleDebug
-mkdir dist
-mv core-sdk-samples/higgs-shop-sample-app/app/build/outputs/apk/debug/app-debug.apk "dist/HiggsShopSampleApp-$1.apk"
+#mkdir dist
+#mv core-sdk-samples/higgs-shop-sample-app/app/build/outputs/apk/debug/app-debug.apk "dist/HiggsShopSampleApp-$1.apk"
