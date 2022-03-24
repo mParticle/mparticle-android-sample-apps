@@ -65,7 +65,7 @@ dependencies {
 
     implementation("com.squareup.retrofit2:retrofit:2.6.1")
     implementation("com.squareup.retrofit2:converter-gson:2.6.1")
-    implementation("com.squareup.retrofit2:converter-moshi:2.6.1")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.6.1")
     implementation("io.reactivex.rxjava2:rxjava:2.1.14")
     implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
