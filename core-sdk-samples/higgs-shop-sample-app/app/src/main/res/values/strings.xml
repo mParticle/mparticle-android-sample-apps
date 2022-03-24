@@ -37,9 +37,9 @@
 
     <!-- account -->
     <string name="account_title">My Account</string>
-    <string name="account_username_header">Username</string>
-    <string name="account_username_value">MyHiggsId</string>
-    <string name="account_username_header2">You are signed in as</string>
+    <string name="account_user_header">User ID</string>
+    <string name="account_user_value">MyHiggsId</string>
+    <string name="account_user_header2">You are signed in as</string>
     <string name="account_cta_login">Sign In*</string>
     <string name="account_cta_logout">Sign Out*</string>
     <string name="account_disclaimer">*Demonstration only</string>

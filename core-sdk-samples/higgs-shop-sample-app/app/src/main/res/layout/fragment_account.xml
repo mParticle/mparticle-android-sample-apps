@@ -30,12 +30,12 @@
                 style="@style/Theme.mParticle.SampleApp.TextInputLayout"
                 android:layout_width="342dp"
                 android:layout_height="54dp"
-                android:hint="@string/account_username_header">
+                android:hint="@string/account_user_header">
                 <com.google.android.material.textfield.TextInputEditText
                 style="@style/Theme.mParticle.SampleApp.TextInputEditText"
                 android:textIsSelectable="false"
                 android:enabled="false"
-                android:text="@string/account_username_value"
+                android:text="@string/account_user_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="342dp"
                 android:layout_height="24dp"
-                android:text="@string/account_username_header2"
+                android:text="@string/account_user_header2"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -64,7 +64,7 @@
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:textColor="@color/gray_999999"
-                android:text="@string/account_username_value"
+                android:text="@string/account_user_value"
                 android:textSize="16sp"
                 android:fontFamily="@font/lato_regular"
                 />
