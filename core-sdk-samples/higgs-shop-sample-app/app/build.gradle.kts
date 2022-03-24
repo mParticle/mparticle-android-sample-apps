@@ -67,7 +67,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.6.1")
     implementation("com.squareup.retrofit2:converter-moshi:2.6.1")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.6.1")
-    implementation("io.reactivex.rxjava2:rxjava:2.1.14")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
     implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
     implementation("com.squareup.okhttp3:logging-interceptor:3.12.12")
     implementation("com.squareup.okhttp3:okhttp:3.12.12")
