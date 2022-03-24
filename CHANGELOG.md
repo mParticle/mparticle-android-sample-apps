@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.8.0...v0.9.0) (2022-03-24)
+
+
+### Features
+
+* add in verified CI bot ([#26](https://github.com/mParticle/mparticle-android-sample-apps/issues/26)) ([f343037](https://github.com/mParticle/mparticle-android-sample-apps/commit/f343037137aa4d75e091c1c26e229279f46dec9c))
+
 # [0.8.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.7.0...v0.8.0) (2022-03-23)
 
 
