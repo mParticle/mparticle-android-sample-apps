@@ -19,12 +19,24 @@ jobs:
     name: "Create Release Branch"
     runs-on: ubuntu-18.04
     needs: confirm-public-repo-main-branch
+    env:
+      GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+      GIT_AUTHOR_NAME: mparticle-automation
+      GIT_AUTHOR_EMAIL: developers@mparticle.com
+      GIT_COMMITTER_NAME: mparticle-automation
+      GIT_COMMITTER_EMAIL: developers@mparticle.com
     steps:
       - name: "Checkout next release branch"
         uses: actions/checkout@v2
         with:
           ref: development
-          token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+      - name: "Import GPG Key"
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
       - name: "Create and push release branch"
         run: |
           git checkout -b release/${{ github.run_number }}
@@ -38,9 +50,9 @@ jobs:
     runs-on: macos-11
     env:
       GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
-      GIT_AUTHOR_NAME: mparticle-bot
+      GIT_AUTHOR_NAME: mparticle-automation
       GIT_AUTHOR_EMAIL: developers@mparticle.com
-      GIT_COMMITTER_NAME: mparticle-bot
+      GIT_COMMITTER_NAME: mparticle-automation
       GIT_COMMITTER_EMAIL: developers@mparticle.com
     steps:
       - name: "Checkout public main branch"
@@ -48,6 +60,13 @@ jobs:
         with:
           fetch-depth: 0
           ref: main
+      - name: "Import GPG Key"
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
       - name: "Install JDK 11"
         uses: actions/setup-java@v2
         with:
