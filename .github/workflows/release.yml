@@ -119,6 +119,7 @@ jobs:
         if: ${{ github.event.inputs.dryRun == 'false'}}
         run: |
           git push origin HEAD:main
+          git push -f origin HEAD:chore/dependabot
           git push origin HEAD:development
       - name: "Delete release branch"
         if: ${{ github.event.inputs.dryRun == 'false' }}
