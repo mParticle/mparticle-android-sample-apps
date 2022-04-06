@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.9.0...v0.10.0) (2022-04-06)
+
+
+### Features
+
+* change dependabot PR target branch ([#35](https://github.com/mParticle/mparticle-android-sample-apps/issues/35)) ([b18ae0f](https://github.com/mParticle/mparticle-android-sample-apps/commit/b18ae0f40730cd07a41bc7148fdbde32f958c24d))
+
 # [0.9.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.8.0...v0.9.0) (2022-03-24)
 
 
