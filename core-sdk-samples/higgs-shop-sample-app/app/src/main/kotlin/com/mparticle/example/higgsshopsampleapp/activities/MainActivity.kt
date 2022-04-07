@@ -2,6 +2,7 @@ package com.mparticle.example.higgsshopsampleapp.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.databinding.ActivityMainBinding
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
+import com.mparticle.example.higgsshopsampleapp.viewmodels.CartViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -82,5 +84,14 @@ class MainActivity : AppCompatActivity() {
 
     fun setActionBarTitle(title: String?) {
         getSupportActionBar()?.setTitle(title)
+    }
+
+    fun updateBottomNavCartButtonText(size: Int) {
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav)
+        val item: MenuItem = bottomNavigation.menu.findItem(R.id.navigation_cart)
+        when(size) {
+            0 -> item.title = getString(R.string.nav_cart)
+            else -> item.title = getString(R.string.nav_cart) + " (${size})"
+        }
     }
 }

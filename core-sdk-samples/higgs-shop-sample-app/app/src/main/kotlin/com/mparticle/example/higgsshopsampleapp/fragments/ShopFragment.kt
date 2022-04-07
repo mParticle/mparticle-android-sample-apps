@@ -78,5 +78,20 @@ class ShopFragment : Fragment() {
             }
         })
         shopViewModel.getProducts(this.requireContext())
+
+        shopViewModel.cartTotalSizeResponseLiveData.observe(viewLifecycleOwner, Observer { total ->
+            Log.d(TAG, "Total: " + total)
+
+            if (total == null || total == 0) {
+                (activity as MainActivity).updateBottomNavCartButtonText(0)
+                return@Observer
+            }
+            (activity as MainActivity).updateBottomNavCartButtonText(total)
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        shopViewModel.getTotalCartItems(this.requireContext())
     }
 }
