@@ -18,12 +18,24 @@ import java.math.BigDecimal
 class CartViewModel : ViewModel() {
     val cartResponseLiveData = MutableLiveData<List<CartItemEntity>>()
     val cartSubtotalPriceLiveData = MutableLiveData<BigDecimal>()
+    val cartTotalLiveData = MutableLiveData<Int>()
     private val cartRepository = CartRepository()
     private val TAG = "CartViewModel"
 
     fun getCartItems(context: Context) {
         viewModelScope.launch {
             cartResponseLiveData.value = cartRepository.getCartItems(context)
+        }
+    }
+
+    fun getTotalCartItems(context: Context) {
+        viewModelScope.launch {
+            val items = cartRepository.getCartItems(context)
+            var total = 0
+            items.forEach {
+                total += it.quantity
+            }
+            cartTotalLiveData.value = total
         }
     }
 

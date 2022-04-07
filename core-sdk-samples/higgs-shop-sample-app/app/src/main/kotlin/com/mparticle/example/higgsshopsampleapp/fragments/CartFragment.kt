@@ -52,6 +52,12 @@ class CartFragment : Fragment() {
                 _binding?.tvCartSubtotalPrice?.text = "$${subTotalPrice}"
             })
 
+        cartViewModel.cartTotalLiveData.observe(
+            viewLifecycleOwner,
+            { total ->
+                (activity as MainActivity).updateBottomNavCartButtonText(total)
+            })
+
         cartViewModel.cartResponseLiveData.observe(viewLifecycleOwner, Observer { items ->
             Log.d(TAG, "Size: " + items?.size)
 
@@ -61,6 +67,7 @@ class CartFragment : Fragment() {
                 _binding?.tvCartSubtotalPrice?.text = getString(R.string.detail_price)
                 btnCTA.isClickable = false
                 btnCTA.alpha = 0.3F
+                (activity as MainActivity).updateBottomNavCartButtonText(0)
                 return@Observer
             }
             btnCTA.setBackgroundResource(R.drawable.rounded_button)
@@ -68,6 +75,7 @@ class CartFragment : Fragment() {
             _binding?.rvCartList?.visibility = View.VISIBLE
             val adapter = CartItemsAdapter()
             adapter.list = items.toMutableList()
+            cartViewModel.getTotalCartItems(this.requireContext())
 
             _binding?.rvCartList?.let { listView ->
                 if (listView.adapter == null) {
