@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.10.0...v0.11.0) (2022-04-11)
+
+
+### Features
+
+* add in cart total text to bottom nav button ([#38](https://github.com/mParticle/mparticle-android-sample-apps/issues/38)) ([d517f40](https://github.com/mParticle/mparticle-android-sample-apps/commit/d517f4067ef97380f48201c217bc9d26a2c177bf))
+
 # [0.10.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.9.0...v0.10.0) (2022-04-06)
 
 
