@@ -13,6 +13,10 @@ on:
 #         required: true
 
   workflow_dispatch:
+    inputs:
+      do-it:
+        description: Just do it
+        required: false
   
 jobs:
     fetch-data-plans:
