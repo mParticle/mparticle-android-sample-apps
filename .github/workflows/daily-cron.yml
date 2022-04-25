@@ -14,7 +14,7 @@ on:
 
   workflow_dispatch:
   
-  jobs:
+jobs:
     fetch-data-plans:
       name: Fetch Data Plan
       # needs: confirm-public-repo-main-branch
