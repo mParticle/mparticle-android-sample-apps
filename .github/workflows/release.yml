@@ -46,6 +46,14 @@ jobs:
             name: higgs-shop-dataplan
             path: core-sdk-samples/higgs-shop-sample-app/dataplans/
 
+        - name: Import GPG Key
+          uses: crazy-max/ghaction-import-gpg@v4
+          with:
+            gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+            passphrase: ${{ secrets.GPG_PASSPHRASE }}
+            git_user_signingkey: true
+            git_commit_gpgsign: true
+
         - name: Commit Data Plans to Git
           uses: EndBug/add-and-commit@v9
           with:
