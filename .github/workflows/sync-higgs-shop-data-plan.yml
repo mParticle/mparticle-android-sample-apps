@@ -1,4 +1,4 @@
-name: Sync Data Plan
+name: Sync Higgs Shop Data Plan
 
 on: [ workflow_dispatch ]
 
