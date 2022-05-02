@@ -38,7 +38,7 @@ jobs:
         - name: Create Commit if Data Plan Changed
           uses: stefanzweifel/git-auto-commit-action@v4
           with:
-            commit_message: Update Higgs Shop Data Plan
+            commit_message: "chore: update Higgs Shop Data Plan"
             branch: chore/data-plan-update-${{ github.run_number }}
             create_branch: true
             commit_user_name: mparticle-bot
