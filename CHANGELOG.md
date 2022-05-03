@@ -1,3 +1,5 @@
+## [0.11.3](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.2...v0.11.3) (2022-05-03)
+
 ## [0.11.2](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.1...v0.11.2) (2022-05-02)
 
 ## [0.11.1](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.0...v0.11.1) (2022-05-02)
