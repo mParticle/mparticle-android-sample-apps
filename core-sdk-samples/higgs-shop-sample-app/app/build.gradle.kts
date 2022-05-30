@@ -60,7 +60,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.13.2")
 
     api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.7")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
 
     implementation("com.squareup.retrofit2:retrofit:2.6.1")
