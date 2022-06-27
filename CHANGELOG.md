@@ -1,3 +1,11 @@
+## [0.11.4](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.3...v0.11.4) (2022-06-27)
+
+
+### Bug Fixes
+
+* move app check yml file back to local repo ([#84](https://github.com/mParticle/mparticle-android-sample-apps/issues/84)) ([7e4239f](https://github.com/mParticle/mparticle-android-sample-apps/commit/7e4239f48b2fbdf39370893b40acd0c7107c3776))
+* switch from pull_request_target to pull_request ([#85](https://github.com/mParticle/mparticle-android-sample-apps/issues/85)) ([a982c4f](https://github.com/mParticle/mparticle-android-sample-apps/commit/a982c4f5de84f22e13f012dc6f8a2e01fce11998))
+
 ## [0.11.3](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.2...v0.11.3) (2022-05-03)
 
 ## [0.11.2](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.1...v0.11.2) (2022-05-02)
