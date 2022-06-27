@@ -1,0 +1,136 @@
+name: "Android Sample App Checks"
+
+on:
+
+  workflow_call:
+    inputs:
+      app_relative_path:
+        description: 'repo path for sample app'
+        required: true
+        type: string
+
+jobs:
+
+  confirm-folder-changes:
+    name: "Confirm changes in sample app folder"
+    runs-on: ubuntu-18.04
+    steps:
+      - name: "Checkout Sample Apps"
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+#      - name: "Create Path Triggers"
+#        uses: dorny/paths-filter@v2
+#        id: changes
+#        with:
+#          base: main
+#          ref: ${{ github.head_ref }}
+#          filters: |
+#            sample-app:
+#              - '${{ inputs.app_relative_path }}/**'
+      # - name: "Cancel workflow"
+      #   if: steps.changes.outputs.sample-app != 'true'
+      #   uses: andymckay/cancel-action@0.2
+
+  instrumented-tests:
+    name: "Instrumented Tests"
+    timeout-minutes: 30
+    runs-on: macos-11
+    needs: confirm-folder-changes
+    steps:
+      - name: "Checkout Branch"
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: "Install JDK 11"
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: "Run Instrumented Tests"
+        uses: reactivecircus/android-emulator-runner@v2.20.0
+        with:
+          working-directory: ${{ inputs.app_relative_path }}
+          api-level: 29
+          script: ./gradlew connectedCheck
+      - name: "Archive Instrumented Tests Results"
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: "instrumented-tests-results"
+          path: ./**/build/reports/androidTests/connected/**
+
+  unit-tests:
+    name: "Unit Tests"
+    timeout-minutes: 15
+    runs-on: ubuntu-18.04
+    needs: confirm-folder-changes
+    steps:
+      - name: "Checkout Branch"
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: "Install JDK 11"
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: "Run Unit Tests"
+        working-directory: ${{ inputs.app_relative_path }}
+        run: ./gradlew test
+      - name: "Android Unit Tests Report"
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: "unit-tests-results"
+          path: ./**/build/reports/**
+
+  lint-checks:
+    name: "Lint Checks"
+    timeout-minutes: 15
+    runs-on: macos-11
+    needs: confirm-folder-changes
+    steps:
+      - name: "Checkout Branch"
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: "Install JDK 11"
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: "Run Android Core SDK Lint"
+        working-directory: ${{ inputs.app_relative_path }}
+        run: ./gradlew lint
+      - name: "Archive Lint Test Results"
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: "lint-results"
+          path: ./**/build/reports/**
+
+  kotlin-lint-checks:
+    name: "Kotlin Lint Checks"
+    timeout-minutes: 15
+    runs-on: macos-11
+    needs: confirm-folder-changes
+    steps:
+      - name: "Checkout Branch"
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: "Install JDK 11"
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: "Run Android Core SDK Kotlin Lint"
+        working-directory: ${{ inputs.app_relative_path }}
+        run: ./gradlew ktlintCheck
+      - name: "Archive Lint Test Results"
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: "kotlin-lint-results"
+          path: ./**/build/reports/**
