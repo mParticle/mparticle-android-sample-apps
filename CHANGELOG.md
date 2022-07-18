@@ -1,3 +1,10 @@
+## [0.11.5](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.4...v0.11.5) (2022-07-18)
+
+
+### Bug Fixes
+
+* update yml files to new format ([#99](https://github.com/mParticle/mparticle-android-sample-apps/issues/99)) ([8454eff](https://github.com/mParticle/mparticle-android-sample-apps/commit/8454eff42b6a78179258414cea050bc094bde030))
+
 ## [0.11.4](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.3...v0.11.4) (2022-06-27)
 
 
