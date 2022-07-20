@@ -70,7 +70,7 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxjava:2.1.14")
     implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    implementation("com.squareup.okhttp3:okhttp:3.12.12")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
