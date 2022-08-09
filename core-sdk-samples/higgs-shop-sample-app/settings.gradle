@@ -1,5 +1,7 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
@@ -8,3 +10,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Higgs Shop Sample App"
 include ':app'
+
+include ':mparticle-android-integration-google-analytics-firebase'
+project(':mparticle-android-integration-google-analytics-firebase').projectDir = new File('app/libs/mparticle-android-integration-google-analytics-firebase-ga4')

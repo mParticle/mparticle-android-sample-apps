@@ -13,7 +13,7 @@ android {
     compileSdk = 31
     defaultConfig {
         applicationId = "com.mparticle.example.higgsshopsampleapp"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 31
         versionCode = buildVersionCode()
         versionName = "0.11.5-SNAPSHOT"
@@ -49,7 +49,11 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("com.google.android.material:material:1.5.0")
-    implementation("com.mparticle:android-core:5.35.3")
+
+    implementation("com.mparticle:android-core:5.44.0")
+    //implementation("com.mparticle:android-core:5.42.0-SNAPSHOT")
+    //implementation(project(":mparticle-android-integration-google-analytics-firebase"))
+    implementation("com.mparticle:android-googleanalyticsfirebasega4-kit:5.44.0")
 
     implementation("androidx.navigation:navigation-fragment:2.3.5")
     implementation("androidx.navigation:navigation-ui:2.3.5")
