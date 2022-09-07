@@ -101,6 +101,10 @@ To verify that your events have arrived at mParticle's servers, or to compare yo
 
 This will not only show your data as it enters mParticle, but also as your data is forwarded to our various partner services and integrations (if enabled).
 
+### Integrating kits and core SDK locally in the sample app
+
+For information on how to integrate a kit or the core SDK for local configurations refer to [ONBOARDING.md](./ONBOARDING.md)
+
 ## Development Notes
 
 This project is built in Kotlin and follows MVVM design patterns and uses Retrofit (networking), Room (ORM/database), and Glide (image loading)
