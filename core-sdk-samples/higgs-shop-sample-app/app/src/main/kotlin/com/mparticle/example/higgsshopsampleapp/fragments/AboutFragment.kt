@@ -10,9 +10,9 @@ import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.activities.MainActivity
 import com.mparticle.example.higgsshopsampleapp.databinding.FragmentAboutBinding
 
+
 class AboutFragment : Fragment() {
-    private var _binding: FragmentAboutBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentAboutBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,9 +21,8 @@ class AboutFragment : Fragment() {
     ): View {
         (activity as MainActivity).setActionBarTitle("");
         inflater.context.setTheme(R.style.Theme_mParticle_SampleApp)
-        _binding = FragmentAboutBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        binding = FragmentAboutBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

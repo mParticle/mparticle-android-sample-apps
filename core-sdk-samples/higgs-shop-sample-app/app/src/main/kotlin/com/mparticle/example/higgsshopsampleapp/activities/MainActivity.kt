@@ -16,7 +16,6 @@ import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.R
 import com.mparticle.example.higgsshopsampleapp.databinding.ActivityMainBinding
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
-import com.mparticle.example.higgsshopsampleapp.viewmodels.CartViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -68,22 +67,21 @@ class MainActivity : AppCompatActivity() {
 
         activityResultLaunch =
             registerForActivityResult(
-                ActivityResultContracts.StartActivityForResult(),
-                { result ->
-                    when(result.resultCode) {
-                        Constants.RESULT_CODE_CART_ADDED -> {
-                            navController.navigate(R.id.navigation_cart)
-                        }
-                        Constants.RESULT_CODE_PURCHASE -> {
-                            navController.navigate(R.id.navigation_shop)
-                        }
+                ActivityResultContracts.StartActivityForResult()
+            ) { result ->
+                when (result.resultCode) {
+                    Constants.RESULT_CODE_CART_ADDED -> {
+                        navController.navigate(R.id.navigation_cart)
+                    }
+                    Constants.RESULT_CODE_PURCHASE -> {
+                        navController.navigate(R.id.navigation_shop)
                     }
                 }
-            )
+            }
     }
 
     fun setActionBarTitle(title: String?) {
-        getSupportActionBar()?.setTitle(title)
+        supportActionBar?.title = title
     }
 
     fun updateBottomNavCartButtonText(size: Int) {

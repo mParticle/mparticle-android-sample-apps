@@ -1,9 +1,9 @@
 package com.mparticle.example.higgsshopsampleapp.viewmodels
 
-import android.content.Context
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mparticle.MParticle
 import com.mparticle.commerce.CommerceEvent
@@ -14,7 +14,7 @@ import com.mparticle.example.higgsshopsampleapp.repositories.network.models.Prod
 import kotlinx.coroutines.launch
 
 
-class ProductDetailViewModel : ViewModel() {
+class ProductDetailViewModel(application: Application) : AndroidViewModel(application) {
     private val TAG = "ProductDetailViewModel"
     val detailResponseLiveData = MutableLiveData<Product>()
     val cartResponseLiveData = MutableLiveData<Boolean>()
@@ -25,27 +25,34 @@ class ProductDetailViewModel : ViewModel() {
     private val productsRepository = ProductsRepository()
     private val cartRepository = CartRepository()
 
-    fun getProductById(context: Context, id : Int) {
+    fun getProductById(id: Int) {
         viewModelScope.launch {
-            detailResponseLiveData.value = productsRepository.getProductById(context, id)
+            detailResponseLiveData.value = productsRepository.getProductById(getApplication(), id)
         }
     }
 
-    fun addToCart(context: Context, cartItem : CartItemEntity) {
+    fun addToCart(cartItem: CartItemEntity) {
         viewModelScope.launch {
-            val rowsAffected = cartRepository.addToCart(context, cartItem)
+            val rowsAffected = cartRepository.addToCart(getApplication(), cartItem)
             if (rowsAffected > 0) {
                 Log.d(TAG, "Publish Success")
-                val product = com.mparticle.commerce.Product.Builder(cartItem.label, cartItem.id.toString(), cartItem.price.toDouble())
-                    .customAttributes(mapOf(
-                        "size" to cartItem.size,
-                        "color" to cartItem.color
-                    ))
+                val product = com.mparticle.commerce.Product.Builder(
+                    cartItem.label,
+                    cartItem.id.toString(),
+                    cartItem.price.toDouble()
+                )
+                    .customAttributes(
+                        mapOf(
+                            "size" to cartItem.size,
+                            "color" to cartItem.color
+                        )
+                    )
                     .unitPrice(cartItem.price.toDouble())
                     .quantity(cartItem.quantity.toDouble())
                     .build()
-                val event = CommerceEvent.Builder(com.mparticle.commerce.Product.ADD_TO_CART, product)
-                    .build()
+                val event =
+                    CommerceEvent.Builder(com.mparticle.commerce.Product.ADD_TO_CART, product)
+                        .build()
                 MParticle.getInstance()?.logEvent(event)
                 cartResponseLiveData.value = true
             } else {

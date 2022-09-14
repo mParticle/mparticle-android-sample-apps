@@ -23,7 +23,10 @@ android {
     }
     buildFeatures {
         dataBinding = true
-        viewBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.1"
     }
     buildTypes {
         getByName("release") {
@@ -41,6 +44,16 @@ android {
 }
 
 dependencies {
+
+    // Compose
+    val composeVersion = "1.2.1"
+    implementation("androidx.compose.runtime:runtime:$composeVersion")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
+    implementation("androidx.compose.runtime:runtime-livedata:$composeVersion")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
+
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.fragment:fragment:1.3.6")
     implementation("androidx.fragment:fragment-ktx:1.3.6")
@@ -49,7 +62,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     implementation("com.google.android.material:material:1.5.0")
-    implementation("com.mparticle:android-core:5.44.2")
+    implementation("com.mparticle:android-core:5.45.0")
 
     implementation("androidx.navigation:navigation-fragment:2.3.5")
     implementation("androidx.navigation:navigation-ui:2.3.5")
@@ -75,14 +88,15 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
 
-    val roomVersion = "2.4.1"
+    val roomVersion = "2.4.3"
     implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    // annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     // ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
-    // implementation("androidx.room:room-rxjava2:$roomVersion")
+    implementation("androidx.room:room-rxjava2:$roomVersion")
     // implementation("androidx.room:room-rxjava3:$roomVersion")
     // implementation("androidx.room:room-guava:$roomVersion")
     // implementation("androidx.room:room-paging:2.4.1")
@@ -105,6 +119,6 @@ dependencies {
 
 fun buildVersionCode(): Int {
     val df = SimpleDateFormat("yyyyMMddHH")
-    df.setTimeZone(TimeZone.getTimeZone("EST"))
+    df.timeZone = TimeZone.getTimeZone("EST")
     return df.format(Date()).toInt()
 }
