@@ -1,5 +1,7 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
@@ -7,4 +9,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Higgs Shop Sample App"
-include ':app'
+include(":app")

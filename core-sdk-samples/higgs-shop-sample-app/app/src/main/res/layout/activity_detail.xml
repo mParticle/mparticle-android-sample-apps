@@ -1,159 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollview_product_detail"
-    android:background="@color/black"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <LinearLayout
         android:orientation="vertical"
         android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_detail_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="@string/detail_header"
-            android:textColor="@color/white"
-            android:layout_marginTop="30dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_detail_price"
-            android:visibility="visible"
-            android:layout_width="282dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/detail_price"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:layout_marginTop="30dp" />
-
-        <ImageView
-            android:id="@+id/iv_detail_image"
-            android:visibility="visible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:src="@drawable/product_image_placeholder"
-            />
-
-        <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                app:endIconTint="@color/white"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
-                app:hintTextColor="@color/white"
-                app:helperTextTextColor="@color/white"
-                android:id="@+id/dropdown_colors"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="153dp"
-                android:layout_height="54dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/detail_color"
-                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
-                >
-                <AutoCompleteTextView
-                    style="@style/Theme.mParticle.SampleApp.TextInputLayout.Dropdown"
-                    android:id="@+id/dropdown_color_item"
-                    android:inputType="none"
-                    android:text="@string/detail_tbd"
-                    android:focusable="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                app:endIconTint="@color/white"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
-                app:hintTextColor="@color/white"
-                app:helperTextTextColor="@color/white"
-                android:id="@+id/dropdown_sizes"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="153dp"
-                android:layout_height="54dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/detail_size"
-                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
-                >
-                <AutoCompleteTextView
-                    style="@style/Theme.mParticle.SampleApp.TextInputLayout.Dropdown"
-                    android:id="@+id/dropdown_size_item"
-                    android:inputType="none"
-                    android:text="@string/detail_tbd"
-                    android:focusable="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
-                app:endIconTint="@color/white"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_baseline_arrow_drop_down_24"
-                app:hintTextColor="@color/white"
-                app:helperTextTextColor="@color/white"
-                android:id="@+id/dropdown_quantity"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="153dp"
-                android:layout_height="54dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/detail_quantity"
-                style="@style/Theme.mParticle.SampleApp.TextInputLayout"
-                >
-                <AutoCompleteTextView
-                    style="@style/Theme.mParticle.SampleApp.TextInputLayout.Dropdown"
-                    android:id="@+id/dropdown_quantity_item"
-                    android:inputType="none"
-                    android:text="@string/detail_tbd"
-                    android:focusable="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/dropdown_invisible"
-                android:visibility="invisible"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="153dp"
-                android:layout_height="54dp"
-                android:layout_marginEnd="10dp" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/detail_cta"
-            android:layout_width="190dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/rounded_button"
-            android:text="@string/detail_add_to_cart"
-            android:theme="@style/Theme.mParticle.SampleApp.Button" />
-
-        <View
-            android:id="@+id/overflow"
+       <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_view"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="wrap_content"/>
     </LinearLayout>
-</ScrollView>
+</layout>

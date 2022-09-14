@@ -13,7 +13,7 @@ jobs:
 
   confirm-folder-changes:
     name: "Confirm changes in sample app folder"
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: "Checkout Sample Apps"
         uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
   instrumented-tests:
     name: "Instrumented Tests"
     timeout-minutes: 30
-    runs-on: macos-11
+    runs-on: macos-latest
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
@@ -63,7 +63,7 @@ jobs:
   unit-tests:
     name: "Unit Tests"
     timeout-minutes: 15
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
@@ -88,7 +88,7 @@ jobs:
   lint-checks:
     name: "Lint Checks"
     timeout-minutes: 15
-    runs-on: macos-11
+    runs-on: macos-latest
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
@@ -113,7 +113,7 @@ jobs:
   kotlin-lint-checks:
     name: "Kotlin Lint Checks"
     timeout-minutes: 15
-    runs-on: macos-11
+    runs-on: macos-latest
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"

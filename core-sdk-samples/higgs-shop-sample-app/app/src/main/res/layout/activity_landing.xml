@@ -1,67 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="bottom"
     tools:context=".activities.LandingActivity">
 
-    <ImageView
-        android:id="@+id/ic_splash_logo"
-        android:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:src="@drawable/ic_splash_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/landing_welcome"
-        />
-
-    <TextView
-        android:id="@+id/landing_welcome"
-        android:visibility="visible"
-        android:layout_width="282dp"
-        android:layout_height="wrap_content"
-        android:text="@string/landing_welcome"
-        android:textColor="@color/white"
-        app:fontFamily="sans-serif"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/landing_cta"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ic_splash_logo" />
-
-    <Button
-        android:id="@+id/landing_cta"
-        android:visibility="visible"
-        android:layout_width="190dp"
-        android:layout_height="50dp"
-        android:text="@string/landing_cta"
-        android:background="@drawable/rounded_button"
-        android:theme="@style/Theme.mParticle.SampleApp.Button"
-        app:layout_constraintBottom_toTopOf="@id/landing_disclaimer"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/landing_welcome" />
-
-    <TextView
-        android:id="@+id/landing_disclaimer"
-        android:visibility="visible"
-        android:layout_width="262dp"
-        android:layout_height="wrap_content"
-        android:text="@string/landing_disclaimer"
-        android:textColor="@color/white"
-        app:fontFamily="sans-serif"
-        android:alpha=".6"
-        android:gravity="center"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/landing_cta" />
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

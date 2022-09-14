@@ -17,7 +17,7 @@ jobs:
 
   create-release-branch:
     name: "Create Release Branch"
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     needs: confirm-public-repo-main-branch
     env:
       GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
@@ -47,7 +47,7 @@ jobs:
   semantic-release:
     name: "Semantic Release"
     needs: create-release-branch
-    runs-on: macos-11
+    runs-on: macos-latest
     env:
       GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
       GIT_AUTHOR_NAME: mparticle-automation
@@ -102,7 +102,7 @@ jobs:
   sync-repository:
     name: "Sync Repository"
     needs: semantic-release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: "Checkout main branch"
         uses: actions/checkout@v2

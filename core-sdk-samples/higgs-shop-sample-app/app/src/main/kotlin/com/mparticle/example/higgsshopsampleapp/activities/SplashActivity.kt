@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.finishAfterTransition
-import com.mparticle.MParticle
 import com.mparticle.example.higgsshopsampleapp.R
 import java.util.*
 import kotlin.concurrent.schedule
