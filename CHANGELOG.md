@@ -1,3 +1,11 @@
+# [0.12.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.5...v0.12.0) (2022-09-14)
+
+
+### Features
+
+* Update sample app UI to compose ([#116](https://github.com/mParticle/mparticle-android-sample-apps/issues/116)) ([4c6e44d](https://github.com/mParticle/mparticle-android-sample-apps/commit/4c6e44db4832a57db657ce7adbc64a8b6201c564))
+* Updated Advertising ID permissions on manifest, updated settings.gradle.kts, and build.gradle.kts to latest dependencies and SDK 33 ([#115](https://github.com/mParticle/mparticle-android-sample-apps/issues/115)) ([115313e](https://github.com/mParticle/mparticle-android-sample-apps/commit/115313e24aa24efb1cbdbf4531b589f2dc27d270))
+
 ## [0.11.5](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.4...v0.11.5) (2022-07-18)
 
 
