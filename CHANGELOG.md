@@ -1,3 +1,10 @@
+# [0.13.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.12.0...v0.13.0) (2022-09-16)
+
+
+### Features
+
+* update AGP to 7.3.0 and reorder dependencies ([#120](https://github.com/mParticle/mparticle-android-sample-apps/issues/120)) ([ba9d10b](https://github.com/mParticle/mparticle-android-sample-apps/commit/ba9d10bf2a89918580cebcc5f861338b14c4c6d0))
+
 # [0.12.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.11.5...v0.12.0) (2022-09-14)
 
 

@@ -16,7 +16,7 @@ android {
         minSdk = 23
         targetSdk = 33
         versionCode = buildVersionCode()
-        versionName = "0.12.0-SNAPSHOT"
+        versionName = "0.13.0-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "HIGGS_SHOP_SAMPLE_APP_KEY", "\"${System.getenv("HIGGS_SHOP_SAMPLE_APP_KEY")}\"")
         buildConfigField("String", "HIGGS_SHOP_SAMPLE_APP_SECRET", "\"${System.getenv("HIGGS_SHOP_SAMPLE_APP_SECRET")}\"")
