@@ -1,38 +1,68 @@
 name: 'Auto Assign PR'
+
 on:
-  workflow_call:
-  pull_request:
-    types: [opened, reopened]
+  workflow_run:
+    workflows: ["Pull Request Opened"]
+    types:
+      - completed
 
 jobs:
-    add-reviewers:
+    log-info:
         name: "Add reviewers to PR"
-        if: ${{ github.actor != 'dependabot[bot]' }}
         runs-on: ubuntu-latest
         steps:
-            - name: "Check PR title"
-              id: is-docs
-              if: >
-                  startsWith(github.event.pull_request.title, 'docs:')
-              run: |
-                  OUTPUT=true
-                  echo "::set-output name=isDocs::$OUTPUT"
-            - name: "echo isDocs"
-              run: |
-                  echo ${{ steps.is-docs.outputs.isDocs }}
-            - name: "PR title is docs"
-              if: ${{steps.is-docs.outputs.isDocs == 'true'}}
-              uses: pozil/auto-assign-issue@v1
-              with:
-                  teams: docs-admin
-                  numOfAssignee: 1
-                  allowSelfAssign: false
-                  repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
-            - name: "PR title is invalid"
-              if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-              uses: pozil/auto-assign-issue@v1
-              with:
-                  teams: android-triage
-                  numOfAssignee: 1
-                  allowSelfAssign: false
-                  repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+          - name: "echo variables"
+            run: |
+              echo \"${{ github.event.workflow_run.event }}\"
+              echo \"${{ github.event.pull_request.types }}\"
+              echo \"${{ github.actor }}\"
+
+    add-reviewers:
+        name: "Add reviewers to PR"
+        if: >
+          github.event.workflow_run.event == 'pull_request' &&
+          github.actor != 'dependabot[bot]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+          GIT_AUTHOR_NAME: mparticle-automation
+          GIT_AUTHOR_EMAIL: developers@mparticle.com
+          GIT_COMMITTER_NAME: mparticle-automation
+          GIT_COMMITTER_EMAIL: developers@mparticle.com
+        runs-on: ubuntu-latest
+        steps:
+          - name: "Checkout Code"
+          - uses: actions/checkout@v2
+
+          - name: "Find Pull Request"
+            id: find-pr
+            uses: sharesight/find-github-pull-request@1.1.2
+            with:
+              allowClosed: false
+              failIfNotFound: false
+
+          - name: "Check PR title"
+            id: is-docs
+            if: >
+                startsWith(${{ steps.find-pr.outputs.title }}, 'docs:')
+            run: |
+                OUTPUT=true
+                echo "::set-output name=isDocs::$OUTPUT"
+          - name: "echo isDocs"
+            run: |
+                echo ${{ steps.is-docs.outputs.isDocs }}
+          - name: "PR title is docs"
+            if: ${{steps.is-docs.outputs.isDocs == 'true'}}
+            uses: pozil/auto-assign-issue@v1
+            with:
+                teams: docs-triage
+                numOfAssignee: 1
+                allowSelfAssign: false
+                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+          - name: "PR title is invalid"
+            if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
+            uses: pozil/auto-assign-issue@v1
+            with:
+                teams: android-triage
+                numOfAssignee: 1
+                allowSelfAssign: false
+                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
