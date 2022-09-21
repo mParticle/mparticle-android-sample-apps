@@ -1,0 +1,13 @@
+name: "Pull Request Opened"
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  pull-request-opened:
+    name: "Opened Pull Request"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Log Opened PR"
+        run: echo 'PR opened or reopened'

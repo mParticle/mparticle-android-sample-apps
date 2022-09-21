@@ -2,7 +2,7 @@ name: 'Auto Assign PR'
 
 on:
   workflow_run:
-    workflows: ["Build and Test"]
+    workflows: ["Pull Request Opened"]
     types:
       - completed
 
@@ -13,7 +13,7 @@ jobs:
           github.event.workflow_run.event == 'pull_request' &&
           (github.event.pull_request.types == 'opened' ||
           github.event.pull_request.types == 'reopened') &&
-          github.actor == 'dependabot[bot]'
+          github.actor != 'dependabot[bot]'
         env:
           GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
           GIT_AUTHOR_NAME: mparticle-automation
