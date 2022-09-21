@@ -7,12 +7,20 @@ on:
       - completed
 
 jobs:
+    log-info:
+        name: "Add reviewers to PR"
+        runs-on: ubuntu-latest
+        steps:
+          - name: "echo variables"
+            run: |
+              echo \"${{ github.event.workflow_run.event }}\"
+              echo \"${{ github.event.pull_request.types }}\"
+              echo \"${{ github.actor }}\"
+
     add-reviewers:
         name: "Add reviewers to PR"
         if: >
           github.event.workflow_run.event == 'pull_request' &&
-          (github.event.pull_request.types == 'opened' ||
-          github.event.pull_request.types == 'reopened') &&
           github.actor != 'dependabot[bot]'
         env:
           GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
