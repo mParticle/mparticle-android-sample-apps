@@ -1,0 +1,38 @@
+name: 'Auto Assign PR'
+on:
+  workflow_call:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+    add-reviewers:
+        name: "Add reviewers to PR"
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Check PR title"
+              id: is-docs
+              if: >
+                  startsWith(github.event.pull_request.title, 'docs:')
+              run: |
+                  OUTPUT=true
+                  echo "::set-output name=isDocs::$OUTPUT"
+            - name: "echo isDocs"
+              run: |
+                  echo ${{ steps.is-docs.outputs.isDocs }}
+            - name: "PR title is docs"
+              if: ${{steps.is-docs.outputs.isDocs == 'true'}}
+              uses: pozil/auto-assign-issue@v1
+              with:
+                  teams: docs-admin
+                  numOfAssignee: 1
+                  allowSelfAssign: false
+                  repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+            - name: "PR title is invalid"
+              if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
+              uses: pozil/auto-assign-issue@v1
+              with:
+                  teams: android-triage
+                  numOfAssignee: 1
+                  allowSelfAssign: false
+                  repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
