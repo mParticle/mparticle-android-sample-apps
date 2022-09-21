@@ -1,0 +1,24 @@
+name: "Pull Request Opened"
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  pull-request-opened:
+    name: "Opened Pull Request"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout PR branch"
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: "Save Pull Request Number"
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.pull_request.title }} > ./pr/NR
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pr
+          path: pr/
