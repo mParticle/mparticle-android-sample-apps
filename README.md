@@ -1,6 +1,6 @@
 <img src="https://static.mparticle.com/sdk/mp_logo_black.svg" width="280"><br>
 
-# mParticle Android Sample Apps
+# mParticle Android Sample Apps 1.0
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
