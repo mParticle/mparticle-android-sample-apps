@@ -1,4 +1,5 @@
-name: 'Auto Assign Issues'
+name: "Auto Assign Issues"
+
 on:
   issues:
     types: [opened, reopened]
