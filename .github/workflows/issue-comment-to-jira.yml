@@ -1,0 +1,11 @@
+name: "Create Jira Comment"
+
+on:
+  issue_comment:
+    types: ["created"]
+
+jobs:
+  automerge-dependabot:
+    name: "Automerge Dependabot PR"
+    uses: mParticle/mparticle-workflows/.github/workflows/issue-comment-to-jira.yml@main
+    secrets: inherit
