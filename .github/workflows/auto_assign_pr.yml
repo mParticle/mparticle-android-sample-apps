@@ -56,21 +56,22 @@ jobs:
           - run: unzip pr.zip
           - name: 'Find PR Title'
             id: find-pr
-            uses: actions/github-script@v3
+            uses: actions/github-script@v6
             with:
               github-token: ${{ secrets.GITHUB_TOKEN }}
               script: |
                 var fs = require('fs');
                 var titleString = String(fs.readFileSync('./NR'));
-                echo "::set-output name=title::titleString"
+                return titleString
+              result-encoding: string
           - name: "Log PR Title"
             run: |
-              echo \"${{ steps.find-pr.outputs.title }}\"
+              echo "${{ steps.find-pr.outputs.result }}"
 
           - name: "Check PR title"
             id: is-docs
             if: >
-                startsWith(${{ steps.find-pr.outputs.title }}, 'docs:')
+                startsWith(${{ steps.find-pr.outputs.result }}, 'docs:')
             run: |
                 OUTPUT=true
                 echo "::set-output name=isDocs::$OUTPUT"
