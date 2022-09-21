@@ -13,4 +13,4 @@ jobs:
             teams: tse-triage
             numOfAssignee: 1
             allowSelfAssign: false
-            repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+            repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
