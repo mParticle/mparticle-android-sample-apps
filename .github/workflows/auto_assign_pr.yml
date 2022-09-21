@@ -30,9 +30,9 @@ jobs:
           GIT_COMMITTER_EMAIL: developers@mparticle.com
         runs-on: ubuntu-latest
         steps:
-
           - name: "Checkout Code"
-          - uses: actions/checkout@v2
+            uses: actions/checkout@v2
+
 
           - name: "Find Pull Request"
             id: find-pr
@@ -41,10 +41,14 @@ jobs:
               allowClosed: false
               failIfNotFound: false
 
+          - name: "echo variables"
+            run: |
+              echo \"${{ steps.find-pr.outputs.title }}\"
+
           - name: "Check PR title"
             id: is-docs
             if: >
-                startsWith(steps.find-pr.outputs.title, 'docs:')
+                startsWith(${{ steps.find-pr.outputs.title }}, 'docs:')
             run: |
                 OUTPUT=true
                 echo "::set-output name=isDocs::$OUTPUT"
@@ -59,7 +63,7 @@ jobs:
                 numOfAssignee: 1
                 allowSelfAssign: false
                 repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
-          - name: "PR title is invalid"
+          - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
             uses: pozil/auto-assign-issue@v1
             with:
