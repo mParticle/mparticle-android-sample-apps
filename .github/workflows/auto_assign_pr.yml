@@ -62,7 +62,7 @@ jobs:
               script: |
                 var fs = require('fs');
                 var titleString = String(fs.readFileSync('./NR'));
-                echo "::set-output name=title::titleString"
+#                echo "::set-output name=title::titleString"
                 echo "::set-output name=title::$titleString"
           - name: "echo variables"
             run: |
