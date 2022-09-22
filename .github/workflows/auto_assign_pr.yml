@@ -91,7 +91,7 @@ jobs:
                 numOfAssignee: 1
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-            uses: hkusu/review-assign-actions@v1
+            uses: hkusu/review-assign-action@v1.3.0
             with:
               reviewers: ${{ env.REVIEWERS }}
 
