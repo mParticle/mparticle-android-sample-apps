@@ -1,6 +1,8 @@
 name: 'Auto Assign PR'
 
 on:
+  workflow_call:
+
   workflow_run:
     workflows: ["Pull Request Opened"]
     types:
@@ -61,17 +63,23 @@ jobs:
               github-token: ${{ secrets.GITHUB_TOKEN }}
               script: |
                 var fs = require('fs');
-                var titleString = String(fs.readFileSync('./NR'));
-                return titleString
+                var str = String(fs.readFileSync('./NR'));
+                var array = str.split(',')
+                await github.issues.assignees({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: array[0],
+                    assignees: 'mchuangatmp'
+                });
+                return array[1]
               result-encoding: string
           - name: "Log PR Title"
             run: |
               echo "${{ steps.find-pr.outputs.result }}"
-
           - name: "Check PR title"
             id: is-docs
             if: >
-                startsWith(${{ steps.find-pr.outputs.result }}, 'docs:')
+                startsWith(steps.find-pr.outputs.result, 'docs:')
             run: |
                 OUTPUT=true
                 echo "::set-output name=isDocs::$OUTPUT"
@@ -80,17 +88,16 @@ jobs:
                 echo ${{ steps.is-docs.outputs.isDocs }}
           - name: "PR title is docs"
             if: ${{steps.is-docs.outputs.isDocs == 'true'}}
-            uses: pozil/auto-assign-issue@v1
+            uses: pozil/auto-assign-issue@v1.10.0
             with:
+                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
                 teams: docs-triage
                 numOfAssignee: 1
-                allowSelfAssign: false
-                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-            uses: pozil/auto-assign-issue@v1
+            uses: pozil/auto-assign-issue@v1.10.0
             with:
-                teams: android-triage
-                numOfAssignee: 1
-                allowSelfAssign: false
-                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+              repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+              teams: android-triage
+              numOfAssignee: 1
+
