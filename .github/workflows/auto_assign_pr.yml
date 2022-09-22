@@ -72,7 +72,7 @@ jobs:
           - name: "Check PR title"
             id: is-docs
             if: >
-                startsWith(${{ steps.find-pr.outputs.result }}, 'docs:')
+                startsWith("${{ steps.find-pr.outputs.result }}", 'docs:')
             run: |
                 OUTPUT=true
                 echo "::set-output name=isDocs::$OUTPUT"
