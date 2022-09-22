@@ -9,15 +9,6 @@ on:
       - completed
 
 jobs:
-    log-info:
-        name: "Add reviewers to PR"
-        runs-on: ubuntu-latest
-        steps:
-          - name: "echo variables"
-            run: |
-              echo \"${{ github.event.workflow_run.event }}\"
-              echo \"${{ github.event.pull_request.types }}\"
-              echo \"${{ github.actor }}\"
 
     add-reviewers:
         name: "Add reviewers to PR"
@@ -110,5 +101,5 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
               https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
-              -d '{"requested_teams":["android-triage"]}'
+              -d '{"team_reviewers":["android-triage"]}'
 
