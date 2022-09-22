@@ -81,22 +81,18 @@ jobs:
                 echo ${{ steps.is-docs.outputs.isDocs }}
           - name: "PR title is docs"
             if: ${{steps.is-docs.outputs.isDocs == 'true'}}
-            uses: rowi1de/auto-assign-review-teams@v1.1.3
+            uses: dc-ag/auto-assign-assignees-from-team@v1.1.0
             with:
               repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
-              org: "mParticle" #only needed for pick-one-from-persons-or-team=true
-              teams: "docs-triage" # only works for GitHub Organisation/Teams
-              include-draft: false # Draft PRs will be skipped (default: false)
-              skip-with-manual-reviewers: 0 # Skip this action, if the number of reviwers was already assigned (default: 0)
-              pick-one-from-persons-or-team: false
+              read-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }} # Read only token which needs access to fetch team members
+              team: "docs-triage" # the team name
+              amount: 1
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-            uses: rowi1de/auto-assign-review-teams@v1.1.3
+            uses: dc-ag/auto-assign-assignees-from-team@v1.1.0
             with:
               repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
-              org: "mParticle" #only needed for pick-one-from-persons-or-team=true
-              teams: "android-triage" # only works for GitHub Organisation/Teams
-              include-draft: false # Draft PRs will be skipped (default: false)
-              skip-with-manual-reviewers: 0 # Skip this action, if the number of reviwers was already assigned (default: 0)
-              pick-one-from-persons-or-team: false
+              read-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }} # Read only token which needs access to fetch team members
+              team: "android-triage" # the team name
+              amount: 1
 
