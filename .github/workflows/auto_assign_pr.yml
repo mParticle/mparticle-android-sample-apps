@@ -80,17 +80,18 @@ jobs:
                 echo ${{ steps.is-docs.outputs.isDocs }}
           - name: "PR title is docs"
             if: ${{steps.is-docs.outputs.isDocs == 'true'}}
-            uses: pozil/auto-assign-issue@v1
+            uses: dc-ag/auto-assign-assignees-from-team@v1.1.0
             with:
-                teams: docs-triage
-                numOfAssignee: 1
-                allowSelfAssign: false
-                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+              repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+              read-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }} # Read only token which needs access to fetch team members
+              team: "docs-triage" # the team name
+              amount: 1
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-            uses: pozil/auto-assign-issue@v1
+            uses: dc-ag/auto-assign-assignees-from-team@v1.1.0
             with:
-                teams: android-triage
-                numOfAssignee: 1
-                allowSelfAssign: false
-                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+              repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+              read-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }} # Read only token which needs access to fetch team members
+              team: "android-triage" # the team name
+              amount: 1
+
