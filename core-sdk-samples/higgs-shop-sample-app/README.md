@@ -107,7 +107,7 @@ For information on how to integrate a kit or the core SDK for local configuratio
 
 ## Development Notes
 
-This project is built in Kotlin and follows MVVM design patterns and uses Retrofit (networking), Room (ORM/database), and Glide (image loading)
+This project is built in Kotlin and follows MVVM design patterns and uses Retrofit (networking), Room (ORM/database), & Glide (image loading)
 
 ## Support
 
