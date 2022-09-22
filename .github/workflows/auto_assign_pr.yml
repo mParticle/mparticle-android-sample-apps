@@ -109,6 +109,6 @@ jobs:
               -X POST \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
-              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/issues/${{ steps.find-pr-number.outputs.result }}/assignees \
-              -d '{"assignees":["mchuangatmp"]}'
+              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
+              -d '{"team_reviewers":["android-triage"]}'
 
