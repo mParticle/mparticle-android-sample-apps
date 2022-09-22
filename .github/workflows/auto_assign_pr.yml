@@ -1,21 +1,14 @@
 name: 'Auto Assign PR'
 
 on:
+  workflow_call:
+
   workflow_run:
     workflows: ["Pull Request Opened"]
     types:
       - completed
 
 jobs:
-    log-info:
-        name: "Add reviewers to PR"
-        runs-on: ubuntu-latest
-        steps:
-          - name: "echo variables"
-            run: |
-              echo \"${{ github.event.workflow_run.event }}\"
-              echo \"${{ github.event.pull_request.types }}\"
-              echo \"${{ github.actor }}\"
 
     add-reviewers:
         name: "Add reviewers to PR"
@@ -54,24 +47,38 @@ jobs:
                 var fs = require('fs');
                 fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
           - run: unzip pr.zip
-          - name: 'Find PR Title'
-            id: find-pr
+          - name: 'Find PR Number'
+            id: find-pr-number
             uses: actions/github-script@v6
             with:
               github-token: ${{ secrets.GITHUB_TOKEN }}
               script: |
                 var fs = require('fs');
-                var titleString = String(fs.readFileSync('./NR'));
-                return titleString
+                var str = String(fs.readFileSync('./NR'));
+                var array = str.split(',')
+                return array[0]
               result-encoding: string
+          - name: 'Find PR Title'
+            id: find-pr-title
+            uses: actions/github-script@v6
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              script: |
+                var fs = require('fs');
+                var str = String(fs.readFileSync('./NR'));
+                var array = str.split(',')
+                return array[1]
+              result-encoding: string
+          - name: "Log PR Number"
+            run: |
+              echo "${{ steps.find-pr-number.outputs.result }}"
           - name: "Log PR Title"
             run: |
-              echo "${{ steps.find-pr.outputs.result }}"
-
+              echo "${{ steps.find-pr-title.outputs.result }}"
           - name: "Check PR title"
             id: is-docs
             if: >
-                startsWith(${{ steps.find-pr.outputs.result }}, 'docs:')
+                startsWith(steps.find-pr-title.outputs.result, 'docs:')
             run: |
                 OUTPUT=true
                 echo "::set-output name=isDocs::$OUTPUT"
@@ -80,17 +87,20 @@ jobs:
                 echo ${{ steps.is-docs.outputs.isDocs }}
           - name: "PR title is docs"
             if: ${{steps.is-docs.outputs.isDocs == 'true'}}
-            uses: pozil/auto-assign-issue@v1
-            with:
-                teams: docs-triage
-                numOfAssignee: 1
-                allowSelfAssign: false
-                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+            run: |
+              curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
+              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
+              -d '{"reviewers":["jasonmgeorge","MystiBerry"],"team_reviewers":["docs-triage"]}'
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-            uses: pozil/auto-assign-issue@v1
-            with:
-                teams: android-triage
-                numOfAssignee: 1
-                allowSelfAssign: false
-                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT}}
+            run: |
+              curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
+              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
+              -d '{"reviewers":["mchuangatmp","einsteinx2"],"team_reviewers":["android-triage"]}'
+
