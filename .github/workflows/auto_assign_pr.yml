@@ -81,6 +81,7 @@ jobs:
                 echo ${{ steps.is-docs.outputs.isDocs }}
           - name: "PR title is docs"
             if: ${{steps.is-docs.outputs.isDocs == 'true'}}
+            uses: rowi1de/auto-assign-review-teams@v1.1.3
             with:
               repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
               org: "mParticle" #only needed for pick-one-from-persons-or-team=true
