@@ -1,6 +1,8 @@
 name: 'Auto Assign PR'
 
 on:
+  workflow_call:
+
   workflow_run:
     workflows: ["Pull Request Opened"]
     types:
@@ -61,14 +63,20 @@ jobs:
               github-token: ${{ secrets.GITHUB_TOKEN }}
               script: |
                 var fs = require('fs');
-                var titleString = String(fs.readFileSync('./NR'));
-                return titleString
+                var str = String(fs.readFileSync('./NR'));
+                var array = str.split(',')
+                await github.issues.assignees({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: array[0],
+                    assignees: 'mchuangatmp'
+                });
+                return array[1]
               result-encoding: string
           - name: "Log PR Title"
 
             run: |
               echo "${{ steps.find-pr.outputs.result }}"
-
           - name: "Check PR title"
             id: is-docs
             if: >
