@@ -17,7 +17,7 @@ jobs:
       - name: "Save Pull Request Number"
         run: |
           mkdir -p ./pr
-          echo ${{ github.event.pull_request.title }} > ./pr/NR
+          echo ${{ github.event.pull_request.number }},${{github.event.pull_request.title }} > ./pr/NR
       - uses: actions/upload-artifact@v2
         with:
           name: pr
