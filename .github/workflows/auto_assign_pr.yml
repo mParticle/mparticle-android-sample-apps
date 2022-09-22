@@ -81,6 +81,7 @@ jobs:
           - name: "echo isDocs"
             run: |
                 echo ${{ steps.is-docs.outputs.isDocs }}
+                echo REVIEWERS=mchuangatmp >> $GITHUB_ENV
           - name: "PR title is docs"
             if: ${{steps.is-docs.outputs.isDocs == 'true'}}
             uses: pozil/auto-assign-issue@v1.10.0
@@ -90,9 +91,7 @@ jobs:
                 numOfAssignee: 1
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-            uses: pozil/auto-assign-issue@v1.10.0
+            uses: hkusu/review-assign-actions@v1
             with:
-              repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
-              teams: android-triage
-              numOfAssignee: 1
+              reviewers: ${{ env.REVIEWERS }}
 
