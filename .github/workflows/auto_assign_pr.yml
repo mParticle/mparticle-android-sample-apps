@@ -56,8 +56,19 @@ jobs:
                 var fs = require('fs');
                 fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
           - run: unzip pr.zip
+          - name: 'Find PR Number'
+            id: find-pr-number
+            uses: actions/github-script@v6
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              script: |
+                var fs = require('fs');
+                var str = String(fs.readFileSync('./NR'));
+                var array = str.split(',')
+                return array[0]
+              result-encoding: number
           - name: 'Find PR Title'
-            id: find-pr
+            id: find-pr-title
             uses: actions/github-script@v6
             with:
               github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -67,14 +78,16 @@ jobs:
                 var array = str.split(',')
                 return array[1]
               result-encoding: string
-          - name: "Log PR Title"
-
+          - name: "Log PR Number"
             run: |
-              echo "${{ steps.find-pr.outputs.result }}"
+              echo "${{ steps.find-pr-number.outputs.result }}"
+          - name: "Log PR Title"
+            run: |
+              echo "${{ steps.find-pr-title.outputs.result }}"
           - name: "Check PR title"
             id: is-docs
             if: >
-                startsWith(steps.find-pr.outputs.result, 'docs:')
+                startsWith(steps.find-pr-title.outputs.result, 'docs:')
             run: |
                 OUTPUT=true
                 echo "::set-output name=isDocs::$OUTPUT"
@@ -91,7 +104,11 @@ jobs:
                 numOfAssignee: 1
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-            uses: hkusu/review-assign-action@v1.3.0
-            with:
-              reviewers: ${{ env.REVIEWERS }}
+            run: |
+              curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
+              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/issues/${{ steps.find-pr-number.outputs.result }}/assignees \
+              -d '{"assignees":["mchuangatmp"]}'
 
