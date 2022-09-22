@@ -110,5 +110,5 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
               https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
-              -d '{"team_reviewers":["android-triage"]}'
+              -d '{"requested_teams":["android-triage"]}'
 
