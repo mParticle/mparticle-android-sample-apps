@@ -88,11 +88,13 @@ jobs:
                 echo REVIEWERS=mchuangatmp >> $GITHUB_ENV
           - name: "PR title is docs"
             if: ${{steps.is-docs.outputs.isDocs == 'true'}}
-            uses: pozil/auto-assign-issue@v1.10.0
-            with:
-                repo-token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
-                teams: docs-triage
-                numOfAssignee: 1
+            run: |
+              curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
+              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
+              -d '{"reviewers":["jasonmgeorge","MystiBerry"],"team_reviewers":["docs-triage"]}'
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
             run: |
