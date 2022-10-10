@@ -63,7 +63,7 @@ dependencies {
     implementation("com.google.android.material:material:1.5.0")
     implementation("com.mparticle:android-core:5.45.2")
 
-    implementation("com.github.bumptech.glide:glide:4.14.0")
+    implementation("com.github.bumptech.glide:glide:4.14.2")
 
     api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
