@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:name=".HiggsShopSampleApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.mParticle.SampleApp">
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.SplashActivity"
+            android:theme="@style/Theme.mParticle.SampleApp.Splash"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.LandingActivity"
+            android:theme="@style/Theme.mParticle.SampleApp.Splash"
+            android:screenOrientation="portrait"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.MainActivity"
+            android:theme="@style/Theme.mParticle.SampleApp"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <nav-graph android:value="@navigation/nav_graph" />
+        </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.ProductDetailActivity"
+            android:theme="@style/Theme.mParticle.SampleApp"
+            android:screenOrientation="portrait"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.mparticle.example.higgsshopsampleapp.activities.CheckoutActivity"
+            android:theme="@style/Theme.mParticle.SampleApp"
+            android:screenOrientation="portrait"
+            android:exported="true">
+        </activity>
+    </application>
+</manifest>

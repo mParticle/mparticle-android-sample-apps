@@ -13,7 +13,7 @@ android {
     compileSdk = 33
     defaultConfig {
         applicationId = "com.mparticle.example.higgsshopsampleapp"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 33
         versionCode = buildVersionCode()
         versionName = "0.13.0-SNAPSHOT"
@@ -45,41 +45,45 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.compose.runtime:runtime:1.2.1")
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("androidx.compose.material:material:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling:1.2.1")
-    implementation("androidx.compose.runtime:runtime-livedata:1.2.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.fragment:fragment:1.3.6")
-    implementation("androidx.fragment:fragment-ktx:1.3.6")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("androidx.compose.runtime:runtime:1.3.0")
+    implementation("androidx.compose.ui:ui:1.3.0")
+    implementation("androidx.compose.material:material:1.3.0")
+    implementation("androidx.compose.ui:ui-tooling:1.3.0")
+    implementation("androidx.compose.runtime:runtime-livedata:1.3.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.fragment:fragment:1.5.4")
+    implementation("androidx.fragment:fragment-ktx:1.5.4")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("com.mparticle:android-core:5.45.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("com.google.android.material:material:1.7.0")
+    implementation("com.mparticle:android-core:5.47.4")
+    implementation(project(":mparticle-android-integration-adobe-media"))
+    implementation("com.google.android.gms:play-services-ads-identifier:18.0.1")
 
-    implementation("com.github.bumptech.glide:glide:4.13.2")
+    implementation("com.mparticle:android-media:1.4.1")
+
+    implementation("com.github.bumptech.glide:glide:4.14.2")
 
     api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
-    implementation("com.squareup.retrofit2:retrofit:2.6.1")
-    implementation("com.squareup.retrofit2:converter-gson:2.6.1")
-    implementation("com.squareup.retrofit2:converter-moshi:2.6.1")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.6.1")
-    implementation("io.reactivex.rxjava2:rxjava:2.1.14")
-    implementation("io.reactivex.rxjava2:rxandroid:2.0.2")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0")
 
     val roomVersion = "2.4.3"
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -94,7 +98,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:$roomVersion")
     testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.2.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.0")
     androidTestImplementation("androidx.test:core:1.4.0")
     androidTestImplementation("androidx.test:core-ktx:1.4.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
