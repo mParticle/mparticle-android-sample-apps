@@ -23,8 +23,57 @@ module.exports = {
     [
       "@semantic-release/release-notes-generator",
       {
-        preset: "angular",
-      },
+        preset: "conventionalcommits",
+        presetConfig: {
+          types: [
+            {
+              "type": "feat",
+              "section": "Features",
+              "hidden": false
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes",
+              "hidden": false
+            },
+            {
+              "type": "docs",
+              "section": "Documentation",
+              "hidden": false
+            },
+            {
+              "type": "style",
+              "section": "Updates & Maintenance",
+              "hidden": false
+            },
+            {
+              "type": "refactor",
+              "section": "Updates & Maintenance",
+              "hidden": false
+            },
+            {
+              "type": "perf",
+              "section": "Updates & Maintenance",
+              "hidden": false
+            },
+            {
+              "type": "test",
+              "section": "Updates & Maintenance",
+              "hidden": false
+            },
+            {
+              "type": "ci",
+              "section": "Updates & Maintenance",
+              "hidden": false
+            },
+            {
+              "type": "chore",
+              "section": "Updates & Maintenance",
+              "hidden": false
+            }
+          ]
+        }
+      }
     ],
     [
       "@semantic-release/changelog",
@@ -44,7 +93,7 @@ module.exports = {
       {
         assets: ["CHANGELOG.md", "build.gradle", "README.md"],
         message:
-          "chore(release): ${nextRelease.version} \n\n${nextRelease.notes}",
+          "chore: ${nextRelease.version} (release) \n\n${nextRelease.notes}",
       },
     ],
   ],
