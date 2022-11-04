@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".HiggsShopSampleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -49,5 +50,19 @@
             android:screenOrientation="portrait"
             android:exported="true">
         </activity>
+        <service android:name="com.mparticle.messaging.InstanceIdService" />
+        <receiver
+            android:name="com.mparticle.MPReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <!-- Use your package name as the category -->
+                <category android:name="com.mparticle.example.higgsshopsampleapp" />
+            </intent-filter>
+        </receiver>
+        <!-- This is the service that does the heavy lifting in parsing, showing, and tracking FCM/GCM notifications. -->
+        <service android:name="com.mparticle.MPService" />
     </application>
 </manifest>

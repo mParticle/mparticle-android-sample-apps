@@ -93,7 +93,7 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
               https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
-              -d '{"reviewers":["jasonmgeorge","MystiBerry"],"team_reviewers":["docs-triage"]}'
+              -d '{"reviewers":["schallock","MystiBerry"],"team_reviewers":["docs-triage"]}'
           - name: "PR title is not docs"
             if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
             run: |
@@ -102,5 +102,5 @@ jobs:
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
               https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
-              -d '{"reviewers":["mchuangatmp","einsteinx2"],"team_reviewers":["android-triage"]}'
+              -d '{"reviewers":["mchuangatmp"],"team_reviewers":["android-triage"]}'
 
