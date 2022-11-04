@@ -5,6 +5,7 @@ import java.util.TimeZone
 plugins {
     id("com.android.application")
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    //id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
 }
@@ -20,6 +21,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "HIGGS_SHOP_SAMPLE_APP_KEY", "\"${System.getenv("HIGGS_SHOP_SAMPLE_APP_KEY")}\"")
         buildConfigField("String", "HIGGS_SHOP_SAMPLE_APP_SECRET", "\"${System.getenv("HIGGS_SHOP_SAMPLE_APP_SECRET")}\"")
+        buildConfigField("String", "HIGGS_SHOP_FCM_SENDER_ID", "\"${System.getenv("HIGGS_SHOP_FCM_SENDER_ID")}\"")
     }
     buildFeatures {
         dataBinding = true
@@ -61,11 +63,13 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation("com.google.android.material:material:1.7.0")
-    implementation("com.mparticle:android-core:5.47.4")
-    implementation(project(":mparticle-android-integration-adobe-media"))
+    implementation("com.mparticle:android-core:5.48.0")
     implementation("com.google.android.gms:play-services-ads-identifier:18.0.1")
 
-    implementation("com.mparticle:android-media:1.4.1")
+    //implementation(platform("com.google.firebase:firebase-bom:31.0.2"))
+    //implementation("com.google.firebase:firebase-analytics-ktx")
+
+    //implementation("com.mparticle:android-media:1.4.2")
 
     implementation("com.github.bumptech.glide:glide:4.14.2")
 
