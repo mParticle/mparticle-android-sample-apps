@@ -5,7 +5,7 @@ import java.util.TimeZone
 plugins {
     id("com.android.application")
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
-    //id("com.google.gms.google-services")
+    // id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
 }
@@ -66,10 +66,10 @@ dependencies {
     implementation("com.mparticle:android-core:5.48.0")
     implementation("com.google.android.gms:play-services-ads-identifier:18.0.1")
 
-    //implementation(platform("com.google.firebase:firebase-bom:31.0.2"))
-    //implementation("com.google.firebase:firebase-analytics-ktx")
+    // implementation(platform("com.google.firebase:firebase-bom:31.0.2"))
+    // implementation("com.google.firebase:firebase-analytics-ktx")
 
-    //implementation("com.mparticle:android-media:1.4.2")
+    // implementation("com.mparticle:android-media:1.4.2")
 
     implementation("com.github.bumptech.glide:glide:4.14.2")
 
