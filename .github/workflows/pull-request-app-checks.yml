@@ -49,7 +49,7 @@ jobs:
           java-version: "11"
           cache: "gradle"
       - name: "Run Instrumented Tests"
-        uses: reactivecircus/android-emulator-runner@v2.26.0
+        uses: reactivecircus/android-emulator-runner@v2.27.0
         with:
           working-directory: ${{ inputs.app_relative_path }}
           api-level: 29
