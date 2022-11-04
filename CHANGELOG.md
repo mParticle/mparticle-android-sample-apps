@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.13.0...v0.14.0) (2022-11-04)
+
+
+### Features
+
+* Add in new Android 13 and dependencies changes ([#149](https://github.com/mParticle/mparticle-android-sample-apps/issues/149)) ([85792ad](https://github.com/mParticle/mparticle-android-sample-apps/commit/85792ada8324903ae56f92cd1a7a898045ecfbdd))
+
 # [0.13.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.12.0...v0.13.0) (2022-09-16)
 
 
