@@ -58,6 +58,7 @@ jobs:
       - name: "Checkout public main branch"
         uses: actions/checkout@v3
         with:
+          token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
           fetch-depth: 0
           ref: main
       - name: "Import GPG Key"
