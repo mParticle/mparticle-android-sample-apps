@@ -13,6 +13,7 @@ import com.mparticle.example.higgsshopsampleapp.repositories.CartRepository
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 class CartViewModel (application: Application) : AndroidViewModel(application) {
@@ -46,7 +47,7 @@ class CartViewModel (application: Application) : AndroidViewModel(application) {
             items.forEach {
                 amount += BigDecimal(it.quantity.toString()) * BigDecimal(it.price)
             }
-            cartSubtotalPriceLiveData.value = amount.setScale(2, BigDecimal.ROUND_HALF_UP)
+            cartSubtotalPriceLiveData.value = amount.setScale(2, RoundingMode.HALF_UP)
         }
     }
 

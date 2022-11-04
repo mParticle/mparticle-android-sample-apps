@@ -10,6 +10,7 @@ import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.C
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 class CheckoutViewModel(application: Application) : AndroidViewModel(application) {
     val cartResponseLiveData = MutableLiveData<List<CartItemEntity>>()
@@ -37,10 +38,10 @@ class CheckoutViewModel(application: Application) : AndroidViewModel(application
                 subTotal * BigDecimal(Constants.CHECKOUT_SHIPPING_COST).divide("100.0".toBigDecimal())
             val grandTotal = subTotal + salesTax + shipping
             checkoutPriceLiveData.value = mapOf(
-                "subTotal" to subTotal.setScale(2, BigDecimal.ROUND_HALF_UP),
-                "salesTax" to salesTax.setScale(2, BigDecimal.ROUND_HALF_UP),
-                "shipping" to shipping.setScale(2, BigDecimal.ROUND_HALF_UP),
-                "grandTotal" to grandTotal.setScale(2, BigDecimal.ROUND_HALF_UP),
+                "subTotal" to subTotal.setScale(2, RoundingMode.HALF_UP),
+                "salesTax" to salesTax.setScale(2, RoundingMode.HALF_UP),
+                "shipping" to shipping.setScale(2, RoundingMode.HALF_UP),
+                "grandTotal" to grandTotal.setScale(2, RoundingMode.HALF_UP),
                 "cartItems" to items
             )
         }
