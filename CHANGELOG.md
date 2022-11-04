@@ -1,3 +1,11 @@
+## [0.14.1](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.14.0...v0.14.1) (2022-11-04)
+
+
+### Updates & Maintenance
+
+* add conventional-changelog-conventionalcommits ([787980b](https://github.com/mParticle/mparticle-android-sample-apps/commit/787980b940fa0013ee6b82c7f0c87d9cd59fef4b))
+* update release.config.js ([b67c8f8](https://github.com/mParticle/mparticle-android-sample-apps/commit/b67c8f88d85da97190613ae6dc49180e8fd1496d))
+
 # [0.14.0](https://github.com/mParticle/mparticle-android-sample-apps/compare/v0.13.0...v0.14.0) (2022-11-04)
 
 
