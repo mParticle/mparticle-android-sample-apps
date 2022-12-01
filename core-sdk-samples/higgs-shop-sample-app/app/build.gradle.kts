@@ -73,6 +73,7 @@ dependencies {
     // implementation("com.google.firebase:firebase-analytics-ktx")
 
     // implementation("com.mparticle:android-media:1.4.2")
+    implementation(project(":mparticle-android-integration-appsflyer"))
 
     implementation("com.github.bumptech.glide:glide:4.14.2")
 
