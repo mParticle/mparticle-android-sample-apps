@@ -1,4 +1,4 @@
-name: Create Jira Issue
+name: "Create Zendesk Ticket"
 
 on:
   issues:
