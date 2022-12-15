@@ -5,7 +5,8 @@ on:
     types: ["opened", "reopened"]
 
 jobs:
+
   create-issue:
     name: "Create Issue"
-    uses: mParticle/mparticle-workflows/.github/workflows/issue-to-jira-ticket.yml@main
+    uses: mParticle/mparticle-workflows/.github/workflows/issue-created-to-zendesk-ticket.yml@ci/SQDSDKS-4936
     secrets: inherit
