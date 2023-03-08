@@ -117,6 +117,9 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("com.google.truth:truth:1.1.3")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
     androidTestUtil("androidx.test:orchestrator:1.4.1")
 }
