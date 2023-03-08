@@ -1,4 +1,4 @@
-name: "Auto Assign PR"
+name: 'Auto Assign PR'
 
 on:
   workflow_call:
@@ -9,93 +9,98 @@ on:
       - completed
 
 jobs:
-  add-reviewers:
-    name: "Add reviewers to PR"
-    if: >
-      github.event.workflow_run.event == 'pull_request' &&
-      github.actor != 'dependabot[bot]'
-    env:
-      GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
-      GIT_AUTHOR_NAME: mparticle-automation
-      GIT_AUTHOR_EMAIL: developers@mparticle.com
-      GIT_COMMITTER_NAME: mparticle-automation
-      GIT_COMMITTER_EMAIL: developers@mparticle.com
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Print Event"
-        run: |
-          echo ${{ github.event.workflow_run.event }}
-      - name: "Download artifact"
-        uses: actions/github-script@v3.1.0
-        with:
-          script: |
-            var artifacts = await github.actions.listWorkflowRunArtifacts({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               run_id: ${{ github.event.workflow_run.id }},
-            });
-            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "pr"
-            })[0];
-            var download = await github.actions.downloadArtifact({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               artifact_id: matchArtifact.id,
-               archive_format: 'zip',
-            });
-            var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
-      - run: unzip pr.zip
-      - name: "Find PR Number"
-        id: find-pr-number
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            var fs = require('fs');
-            var str = String(fs.readFileSync('./NR'));
-            var array = str.split(',')
-            return array[0]
-          result-encoding: string
-      - name: "Find PR Title"
-        id: find-pr-title
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            var fs = require('fs');
-            var str = String(fs.readFileSync('./NR'));
-            var array = str.split(',')
-            return array[1]
-          result-encoding: string
-      - name: "Log PR Title"
-        run: |
-          echo "${{ steps.find-pr-title.outputs.result }}"
-      - name: "Check PR title"
-        id: is-docs
+
+    add-reviewers:
+        name: "Add reviewers to PR"
         if: >
-          startsWith(steps.find-pr-title.outputs.result, 'docs:')
-        run: |
-          OUTPUT=true
-          echo "::set-output name=isDocs::$OUTPUT"
-      - name: "echo isDocs"
-        run: |
-          echo ${{ steps.is-docs.outputs.isDocs }}
-      - name: "PR title is docs"
-        if: ${{steps.is-docs.outputs.isDocs == 'true'}}
-        run: |
-          curl \
-          -X POST \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
-          https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
-          -d '{"reviewers":["schallock","MystiBerry"],"team_reviewers":["docs-triage"]}'
-      - name: "PR title is not docs"
-        if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
-        run: |
-          curl \
-          -X POST \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
-          https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
-          -d '{"reviewers":["mchuangatmp"],"team_reviewers":["android-triage"]}'
+          github.event.workflow_run.event == 'pull_request' &&
+          github.actor != 'dependabot[bot]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
+          GIT_AUTHOR_NAME: mparticle-automation
+          GIT_AUTHOR_EMAIL: developers@mparticle.com
+          GIT_COMMITTER_NAME: mparticle-automation
+          GIT_COMMITTER_EMAIL: developers@mparticle.com
+        runs-on: ubuntu-latest
+        steps:
+          - name: 'Print Event'
+            run: |
+              echo ${{ github.event.workflow_run.event }}
+          - name: 'Download artifact'
+            uses: actions/github-script@v3.1.0
+            with:
+              script: |
+                var artifacts = await github.actions.listWorkflowRunArtifacts({
+                   owner: context.repo.owner,
+                   repo: context.repo.repo,
+                   run_id: ${{ github.event.workflow_run.id }},
+                });
+                var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+                  return artifact.name == "pr"
+                })[0];
+                var download = await github.actions.downloadArtifact({
+                   owner: context.repo.owner,
+                   repo: context.repo.repo,
+                   artifact_id: matchArtifact.id,
+                   archive_format: 'zip',
+                });
+                var fs = require('fs');
+                fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+          - run: unzip pr.zip
+          - name: 'Find PR Number'
+            id: find-pr-number
+            uses: actions/github-script@v6
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              script: |
+                var fs = require('fs');
+                var str = String(fs.readFileSync('./NR'));
+                var array = str.split(',')
+                return array[0]
+              result-encoding: string
+          - name: 'Find PR Title'
+            id: find-pr-title
+            uses: actions/github-script@v6
+            with:
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+              script: |
+                var fs = require('fs');
+                var str = String(fs.readFileSync('./NR'));
+                var array = str.split(',')
+                return array[1]
+              result-encoding: string
+          - name: "Log PR Number"
+            run: |
+              echo "${{ steps.find-pr-number.outputs.result }}"
+          - name: "Log PR Title"
+            run: |
+              echo "${{ steps.find-pr-title.outputs.result }}"
+          - name: "Check PR title"
+            id: is-docs
+            if: >
+                startsWith(steps.find-pr-title.outputs.result, 'docs:')
+            run: |
+                OUTPUT=true
+                echo "::set-output name=isDocs::$OUTPUT"
+          - name: "echo isDocs"
+            run: |
+                echo ${{ steps.is-docs.outputs.isDocs }}
+          - name: "PR title is docs"
+            if: ${{steps.is-docs.outputs.isDocs == 'true'}}
+            run: |
+              curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
+              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
+              -d '{"reviewers":["schallock","MystiBerry"],"team_reviewers":["docs-triage"]}'
+          - name: "PR title is not docs"
+            if: ${{ steps.is-docs.outputs.isDocs != 'true'}}
+            run: |
+              curl \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{secrets.MP_SEMANTIC_RELEASE_BOT}}" \
+              https://api.github.com/repos/mParticle/mparticle-android-sample-apps/pulls/${{ steps.find-pr-number.outputs.result }}/requested_reviewers \
+              -d '{"reviewers":["mchuangatmp"],"team_reviewers":["android-triage"]}'
+
