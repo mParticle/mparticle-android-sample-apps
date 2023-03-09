@@ -69,9 +69,6 @@ jobs:
                 var array = str.split(',')
                 return array[1]
               result-encoding: string
-          - name: "Log PR Number"
-            run: |
-              echo "${{ steps.find-pr-number.outputs.result }}"
           - name: "Log PR Title"
             run: |
               echo "${{ steps.find-pr-title.outputs.result }}"
