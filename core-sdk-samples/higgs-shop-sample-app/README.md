@@ -22,7 +22,7 @@ The purpose of the app is to highlight the following features:
 
 ### API Credentials
 
-**NOTE** These Sample Apps require a mParticle account with an API key and Secret.
+**NOTE** These Sample Apps require a mParticle account with an API key and Secret. Please refer to the [mParticle Docs] (https://docs.mparticle.com/developers/quickstart/android/create-input/#13-insert-your-api-key-and-secret) for the exact instructions for this Android App.  
 
 While the code might run and build without mParticle credentials, the SDKs will not upload events to our servers and will generate errors.
 
