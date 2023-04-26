@@ -86,9 +86,9 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.3.0")
 
