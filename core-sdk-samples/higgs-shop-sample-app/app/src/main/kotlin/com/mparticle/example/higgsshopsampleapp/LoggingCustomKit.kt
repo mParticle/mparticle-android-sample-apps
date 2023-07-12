@@ -13,7 +13,7 @@ import java.lang.Exception
 class LoggingCustomKit : MPSideloadedKit(), KitListener, EventListener {
 
     companion object {
-        private const val CUSTOM_KIT = "Custom Kit"
+        private const val CUSTOM_KIT = "LoggingCustomKit"
     }
 
     override fun getName(): String = CUSTOM_KIT
@@ -22,12 +22,12 @@ class LoggingCustomKit : MPSideloadedKit(), KitListener, EventListener {
         settings: MutableMap<String, String>?,
         context: Context?
     ): MutableList<ReportingMessage> {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT onKitCreate")
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT onKitCreate")
         return mutableListOf()
     }
 
     override fun leaveBreadcrumb(breadcrumb: String?): MutableList<ReportingMessage> {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT leaveBreadcrumb with breadcrumb: ${breadcrumb.orEmpty()}")
         return mutableListOf()
     }
 
@@ -35,7 +35,7 @@ class LoggingCustomKit : MPSideloadedKit(), KitListener, EventListener {
         message: String?,
         errorAttributes: MutableMap<String, String>?
     ): MutableList<ReportingMessage> {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT logError with message: ${message.orEmpty()}")
         return mutableListOf()
     }
 
@@ -44,12 +44,12 @@ class LoggingCustomKit : MPSideloadedKit(), KitListener, EventListener {
         exceptionAttributes: MutableMap<String, String>?,
         message: String?
     ): MutableList<ReportingMessage> {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT logException with exception: ${exception?.message.orEmpty()} and message: ${message.orEmpty()}")
         return mutableListOf()
     }
 
     override fun logEvent(baseEvent: MPEvent): MutableList<ReportingMessage>? {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ${baseEvent.eventName}")
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT logEvent with name: ${baseEvent.eventName}")
         return super.logEvent(baseEvent)
     }
 
@@ -57,32 +57,33 @@ class LoggingCustomKit : MPSideloadedKit(), KitListener, EventListener {
         screenName: String?,
         screenAttributes: MutableMap<String, String>?
     ): MutableList<ReportingMessage> {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT logScreen with screen name: ${screenName.orEmpty()}")
         return mutableListOf()
     }
 
     override fun setOptOut(optedOut: Boolean): MutableList<ReportingMessage> = mutableListOf()
-    override fun kitFound(p0: Int) {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+
+    override fun kitFound(kitId: Int) {
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT kitFound for kit: $kitId")
     }
 
-    override fun kitConfigReceived(p0: Int, p1: String?) {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+    override fun kitConfigReceived(kitId: Int, p1: String?) {
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT kitConfigReceived for kit: $kitId")
     }
 
-    override fun kitExcluded(p0: Int, p1: String?) {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+    override fun kitExcluded(kitId: Int, p1: String?) {
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT kitExcluded for kit $kitId")
     }
 
-    override fun kitStarted(p0: Int) {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+    override fun kitStarted(kitId: Int) {
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT kitStarted for kit: $kitId")
     }
 
-    override fun onKitApiCalled(p0: Int, p1: Boolean?, vararg p2: Any?) {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+    override fun onKitApiCalled(kitId: Int, p1: Boolean?, vararg p2: Any?) {
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT onKitApiCalled for kit: $kitId")
     }
 
-    override fun onKitApiCalled(p0: String?, p1: Int, p2: Boolean?, vararg p3: Any?) {
-        Log.d(CUSTOM_KIT, "CUSTOM_KIT event log with name ")
+    override fun onKitApiCalled(methodName: String?, kitId: Int, p2: Boolean?, vararg p3: Any?) {
+        Log.d(CUSTOM_KIT, "$CUSTOM_KIT onKitApiCalled for kit: $kitId with method name: ${methodName.orEmpty()}")
     }
 }
