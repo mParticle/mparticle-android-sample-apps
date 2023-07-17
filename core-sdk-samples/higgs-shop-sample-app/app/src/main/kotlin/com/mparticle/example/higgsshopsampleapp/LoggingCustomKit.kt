@@ -4,13 +4,12 @@ import android.content.Context
 import android.util.Log
 import com.mparticle.MPEvent
 import com.mparticle.internal.CoreCallbacks.KitListener
-import com.mparticle.kits.KitIntegration
 import com.mparticle.kits.KitIntegration.EventListener
 import com.mparticle.kits.MPSideloadedKit
 import com.mparticle.kits.ReportingMessage
 import java.lang.Exception
 
-class LoggingCustomKit : MPSideloadedKit(), KitListener, EventListener {
+class LoggingCustomKit(kitId: Int) : MPSideloadedKit(kitId), KitListener, EventListener {
 
     companion object {
         private const val CUSTOM_KIT = "LoggingCustomKit"
