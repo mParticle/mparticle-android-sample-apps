@@ -1,4 +1,4 @@
-package com.mparticle.example.higgsshopsampleapp
+package com.mparticle.example.higgsshopsampleapp.sideloading_kits
 
 import android.content.Context
 import android.util.Log
