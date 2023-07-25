@@ -66,7 +66,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation("com.google.android.material:material:1.7.0")
-    implementation("com.mparticle:android-core:5.48.0")
+    implementation("com.mparticle:android-core:5+")
+    implementation("com.mparticle:android-kit-base:5+")
     implementation("com.google.android.gms:play-services-ads-identifier:18.0.1")
 
     // implementation(platform("com.google.firebase:firebase-bom:31.0.2"))
