@@ -74,7 +74,7 @@ dependencies {
 
     // implementation("com.mparticle:android-media:1.4.2")
 
-    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.3")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
