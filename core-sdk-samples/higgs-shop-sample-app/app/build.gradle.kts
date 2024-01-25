@@ -113,7 +113,7 @@ dependencies {
     androidTestImplementation("androidx.test:rules:1.5.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
-    androidTestImplementation("androidx.test.ext:truth:1.4.0")
+    androidTestImplementation("androidx.test.ext:truth:1.5.0")
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("com.google.truth:truth:1.1.5")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
