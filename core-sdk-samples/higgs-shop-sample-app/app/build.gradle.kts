@@ -4,7 +4,7 @@ import java.util.TimeZone
 
 plugins {
     id("com.android.application")
-    id("org.jlleitschuh.gradle.ktlint") version "12.0.2"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
     // id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
