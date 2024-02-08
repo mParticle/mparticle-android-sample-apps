@@ -105,7 +105,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:$roomVersion")
     testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.1")
     androidTestImplementation("androidx.test:core:1.4.0")
     androidTestImplementation("androidx.test:core-ktx:1.4.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
