@@ -112,7 +112,7 @@ class CheckoutActivity : AppCompatActivity() {
         snackbar.setTextColor(getColor(R.color.black))
         snackbar.setActionTextColor(getColor(R.color.blue_4079FE))
         snackbar.view.setPadding(20, 10, 20, 0)
-        (snackbar.view.findViewById<TextView>(R.id.snackbar_text))?.textAlignment =
+        (snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text))?.textAlignment =
             View.TEXT_ALIGNMENT_TEXT_START
         val snackbarActionTextView =
             snackbar.view.findViewById<View>(com.google.android.material.R.id.snackbar_action) as TextView
