@@ -3,15 +3,23 @@ package com.mparticle.example.higgsshopsampleapp;
 import android.app.Application
 import com.mparticle.MParticle
 import com.mparticle.MParticleOptions
-import com.mparticle.networking.NetworkOptions
+import com.mparticle.example.higgsshopsampleapp.sideloading_kits.LoggingCustomKit
+import com.mparticle.example.higgsshopsampleapp.sideloading_kits.MinimalSideloadingKit
 
-class HiggsShopSampleApplication: Application() {
+class HiggsShopSampleApplication : Application() {
     val TAG = "HiggsShopSampleApplication"
     override fun onCreate() {
         super.onCreate()
         val options: MParticleOptions = MParticleOptions.builder(this)
-            .credentials(BuildConfig.HIGGS_SHOP_SAMPLE_APP_KEY, BuildConfig.HIGGS_SHOP_SAMPLE_APP_SECRET)
+            .credentials(
+                BuildConfig.HIGGS_SHOP_SAMPLE_APP_KEY,
+                BuildConfig.HIGGS_SHOP_SAMPLE_APP_SECRET
+            )
             .environment(MParticle.Environment.Development)
+            .sideloadedKits(listOf(
+                LoggingCustomKit(1000001), LoggingCustomKit(1000002),
+                MinimalSideloadingKit(5000000)
+            ))
             // Disable SSL pinning for debugging network requests
 //            .networkOptions(
 //                NetworkOptions.builder()
