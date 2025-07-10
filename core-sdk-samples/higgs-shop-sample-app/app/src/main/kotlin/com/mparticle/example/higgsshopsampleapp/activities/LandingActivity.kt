@@ -77,7 +77,7 @@ class LandingActivity : AppCompatActivity() {
         )
         val layoutParams = ActionBar.LayoutParams(snackbar.view.layoutParams)
 
-        val tv = (snackbar.view.findViewById<TextView>(R.id.snackbar_text))
+        val tv = (snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text))
         tv?.maxLines = 5
         tv?.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
 

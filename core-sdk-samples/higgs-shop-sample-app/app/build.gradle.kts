@@ -11,11 +11,12 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    namespace = "com.mparticle.example.higgsshopsampleapp"
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.mparticle.example.higgsshopsampleapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = buildVersionCode()
         versionName = "0.14.1-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -24,11 +25,12 @@ android {
         buildConfigField("String", "HIGGS_SHOP_FCM_SENDER_ID", "\"${System.getenv("HIGGS_SHOP_FCM_SENDER_ID")}\"")
     }
     buildFeatures {
+        buildConfig = true
         dataBinding = true
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     kotlinOptions {
         jvmTarget = "11"
@@ -46,16 +48,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    namespace = "com.mparticle.example.higgsshopsampleapp"
 }
 
 dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("androidx.compose.runtime:runtime:1.3.0")
-    implementation("androidx.compose.ui:ui:1.3.0")
-    implementation("androidx.compose.material:material:1.3.0")
-    implementation("androidx.compose.ui:ui-tooling:1.3.0")
-    implementation("androidx.compose.runtime:runtime-livedata:1.3.0")
+    implementation("androidx.compose.runtime:runtime:1.5.4")
+    implementation("androidx.compose.ui:ui:1.5.4")
+    implementation("androidx.compose.material:material:1.5.4")
+    implementation("androidx.compose.ui:ui-tooling:1.5.4")
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.fragment:fragment:1.5.4")
@@ -77,9 +78,9 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:4.14.2")
 
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.3")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -91,9 +92,9 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.4")
 
-    val roomVersion = "2.4.3"
+    val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
     // annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
