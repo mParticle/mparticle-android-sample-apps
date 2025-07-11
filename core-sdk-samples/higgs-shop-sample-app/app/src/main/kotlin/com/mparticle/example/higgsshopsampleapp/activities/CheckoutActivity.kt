@@ -40,6 +40,8 @@ import com.mparticle.example.higgsshopsampleapp.databinding.ActivityCheckoutBind
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import com.mparticle.example.higgsshopsampleapp.viewmodels.CheckoutViewModel
+import com.mparticle.rokt.RoktConfig
+import java.lang.ref.WeakReference
 import java.math.BigDecimal
 import java.util.*
 
@@ -89,6 +91,7 @@ class CheckoutActivity : AppCompatActivity() {
         checkoutViewModel.checkOutLiveData.observe(this) { checkedOut ->
             if (checkedOut) {
                 showPurchaseAlert()
+                showRoktPlacement()
             }
         }
 
@@ -98,6 +101,21 @@ class CheckoutActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
+    }
+
+    private fun showRoktPlacement() {
+        val attributes = mapOf(
+            "email" to "j.smith@example.com",
+            "firstname" to "Jenny",
+            "lastname" to "Smith",
+            "billingzipcode" to "90210",
+            "confirmationref" to "54321",
+        )
+
+        MParticle.getInstance()?.Rokt()?.selectPlacements(
+            identifier = "MSDKOverlayLayout",
+            attributes = attributes,
+        )
     }
 
     fun showPurchaseAlert() {
