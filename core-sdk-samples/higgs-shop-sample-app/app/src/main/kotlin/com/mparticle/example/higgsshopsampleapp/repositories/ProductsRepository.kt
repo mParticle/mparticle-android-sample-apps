@@ -22,9 +22,11 @@ class ProductsRepository()  {
 
     fun getProducts(context: Context) : List<Product> {
         val jsonFileString = getJsonDataFromAsset(context, "products.json")
-        Log.i(TAG, jsonFileString ?: "Could not find local products.json")
+        if (jsonFileString.isNullOrBlank()) {
+            Log.e(TAG, "Could not find local products.json")
+        }
         val listProductType = object : TypeToken<Products>() {}.type
-        var products: Products = Gson().fromJson(jsonFileString, listProductType)
+        val products: Products = Gson().fromJson(jsonFileString, listProductType)
         return products.products
     }
 
