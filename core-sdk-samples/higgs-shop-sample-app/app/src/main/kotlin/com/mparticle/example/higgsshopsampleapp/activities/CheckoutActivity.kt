@@ -31,7 +31,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.mparticle.MParticle
-import com.mparticle.RoktEvent
 import com.mparticle.RoktEvent.PlacementReady
 import com.mparticle.commerce.CommerceEvent
 import com.mparticle.commerce.Product
@@ -43,9 +42,7 @@ import com.mparticle.example.higgsshopsampleapp.databinding.ActivityCheckoutBind
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import com.mparticle.example.higgsshopsampleapp.viewmodels.CheckoutViewModel
-import com.rokt.roktsdk.Rokt
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import java.util.*
@@ -109,7 +106,20 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun showRoktPlacement() {
-        val identifer = "MSDKOverlayLayout"
+        val identifier = "MSDKOverlayLayout"
+
+        lifecycleScope.launch {
+            MParticle.getInstance()?.Rokt()?.events(identifier)?.collect {
+                Log.v(TAG, "Rokt event: $it")
+                when (it) {
+                    is PlacementReady -> {
+                        delay(5000)
+                        MParticle.getInstance()?.Rokt()?.close()
+                    }
+                    else -> {}
+                }
+            }
+        }
 
         val attributes = mapOf(
             "email" to "j.smith@example.com",
@@ -120,13 +130,9 @@ class CheckoutActivity : AppCompatActivity() {
         )
 
         MParticle.getInstance()?.Rokt()?.selectPlacements(
-            identifier = identifer,
+            identifier = identifier,
             attributes = attributes,
         )
-        lifecycleScope.launch {
-            delay(5000)
-            MParticle.getInstance()?.Rokt()?.close()
-        }
     }
 
     private fun showPurchaseAlert() {
