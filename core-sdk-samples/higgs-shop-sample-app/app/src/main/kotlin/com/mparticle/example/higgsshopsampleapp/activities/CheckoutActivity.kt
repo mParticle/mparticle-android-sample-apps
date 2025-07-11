@@ -27,9 +27,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.mparticle.MParticle
+import com.mparticle.RoktEvent
+import com.mparticle.RoktEvent.PlacementReady
 import com.mparticle.commerce.CommerceEvent
 import com.mparticle.commerce.Product
 import com.mparticle.commerce.TransactionAttributes
@@ -40,8 +43,10 @@ import com.mparticle.example.higgsshopsampleapp.databinding.ActivityCheckoutBind
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import com.mparticle.example.higgsshopsampleapp.viewmodels.CheckoutViewModel
-import com.mparticle.rokt.RoktConfig
-import java.lang.ref.WeakReference
+import com.rokt.roktsdk.Rokt
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import java.util.*
 
@@ -104,6 +109,8 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun showRoktPlacement() {
+        val identifer = "MSDKOverlayLayout"
+
         val attributes = mapOf(
             "email" to "j.smith@example.com",
             "firstname" to "Jenny",
@@ -113,12 +120,16 @@ class CheckoutActivity : AppCompatActivity() {
         )
 
         MParticle.getInstance()?.Rokt()?.selectPlacements(
-            identifier = "MSDKOverlayLayout",
+            identifier = identifer,
             attributes = attributes,
         )
+        lifecycleScope.launch {
+            delay(5000)
+            MParticle.getInstance()?.Rokt()?.close()
+        }
     }
 
-    fun showPurchaseAlert() {
+    private fun showPurchaseAlert() {
         val snackbar = Snackbar.make(
             binding.root,
             getString(R.string.checkout_thanks),
