@@ -35,7 +35,7 @@ jobs:
   instrumented-tests:
     name: "Instrumented Tests"
     timeout-minutes: 30
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
@@ -48,11 +48,18 @@ jobs:
           distribution: "zulu"
           java-version: 17
           cache: "gradle"
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
       - name: "Run Instrumented Tests"
-        uses: reactivecircus/android-emulator-runner@v2.27.0
+        uses: reactivecircus/android-emulator-runner@v2
         with:
           working-directory: ${{ inputs.app_relative_path }}
           api-level: 29
+          arch: x86_64
+          profile: Nexus 6
           script: ./gradlew connectedCheck
       - name: "Archive Instrumented Tests Results"
         uses: actions/upload-artifact@v4
@@ -90,7 +97,7 @@ jobs:
   lint-checks:
     name: "Lint Checks"
     timeout-minutes: 15
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
@@ -116,7 +123,7 @@ jobs:
   kotlin-lint-checks:
     name: "Kotlin Lint Checks"
     timeout-minutes: 15
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
