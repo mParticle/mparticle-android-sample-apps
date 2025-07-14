@@ -16,7 +16,7 @@ jobs:
 
   higgs-shop-sample-app:
     name: "Check Higgs Shop Sample App"
-    uses: mParticle/mparticle-android-sample-apps/.github/workflows/pull-request-app-checks.yml
+    uses: ./.github/workflows/pull-request-app-checks.yml
     with:
       app_relative_path: "core-sdk-samples/higgs-shop-sample-app"
 
