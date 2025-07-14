@@ -3,11 +3,11 @@ import java.util.Date
 import java.util.TimeZone
 
 plugins {
-    id("com.android.application")
-    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.ktlint)
     // id("com.google.gms.google-services")
-    kotlin("android")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
