@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: gradle
-    directory: "/core-sdk-samples/higgs-shop-sample-app/"
+    directory: "/"
     schedule:
       interval: daily
       time: "08:00"
@@ -9,5 +9,14 @@ updates:
     target-branch: "chore/dependabot"
     labels: ['dependabot']
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore"
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 4
+    labels:
+      - dependabot
     commit-message:
       prefix: "chore"

@@ -3,19 +3,20 @@ import java.util.Date
 import java.util.TimeZone
 
 plugins {
-    id("com.android.application")
-    id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.ktlint)
     // id("com.google.gms.google-services")
-    kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    compileSdk = 33
+    namespace = "com.mparticle.example.higgsshopsampleapp"
+    compileSdk = 34
     defaultConfig {
         applicationId = "com.mparticle.example.higgsshopsampleapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = buildVersionCode()
         versionName = "0.14.1-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -24,104 +25,115 @@ android {
         buildConfigField("String", "HIGGS_SHOP_FCM_SENDER_ID", "\"${System.getenv("HIGGS_SHOP_FCM_SENDER_ID")}\"")
     }
     buildFeatures {
+        buildConfig = true
+        viewBinding = true
         dataBinding = true
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
-        getByName("debug") {
+        debug {
             isMinifyEnabled = false
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    namespace = "com.mparticle.example.higgsshopsampleapp"
+    lint {
+        baseline = file("lint-baseline.xml")
+        disable += "MParticleVersionInconsistency"
+    }
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("androidx.compose.runtime:runtime:1.3.0")
-    implementation("androidx.compose.ui:ui:1.3.0")
-    implementation("androidx.compose.material:material:1.3.0")
-    implementation("androidx.compose.ui:ui-tooling:1.3.0")
-    implementation("androidx.compose.runtime:runtime-livedata:1.3.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.fragment:fragment:1.5.4")
-    implementation("androidx.fragment:fragment-ktx:1.5.4")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("com.google.android.material:material:1.7.0")
-    implementation("com.mparticle:android-core:5.48.0")
-    implementation("com.google.android.gms:play-services-ads-identifier:18.0.1")
+    // AndroidX BOM
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.runtime.runtime)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material.material)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.runtime.livedata)
 
-    // implementation(platform("com.google.firebase:firebase-bom:31.0.2"))
-    // implementation("com.google.firebase:firebase-analytics-ktx")
+    // Core AndroidX dependencies
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.recyclerview)
 
-    // implementation("com.mparticle:android-media:1.4.2")
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
-    implementation("com.github.bumptech.glide:glide:4.14.2")
+    // Navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
 
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
-    implementation("io.reactivex.rxjava2:rxjava:2.2.21")
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    // Coroutines
+    implementation(platform(libs.kotlinx.coroutines.bom))
+    implementation(libs.org.jetbrains.kotlinx.coroutines.android)
+    implementation(libs.org.jetbrains.kotlinx.coroutines.core)
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0")
+    // OkHttp
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.squareup.logging.interceptor)
 
-    val roomVersion = "2.4.3"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    // annotationProcessor("androidx.room:room-compiler:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    // ksp("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    implementation("androidx.room:room-rxjava2:$roomVersion")
-    // implementation("androidx.room:room-rxjava3:$roomVersion")
-    // implementation("androidx.room:room-guava:$roomVersion")
-    // implementation("androidx.room:room-paging:2.4.1")
-    testImplementation("androidx.room:room-testing:$roomVersion")
-    testImplementation("junit:junit:4.13.2")
+    // Retrofit
+    implementation(libs.com.squareup.retrofit)
+    implementation(libs.com.squareup.retrofit.converter.gson)
 
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.0")
-    androidTestImplementation("androidx.test:core:1.4.0")
-    androidTestImplementation("androidx.test:core-ktx:1.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.4.0")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.3")
-    androidTestImplementation("androidx.test.ext:truth:1.4.0")
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("com.google.truth:truth:1.1.3")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
-    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
-    androidTestImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    // mParticle
+    implementation("com.mparticle:android-core:5+")
+    implementation("com.mparticle:android-kit-base:5+")
+    implementation("com.mparticle:android-rokt-kit:5+")
 
-    androidTestUtil("androidx.test:orchestrator:1.4.1")
+    // Google Services
+    implementation(libs.play.services.ads.identifier)
+
+    // Other dependencies
+    implementation(libs.material)
+    implementation(libs.gson)
+    implementation(libs.glide)
+    ksp(libs.compiler.glide)
+
+    // Testing dependencies
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.junit.ktx)
+    androidTestImplementation(libs.androidx.espresso.core)
+
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.androidx.core)
+    androidTestImplementation(libs.core.ktx)
+    androidTestImplementation(libs.androidx.espresso.intents)
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.truth)
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.androidx.core.testing)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.mockito.kotlin)
 }
 
 fun buildVersionCode(): Int {

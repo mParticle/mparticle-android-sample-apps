@@ -76,7 +76,7 @@ class AccountFragment : Fragment() {
         val snackbar = Snackbar.make(parentLayout, message, Snackbar.LENGTH_SHORT)
         val layoutParams = ActionBar.LayoutParams(snackbar.view.layoutParams)
 
-        val tv = (snackbar.view.findViewById<TextView>(R.id.snackbar_text))
+        val tv = (snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text))
         tv?.textAlignment = View.TEXT_ALIGNMENT_CENTER
 
         snackbar.setBackgroundTint(requireContext().getColor(R.color.white))

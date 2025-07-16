@@ -2,11 +2,21 @@ name: "Build and Test"
 
 on: [ push, workflow_dispatch, pull_request ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: write
+  id-token: write
+
 jobs:
 
   higgs-shop-sample-app:
     name: "Check Higgs Shop Sample App"
-    uses: mParticle/mparticle-android-sample-apps/.github/workflows/pull-request-app-checks.yml@main
+    uses: ./.github/workflows/pull-request-app-checks.yml
     with:
       app_relative_path: "core-sdk-samples/higgs-shop-sample-app"
 
@@ -14,3 +24,14 @@ jobs:
     name: "Save PR Number for Dependabot Automerge"
     needs: [ higgs-shop-sample-app ]
     uses: mParticle/mparticle-workflows/.github/workflows/dependabot-save-pr-number.yml@main
+
+  pr-notify:
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false
+    needs:
+      - higgs-shop-sample-app
+    name: Notify GChat
+    uses: ROKT/rokt-workflows/.github/workflows/oss_pr_opened_notification.yml@main
+    secrets:
+      gchat_webhook: ${{ secrets.GCHAT_PRS_WEBHOOK }}

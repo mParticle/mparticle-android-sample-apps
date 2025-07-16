@@ -119,7 +119,7 @@ class ProductDetailActivity : AppCompatActivity() {
         snackbar.setBackgroundTint(getColor(R.color.white))
         snackbar.setTextColor(getColor(R.color.black))
         snackbar.view.setPadding(20, 10, 20, 0)
-        (snackbar.view.findViewById<TextView>(R.id.snackbar_text))?.textAlignment =
+        (snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text))?.textAlignment =
             View.TEXT_ALIGNMENT_TEXT_START
         snackbar.setActionTextColor(getColor(R.color.blue_4079FE))
         val snackbarActionTextView =

@@ -15,7 +15,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.mparticle.example.higgsshopsampleapp.R
 
 
-const val DEFAULT_PRODUCT_IMAGE = R.drawable.product_image_placeholder
+var DEFAULT_PRODUCT_IMAGE = R.drawable.product_image_placeholder
 
 @SuppressLint("UnrememberedMutableState")
 @Composable

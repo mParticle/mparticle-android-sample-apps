@@ -7,16 +7,16 @@ import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.C
 interface CartDao {
 
     @Query("SELECT * FROM CartItems ORDER BY sku desc")
-    fun getAllCartItems(): List<CartItemEntity>
+    suspend fun getAllCartItems(): List<CartItemEntity>
 
     @Query("SELECT * FROM CartItems WHERE sku=:sku ORDER BY sku desc")
-    fun getCartItemByKey(sku: String): CartItemEntity?
+    suspend fun getCartItemByKey(sku: String): CartItemEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addToCart(CartItemEntity: CartItemEntity): Long
+    suspend fun addToCart(cartItem: CartItemEntity): Long
 
     @Delete
-    suspend fun removeFromCart(CartItemEntity: CartItemEntity): Int
+    suspend fun removeFromCart(cartItem: CartItemEntity): Int
 
     @Query("DELETE FROM CartItems")
     suspend fun clearCart(): Int

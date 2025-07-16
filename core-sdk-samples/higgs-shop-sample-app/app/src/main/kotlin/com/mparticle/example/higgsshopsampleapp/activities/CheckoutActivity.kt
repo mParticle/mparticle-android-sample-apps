@@ -27,9 +27,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.mparticle.MParticle
+import com.mparticle.RoktEvent.PlacementReady
 import com.mparticle.commerce.CommerceEvent
 import com.mparticle.commerce.Product
 import com.mparticle.commerce.TransactionAttributes
@@ -40,6 +42,8 @@ import com.mparticle.example.higgsshopsampleapp.databinding.ActivityCheckoutBind
 import com.mparticle.example.higgsshopsampleapp.repositories.database.entities.CartItemEntity
 import com.mparticle.example.higgsshopsampleapp.utils.Constants
 import com.mparticle.example.higgsshopsampleapp.viewmodels.CheckoutViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import java.util.*
 
@@ -89,6 +93,7 @@ class CheckoutActivity : AppCompatActivity() {
         checkoutViewModel.checkOutLiveData.observe(this) { checkedOut ->
             if (checkedOut) {
                 showPurchaseAlert()
+                showRoktPlacement()
             }
         }
 
@@ -100,7 +105,37 @@ class CheckoutActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    fun showPurchaseAlert() {
+    private fun showRoktPlacement() {
+        val identifier = "MSDKOverlayLayout"
+
+        lifecycleScope.launch {
+            MParticle.getInstance()?.Rokt()?.events(identifier)?.collect {
+                Log.v(TAG, "Rokt event: $it")
+                when (it) {
+                    is PlacementReady -> {
+                        delay(5000)
+                        MParticle.getInstance()?.Rokt()?.close()
+                    }
+                    else -> {}
+                }
+            }
+        }
+
+        val attributes = mapOf(
+            "email" to "j.smith@example.com",
+            "firstname" to "Jenny",
+            "lastname" to "Smith",
+            "billingzipcode" to "90210",
+            "confirmationref" to "54321",
+        )
+
+        MParticle.getInstance()?.Rokt()?.selectPlacements(
+            identifier = identifier,
+            attributes = attributes,
+        )
+    }
+
+    private fun showPurchaseAlert() {
         val snackbar = Snackbar.make(
             binding.root,
             getString(R.string.checkout_thanks),
@@ -112,7 +147,7 @@ class CheckoutActivity : AppCompatActivity() {
         snackbar.setTextColor(getColor(R.color.black))
         snackbar.setActionTextColor(getColor(R.color.blue_4079FE))
         snackbar.view.setPadding(20, 10, 20, 0)
-        (snackbar.view.findViewById<TextView>(R.id.snackbar_text))?.textAlignment =
+        (snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text))?.textAlignment =
             View.TEXT_ALIGNMENT_TEXT_START
         val snackbarActionTextView =
             snackbar.view.findViewById<View>(com.google.android.material.R.id.snackbar_action) as TextView
