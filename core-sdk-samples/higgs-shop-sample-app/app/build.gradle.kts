@@ -12,11 +12,11 @@ plugins {
 
 android {
     namespace = "com.mparticle.example.higgsshopsampleapp"
-    compileSdk = 34
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.mparticle.example.higgsshopsampleapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = buildVersionCode()
         versionName = "0.14.1-SNAPSHOT"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -49,6 +49,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -59,6 +60,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
     // AndroidX BOM
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.runtime.runtime)
