@@ -52,9 +52,9 @@ android {
 dependencies {
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("androidx.compose.runtime:runtime:1.3.0")
-    implementation("androidx.compose.ui:ui:1.3.0")
+    implementation("androidx.compose.ui:ui:1.9.5")
     implementation("androidx.compose.material:material:1.3.0")
-    implementation("androidx.compose.ui:ui-tooling:1.3.0")
+    implementation("androidx.compose.ui:ui-tooling:1.9.5")
     implementation("androidx.compose.runtime:runtime-livedata:1.3.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.core:core-ktx:1.9.0")
@@ -90,7 +90,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.9.5")
 
     val roomVersion = "2.4.3"
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -105,7 +105,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:$roomVersion")
     testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.3.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.9.5")
     androidTestImplementation("androidx.test:core:1.4.0")
     androidTestImplementation("androidx.test:core-ktx:1.4.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
