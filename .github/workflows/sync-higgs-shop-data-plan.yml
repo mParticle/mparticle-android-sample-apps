@@ -46,7 +46,7 @@ jobs:
             git_commit_gpgsign: true
 
         - name: Create Commit if Data Plan Changed
-          uses: stefanzweifel/git-auto-commit-action@v4
+          uses: stefanzweifel/git-auto-commit-action@v7
           with:
             commit_message: "chore: update Higgs Shop Data Plan"
             branch: chore/data-plan-update-${{ github.run_number }}
