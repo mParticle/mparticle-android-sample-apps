@@ -62,7 +62,7 @@ jobs:
           profile: Nexus 6
           script: ./gradlew connectedCheck
       - name: "Archive Instrumented Tests Results"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: ${{ always() }}
         with:
           name: "instrumented-tests-results"
@@ -88,7 +88,7 @@ jobs:
         working-directory: ${{ inputs.app_relative_path }}
         run: ./gradlew test
       - name: "Android Unit Tests Report"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: ${{ always() }}
         with:
           name: "unit-tests-results"
@@ -114,7 +114,7 @@ jobs:
         working-directory: ${{ inputs.app_relative_path }}
         run: ./gradlew lint
       - name: "Archive Lint Test Results"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: ${{ always() }}
         with:
           name: "lint-results"
@@ -140,7 +140,7 @@ jobs:
         working-directory: ${{ inputs.app_relative_path }}
         run: ./gradlew ktlintCheck
       - name: "Archive Lint Test Results"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: ${{ always() }}
         with:
           name: "kotlin-lint-results"
