@@ -20,4 +20,9 @@
         android:name="com.mparticle.example.higgsshopsampleapp.fragments.CartFragment"
         android:label="@string/nav_cart"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/navigation_webview_bridge"
+        android:name="com.mparticle.example.higgsshopsampleapp.fragments.WebViewBridgeFragment"
+        android:label="@string/nav_webview_bridge"
+        tools:layout="@layout/fragment_webview_bridge" />
 </navigation>

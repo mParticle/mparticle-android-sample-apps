@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>mParticle WebView Bridge Test</title>
+    <style>
+      body { font-family: sans-serif; background: #111; color: #fff; padding: 16px; }
+      button { padding: 12px 14px; margin-right: 10px; border-radius: 10px; border: 0; background: #4079fe; color: #fff; font-weight: 600; }
+      .muted { opacity: 0.7; }
+    </style>
+    <script type="text/javascript">
+      // WebView-only snippet (NO API KEY) + required bridge name.
+      const mySdkConfig = {
+        requiredWebviewBridgeName: "higgsWebviewBridge",
+        isDevelopmentMode: true
+      };
+      window.mParticle = { config: mySdkConfig };
+
+      (function () {
+        window.mParticle = window.mParticle || {
+          EventType: { Unknown: 0, Navigation: 1, Location: 2, Search: 3, Transaction: 4, UserContent: 5, UserPreference: 6, Social: 7, Other: 8 }
+        };
+        window.mParticle.eCommerce = { Cart: {} };
+        window.mParticle.Identity = {};
+        window.mParticle.config = window.mParticle.config || {};
+        window.mParticle.config.rq = [];
+        window.mParticle.ready = function (t) { window.mParticle.config.rq.push(t); };
+        function e(e, o) {
+          return function () {
+            if (o) { e = o + "." + e; }
+            var t = Array.prototype.slice.call(arguments);
+            t.unshift(e);
+            window.mParticle.config.rq.push(t);
+          };
+        }
+        var o = ["endSession", "logError", "logEvent", "logForm", "logLink", "logPageView", "setSessionAttribute", "setAppName", "setAppVersion", "setOptOut", "setPosition", "startNewSession", "startTrackingLocation", "stopTrackingLocation"];
+        var n = ["setCurrencyCode", "logCheckout"];
+        var i = ["identify", "login", "logout", "modify"];
+        o.forEach(function (t) { window.mParticle[t] = e(t); });
+        n.forEach(function (t) { window.mParticle.eCommerce[t] = e(t, "eCommerce"); });
+        i.forEach(function (t) { window.mParticle.Identity[t] = e(t, "Identity"); });
+        var r = document.createElement("script");
+        r.type = "text/javascript";
+        r.async = true;
+        r.src = "https://jssdkcdns.mparticle.com/js/v2/mparticle.js";
+        var c = document.getElementsByTagName("script")[0];
+        c.parentNode.insertBefore(r, c);
+      })();
+    </script>
+  </head>
+  <body>
+    <h2>mParticle WebView Bridge</h2>
+    <p class="muted">
+      This page is loaded from <code>file:///android_asset</code> and uses the Web SDK in bridged mode.
+      Click the button to log a JS event that should be forwarded through the Android SDK.
+    </p>
+
+    <button id="btnEvent">Log JS Event</button>
+    <button id="btnPage">Log Page View</button>
+
+    <hr style="border:0;border-top:1px solid rgba(255,255,255,0.15);margin:18px 0;" />
+
+    <h3 style="margin:0 0 10px 0;">Identity Alias (JS → Native)</h3>
+    <p class="muted" style="margin-top:0;">
+      This calls <code>mParticle.Identity.aliasUsers</code>. In WebView bridge mode this is queued as a JS request and
+      forwarded to the Android SDK. We auto-populate a valid aliasRequest from the native SDK (MPIDs + time window),
+      similar to the docs reference.
+    </p>
+
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:520px;">
+      <div class="muted" id="aliasInfo">Waiting for native MPIDs…</div>
+      <div>
+        <button id="btnAlias" disabled style="opacity:0.6;">Send Alias Users</button>
+      </div>
+    </div>
+
+    <script>
+      function log(msg) {
+        // Keep logs out of the UI; use console instead.
+        console.log((new Date().toISOString()) + "  " + msg);
+      }
+
+      document.getElementById("btnEvent").addEventListener("click", function () {
+        if (!window.mParticle) return log("mParticle not available");
+        window.mParticle.logEvent(
+          "WebView JS Button Click",
+          window.mParticle.EventType.Other,
+          { source: "webview", bridgeName: "higgsWebviewBridge" }
+        );
+        log("Called mParticle.logEvent('WebView JS Button Click')");
+      });
+
+      document.getElementById("btnPage").addEventListener("click", function () {
+        if (!window.mParticle) return log("mParticle not available");
+        window.mParticle.logPageView("WebView Bridge Test", { source: "webview" });
+        log("Called mParticle.logPageView('WebView Bridge Test')");
+      });
+
+      window.__mp = window.__mp || {};
+      window.__mp.aliasRequest = window.__mp.aliasRequest || null;
+
+      // Called by native via evaluateJavascript after page load
+      window.setNativeAliasRequest = function (aliasRequest) {
+        window.__mp.aliasRequest = aliasRequest || null;
+        const info = document.getElementById("aliasInfo");
+        const btn = document.getElementById("btnAlias");
+        if (!window.__mp.aliasRequest) {
+          info.textContent = "Missing aliasRequest from native SDK";
+          btn.disabled = true;
+          btn.style.opacity = "0.6";
+          return;
+        }
+        const ar = window.__mp.aliasRequest;
+        const valid = !!ar.sourceMpid && !!ar.destinationMpid && String(ar.sourceMpid) !== String(ar.destinationMpid);
+        info.textContent =
+          `Using sourceMpid=${ar.sourceMpid} → destinationMpid=${ar.destinationMpid} ` +
+          `(scope=${ar.scope || "device"})`;
+        btn.disabled = !valid;
+        btn.style.opacity = valid ? "1" : "0.6";
+        if (!valid) {
+          info.textContent = "Invalid MPIDs from native SDK (need 2 unique users)";
+        }
+      };
+
+      // If native injected a pending request before this function was defined, apply it now.
+      if (window.__mp && window.__mp._pendingAliasRequest) {
+        window.setNativeAliasRequest(window.__mp._pendingAliasRequest);
+      }
+
+      // Log screen view from JS (not native) when page loads
+      window.mParticle.ready(function() {
+        if (window.mParticle && typeof window.mParticle.logScreen === "function") {
+          window.mParticle.logScreen("WebView Bridge");
+          log("Called mParticle.logScreen('WebView Bridge') from JS");
+        }
+      });
+
+      document.getElementById("btnAlias").addEventListener("click", function () {
+        // Send alias request from WebView (JS) per Web SDK docs:
+        // https://docs.mparticle.com/developers/client-sdks/web/idsync/#user-aliasing
+        if (!window.mParticle || !window.mParticle.Identity) return log("mParticle.Identity not available");
+        if (typeof window.mParticle.Identity.aliasUsers !== "function") return log("mParticle.Identity.aliasUsers not available yet");
+        if (!window.__mp.aliasRequest) return log("Alias blocked: missing aliasRequest (native injection not ready)");
+
+        const sourceMpidStr = String(window.__mp.aliasRequest.sourceMpid || "").trim();
+        const destinationMpidStr = String(window.__mp.aliasRequest.destinationMpid || "").trim();
+        
+        if (!sourceMpidStr || !destinationMpidStr) {
+          return log("Alias blocked: missing MPIDs");
+        }
+        if (sourceMpidStr === destinationMpidStr) {
+          return log("Alias blocked: sourceMpid and destinationMpid must be unique");
+        }
+
+        // Parse MPIDs as numbers for the bridge (may lose precision for very large MPIDs,
+        // but the bridge might require numeric values to convert to native long).
+        const sourceMpidNum = Number(sourceMpidStr);
+        const destinationMpidNum = Number(destinationMpidStr);
+        
+        if (!Number.isFinite(sourceMpidNum) || !Number.isFinite(destinationMpidNum)) {
+          return log(`Alias blocked: MPIDs not numeric (source=${sourceMpidStr}, dest=${destinationMpidStr})`);
+        }
+        if (sourceMpidNum <= 0 || destinationMpidNum <= 0) {
+          return log(`Alias blocked: MPIDs must be positive (source=${sourceMpidNum}, dest=${destinationMpidNum})`);
+        }
+
+        const now = Date.now();
+        // Per Web SDK docs format: MPIDs as numbers, times as numbers (ms since epoch)
+        const aliasRequest = {
+          sourceMpid: sourceMpidNum,
+          destinationMpid: destinationMpidNum,
+          startTime: now - (30 * 60 * 1000), // last 30 minutes
+          endTime: now,
+          scope: "device"
+        };
+
+        log(`Sending aliasRequest: sourceMpid=${sourceMpidNum} (from "${sourceMpidStr}"), destinationMpid=${destinationMpidNum} (from "${destinationMpidStr}")`);
+
+        window.mParticle.Identity.aliasUsers(aliasRequest, function (code, body) {
+          log(`aliasUsers callback: code=${code} body=${JSON.stringify(body)}`);
+        });
+        log(`Called mParticle.Identity.aliasUsers(${JSON.stringify(aliasRequest)})`);
+      });
+
+      log("Loaded. Waiting for user action…");
+    </script>
+  </body>
+</html>
