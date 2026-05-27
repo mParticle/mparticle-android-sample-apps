@@ -104,10 +104,11 @@ dependencies {
     implementation(libs.com.squareup.retrofit)
     implementation(libs.com.squareup.retrofit.converter.gson)
 
-    // mParticle
-    implementation("com.mparticle:android-core:5+")
-    implementation("com.mparticle:android-kit-base:5+")
-    implementation("com.mparticle:android-rokt-kit:5+")
+    // mParticle — bounded upper bound prevents resolving to 6.0.0-rc.1+ on
+    // Maven Central, which removed deprecated symbols. See mparticle-android-sdk#710.
+    implementation("com.mparticle:android-core:[5.0,6.0)")
+    implementation("com.mparticle:android-kit-base:[5.0,6.0)")
+    implementation("com.mparticle:android-rokt-kit:[5.0,6.0)")
 
     // Google Services
     implementation(libs.play.services.ads.identifier)
