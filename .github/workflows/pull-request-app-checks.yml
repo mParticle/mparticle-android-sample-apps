@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Sample Apps"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
       #      - name: "Create Path Triggers"
@@ -39,7 +39,7 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
       - name: "Install JDK"
@@ -75,7 +75,7 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
       - name: "Install JDK"
@@ -101,7 +101,7 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
       - name: Install JDK
@@ -127,7 +127,7 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
       - name: Install JDK
