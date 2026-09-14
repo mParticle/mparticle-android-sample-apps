@@ -57,7 +57,7 @@ jobs:
             file_pattern: core-sdk-samples/higgs-shop-sample-app/dataplans/*
 
         - name: Open Pull Request
-          uses: vsoch/pull-request-action@1.0.19
+          uses: vsoch/pull-request-action@1.1.1
           env:
             GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
             PULL_REQUEST_BRANCH: development
