@@ -3,16 +3,20 @@ name: "Reusable Workflows"
 on:
   pull_request:
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   pr-check-hadcoded-secrets:
     name: "Check PR for hardcoded secrets"
-    uses: mParticle/mparticle-workflows/.github/workflows/security-hardcoded-secrets.yml@main
+    uses: mParticle/mparticle-workflows/.github/workflows/security-hardcoded-secrets.yml@a78c8b34f5811be7c046a27cae900a844094f1cf # zizmor: ignore[ref-version-mismatch]
   pr-branch-check-name:
     name: "Check PR for semantic branch name"
-    uses: mParticle/mparticle-workflows/.github/workflows/pr-branch-check-name.yml@main
+    uses: mParticle/mparticle-workflows/.github/workflows/pr-branch-check-name.yml@a78c8b34f5811be7c046a27cae900a844094f1cf # zizmor: ignore[ref-version-mismatch]
   pr-title-check:
     name: "Check PR for semantic title"
-    uses: mParticle/mparticle-workflows/.github/workflows/pr-title-check.yml@main
+    uses: mParticle/mparticle-workflows/.github/workflows/pr-title-check.yml@a78c8b34f5811be7c046a27cae900a844094f1cf # zizmor: ignore[ref-version-mismatch]
   pr-branch-target-gitflow:
     name: "Check PR for semantic target branch"
-    uses: mParticle/mparticle-workflows/.github/workflows/pr-branch-target-gitflow.yml@main
+    uses: mParticle/mparticle-workflows/.github/workflows/pr-branch-target-gitflow.yml@a78c8b34f5811be7c046a27cae900a844094f1cf # zizmor: ignore[ref-version-mismatch]

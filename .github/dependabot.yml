@@ -11,6 +11,8 @@ updates:
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore"
+    cooldown:
+      default-days: 7
   - package-ecosystem: github-actions
     directory: /
     schedule:
@@ -20,3 +22,5 @@ updates:
       - dependabot
     commit-message:
       prefix: "chore"
+    cooldown:
+      default-days: 7

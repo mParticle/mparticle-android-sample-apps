@@ -9,21 +9,13 @@ concurrency:
 permissions:
   contents: read
   pull-requests: read
-  checks: write
-  id-token: write
 
 jobs:
-
   higgs-shop-sample-app:
     name: "Check Higgs Shop Sample App"
-    uses: ./.github/workflows/pull-request-app-checks.yml
+    uses: ./.github/workflows/pull-request-app-checks.yml # zizmor: ignore[self-repository]
     with:
       app_relative_path: "core-sdk-samples/higgs-shop-sample-app"
-
-  automerge-dependabot:
-    name: "Save PR Number for Dependabot Automerge"
-    needs: [ higgs-shop-sample-app ]
-    uses: mParticle/mparticle-workflows/.github/workflows/dependabot-save-pr-number.yml@main
 
   pr-notify:
     if: >
@@ -32,6 +24,9 @@ jobs:
     needs:
       - higgs-shop-sample-app
     name: Notify GChat
-    uses: ROKT/rokt-workflows/.github/workflows/oss_pr_opened_notification.yml@main
+    permissions:
+      contents: read
+      id-token: write
+    uses: ROKT/rokt-workflows/.github/workflows/oss_pr_opened_notification.yml@da0c5fd5d38e9cf113a24ec9aaea079cc7d0bc40 # zizmor: ignore[ref-version-mismatch]
     secrets:
       gchat_webhook: ${{ secrets.GCHAT_PRS_WEBHOOK }}

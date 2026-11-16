@@ -1,7 +1,6 @@
 name: "Android Sample App Checks"
 
 on:
-
   workflow_call:
     inputs:
       app_relative_path:
@@ -9,28 +8,19 @@ on:
         required: true
         type: string
 
-jobs:
+permissions:
+  contents: read
 
+jobs:
   confirm-folder-changes:
     name: "Confirm changes in sample app folder"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Sample Apps"
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           submodules: recursive
-      #      - name: "Create Path Triggers"
-      #        uses: dorny/paths-filter@v2
-      #        id: changes
-      #        with:
-      #          base: main
-      #          ref: ${{ github.head_ref }}
-      #          filters: |
-      #            sample-app:
-      #              - '${{ inputs.app_relative_path }}/**'
-      # - name: "Cancel workflow"
-      #   if: steps.changes.outputs.sample-app != 'true'
-      #   uses: andymckay/cancel-action@0.2
 
   instrumented-tests:
     name: "Instrumented Tests"
@@ -39,11 +29,12 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           submodules: recursive
       - name: "Install JDK"
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: "zulu"
           java-version: 17
@@ -54,7 +45,7 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
       - name: "Run Instrumented Tests"
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
         with:
           working-directory: ${{ inputs.app_relative_path }}
           api-level: 29
@@ -62,7 +53,7 @@ jobs:
           profile: Nexus 6
           script: ./gradlew connectedCheck
       - name: "Archive Instrumented Tests Results"
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: ${{ always() }}
         with:
           name: "instrumented-tests-results"
@@ -75,11 +66,12 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           submodules: recursive
       - name: "Install JDK"
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: "zulu"
           java-version: 17
@@ -88,7 +80,7 @@ jobs:
         working-directory: ${{ inputs.app_relative_path }}
         run: ./gradlew test
       - name: "Android Unit Tests Report"
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: ${{ always() }}
         with:
           name: "unit-tests-results"
@@ -101,11 +93,12 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           submodules: recursive
       - name: Install JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: "zulu"
           java-version: 17
@@ -114,7 +107,7 @@ jobs:
         working-directory: ${{ inputs.app_relative_path }}
         run: ./gradlew lint
       - name: "Archive Lint Test Results"
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: ${{ always() }}
         with:
           name: "lint-results"
@@ -127,11 +120,12 @@ jobs:
     needs: confirm-folder-changes
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           submodules: recursive
       - name: Install JDK
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: "zulu"
           java-version: 17
@@ -140,7 +134,7 @@ jobs:
         working-directory: ${{ inputs.app_relative_path }}
         run: ./gradlew ktlintCheck
       - name: "Archive Lint Test Results"
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: ${{ always() }}
         with:
           name: "kotlin-lint-results"
