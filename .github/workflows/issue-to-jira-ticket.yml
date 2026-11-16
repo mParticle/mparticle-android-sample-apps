@@ -4,8 +4,12 @@ on:
   issues:
     types: ["opened", "reopened"]
 
+permissions: {}
+
 jobs:
   create-issue:
     name: "Create Issue"
-    uses: mParticle/mparticle-workflows/.github/workflows/issue-to-jira-ticket.yml@main
-    secrets: inherit
+    permissions:
+      issues: write
+    uses: mParticle/mparticle-workflows/.github/workflows/issue-to-jira-ticket.yml@a78c8b34f5811be7c046a27cae900a844094f1cf # zizmor: ignore[ref-version-mismatch]
+    secrets: inherit # zizmor: ignore[secrets-inherit]

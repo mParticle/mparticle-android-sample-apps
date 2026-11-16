@@ -1,0 +1,49 @@
+name: Zizmor Security Scan
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+      - development
+    paths:
+      - .github/workflows/**
+      - .github/actions/**
+      - .github/dependabot.yml
+  push:
+    branches:
+      - main
+      - development
+    paths:
+      - .github/workflows/**
+      - .github/actions/**
+      - .github/dependabot.yml
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions: {} # deny-by-default; job below grants only what it needs
+
+jobs:
+  zizmor:
+    name: Scan GitHub Actions workflows
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read # zizmor resolves reusable workflow/action metadata via GitHub API
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1 # zizmor only needs the tree at HEAD
+      # A finding fails this job. The zizmor version is pinned so a new release of the tool
+      # cannot fail main on its own; bump it together with the fixes its new audits ask for.
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
+        with:
+          advanced-security: false
+          annotations: true
+          version: 1.32.0
