@@ -21,6 +21,7 @@ jobs:
   create-release-branch:
     name: "Create Release Branch"
     runs-on: ubuntu-latest
+    environment: release
     needs: confirm-public-repo-main-branch
     permissions:
       contents: write
@@ -53,6 +54,7 @@ jobs:
     name: "Semantic Release"
     needs: create-release-branch
     runs-on: macos-latest
+    environment: release
     permissions:
       contents: write
     env:
@@ -114,6 +116,7 @@ jobs:
     name: "Sync Repository"
     needs: semantic-release
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       contents: write
     steps:
