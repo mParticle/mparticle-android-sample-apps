@@ -9,6 +9,7 @@ permissions: {}
 jobs:
   add-reviewers:
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       issues: write
     steps:
