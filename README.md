@@ -8,11 +8,11 @@ Hello! This is the mParticle Android Sample Apps Repository. We've built a colle
 
 ## Getting Started
 
-This repository serves as directory of individual, self-contained, Sample Apps. Each application is a full project with working code, detailed implementation documentation and an integrated CI/CD pipeline via Github Actions.
+This repository serves as a directory of individual, self-contained, Sample Apps. Each application is a full project with working code, detailed implementation documentation and an integrated CI/CD pipeline via GitHub Actions.
 
-Our recommenation is to fork or download the entire repository and open a specific project in Android Studio or editor of choice. This will provide full project settings, including linting.
+Our recommendation is to fork or download the entire repository and open a specific project in Android Studio or editor of choice. This will provide full project settings, including linting.
 
-:information_source: **Note:** These Sample Apps require a mParticle account and a valid Input API key.
+:information_source: **Note:** These Sample Apps require an mParticle account and a valid Input API key.
 
 While the code might run and build without mParticle credentials, the SDKs will not upload events to our servers and will generate errors. Please visit [our docs](https://docs.mparticle.com/guides/getting-started/create-an-input/#create-access-credentials) for more details on setting up an Input API key.
 
@@ -38,10 +38,10 @@ Please review the [CONTRIBUTING.md](CONTRIBUTING.md) file for details.
 
 ## Support
 
-<support@mparticle.com>
+Questions? Have an issue? Read the [docs](https://docs.mparticle.com/developers/client-sdks/android/) or contact our **Customer Success** team at <support@mparticle.com>.
 
 ## License
 
-The mParticle Android SDK is available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). See the LICENSE file for more info.
+The mParticle Android Sample Apps are available under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). See the LICENSE file for more info.
 
 THE MPARTICLE SAMPLE APPS, INCLUDING ANY ASSOCIATED MPARTICLE APIs AND MPARTICLE SDKs, ARE PROVIDED ON AN “AS-IS” BASIS, AND MPARTICLE HEREBY DISCLAIMS ANY AND ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED (EITHER IN FACT OR BY OPERATION OF LAW), OR STATUTORY, AS TO ANY MATTER WHATSOEVER, INCLUDING, BUT NOT LIMITED TO, ALL IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, QUALITY, ACCURACY, TITLE, AND NON-INFRINGEMENT. MPARTICLE DOES NOT WARRANT THAT THE MPARTICLE SAMPLE APP, INCLUDING ANY ASSOCIATED, MPARTICLE SDKs OR MPARTICLE APIs, ARE ERROR-FREE OR THAT OPERATION THEREOF WILL BE SECURE OR UNINTERRUPTED.
