@@ -92,7 +92,7 @@ dependencies {
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.3.0")
 
-    val roomVersion = "2.4.3"
+    val roomVersion = "2.8.5"
     implementation("androidx.room:room-runtime:$roomVersion")
     // annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
