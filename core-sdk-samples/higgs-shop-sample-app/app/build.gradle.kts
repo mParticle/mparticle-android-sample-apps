@@ -65,7 +65,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("com.google.android.material:material:1.7.0")
+    implementation("com.google.android.material:material:1.14.0")
     implementation("com.mparticle:android-core:5.55.0")
     implementation("com.google.android.gms:play-services-ads-identifier:18.0.1")
 
